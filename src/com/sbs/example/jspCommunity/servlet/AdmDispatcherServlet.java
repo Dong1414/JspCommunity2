@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.example.jspCommunity.container.Container;
-import com.sbs.example.jspCommunity.controller.usr.ArticleController;
-import com.sbs.example.jspCommunity.controller.usr.MemberController;
+import com.sbs.example.jspCommunity.controller.AdmMemberController;
 import com.sbs.example.mysqlutil.MysqlUtil;
 
 @WebServlet("/adm/*")
-public class AdmServlet extends HttpServlet {
+public class AdmDispatcherServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -37,14 +36,11 @@ public class AdmServlet extends HttpServlet {
 		String jspPath = null;
 
 		if (controllerName.equals("member")) {
-			MemberController memberController = Container.memberController;
+			AdmMemberController admMembrController = Container.admMembrController;
 
 			if (actionMethodName.equals("list")) {
-				jspPath = memberController.showList(req, resp);
+				jspPath = admMembrController.showList(req, resp);
 			}
-			
-		} else if (controllerName.equals("article")) {
-			ArticleController articleController = Container.articleController;
 			
 		}
 

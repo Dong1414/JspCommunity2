@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.example.jspCommunity.container.Container;
-import com.sbs.example.jspCommunity.controller.usr.ArticleController;
-import com.sbs.example.jspCommunity.controller.usr.MemberController;
+import com.sbs.example.jspCommunity.controller.UsrArticleController;
+import com.sbs.example.jspCommunity.controller.UsrMemberController;
 import com.sbs.example.mysqlutil.MysqlUtil;
 
 @WebServlet("/usr/*")
-public class DispatcherServlet extends HttpServlet {
+public class UsrDispatcherServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -37,33 +37,33 @@ public class DispatcherServlet extends HttpServlet {
 		String jspPath = null;
 
 		if (controllerName.equals("member")) {
-			MemberController memberController = Container.memberController;
+			UsrMemberController usrMemberController = Container.usrMemberController;
 			if (actionMethodName.equals("join")) {
-				jspPath = memberController.join(req, resp);
+				jspPath = usrMemberController.join(req, resp);
 			} else if (actionMethodName.equals("doJoin")) {
-				jspPath = memberController.doJoin(req, resp);
+				jspPath = usrMemberController.doJoin(req, resp);
 			} else if (actionMethodName.equals("login")) {
-				jspPath = memberController.login(req, resp);
+				jspPath = usrMemberController.login(req, resp);
 			} else if (actionMethodName.equals("doLogin")) {
-				jspPath = memberController.doLogin(req, resp);
+				jspPath = usrMemberController.doLogin(req, resp);
 			}
 		} else if (controllerName.equals("article")) {
-			ArticleController articleController = Container.articleController;
+			UsrArticleController usrArticleController = Container.usrArticleController;
 
 			if (actionMethodName.equals("list")) {
-				jspPath = articleController.showList(req, resp);
+				jspPath = usrArticleController.showList(req, resp);
 			} else if (actionMethodName.equals("detail")) {
-				jspPath = articleController.showDetail(req, resp);
+				jspPath = usrArticleController.showDetail(req, resp);
 			} else if (actionMethodName.equals("modify")) {
-				jspPath = articleController.showModify(req, resp);
+				jspPath = usrArticleController.showModify(req, resp);
 			} else if (actionMethodName.equals("doModify")) {
-				jspPath = articleController.doModify(req, resp);
+				jspPath = usrArticleController.doModify(req, resp);
 			} else if (actionMethodName.equals("write")) {
-				jspPath = articleController.showWrite(req, resp);
+				jspPath = usrArticleController.showWrite(req, resp);
 			} else if (actionMethodName.equals("doWrite")) {
-				jspPath = articleController.doWrite(req, resp);
+				jspPath = usrArticleController.doWrite(req, resp);
 			} else if (actionMethodName.equals("doDelete")) {
-				jspPath = articleController.doDelete(req, resp);
+				jspPath = usrArticleController.doDelete(req, resp);
 			}
 		}
 

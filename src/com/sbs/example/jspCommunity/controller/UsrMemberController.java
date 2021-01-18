@@ -1,4 +1,4 @@
-package com.sbs.example.jspCommunity.controller.usr;
+package com.sbs.example.jspCommunity.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,21 +12,13 @@ import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.service.MemberService;
 
-public class MemberController {
+public class UsrMemberController {
 	private MemberService memberService;
 	
-	public MemberController() {
+	public UsrMemberController() {
 		memberService = Container.memberService;
 	}
 	
-	public String showList(HttpServletRequest req, HttpServletResponse resp) {
-		List<Member> members = memberService.getForPrintMembers();
-		
-		req.setAttribute("members", members);
-		
-		return "adm/member/list";
-	}
-
 	public String join(HttpServletRequest req, HttpServletResponse resp) {
 		return "usr/member/join";
 	}

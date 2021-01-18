@@ -89,28 +89,28 @@
 		<div>
 			<div>loginPw</div>
 			<div>
-				<textarea placeholder="패스워드를 입력해주세요." name="loginPw" maxlength="5000"></textarea>				
+				<input placeholder="패스워드를 입력해주세요." type="password" name="loginPw" maxlength="50"></input>				
 			</div>
 		</div>
 		<hr />
 		<div>
 			<div>이름</div>
 			<div>
-				<textarea placeholder="이름을 입력해주세요." name="name" maxlength="5000"></textarea>
+				<input placeholder="이름을 입력해주세요." type="text" name="name" maxlength="50"></input>
 			</div>
 		</div>
 		<hr />
 		<div>
 			<div>닉네임</div>
 			<div>
-				<textarea placeholder="닉네임을 입력해주세요." name="nickName" maxlength="5000"></textarea>
+				<input placeholder="닉네임을 입력해주세요." type="text" name="nickName" maxlength="50"></input>
 			</div>
 		</div>
 		<hr />
 		<div>
 			<div>휴대폰</div>
 			<div>
-				<textarea placeholder="전화번호를 입력해주세요." name="cellPhonNo" maxlength="5000"></textarea>
+				<input placeholder="전화번호를 입력해주세요." type="number" name="cellPhonNo" maxlength="50"></input>
 			</div>
 		</div>
 		
@@ -118,7 +118,7 @@
 		<div>
 			<div>e-mail</div>
 			<div>
-				<textarea placeholder="e-mail을 입력해주세요." name="email" maxlength="5000"></textarea>
+				<input placeholder="e-mail을 입력해주세요." type="email" name="email" maxlength="50"></input>
 		</div>
 			<div>
 				<input type="submit" value="가입"  />
