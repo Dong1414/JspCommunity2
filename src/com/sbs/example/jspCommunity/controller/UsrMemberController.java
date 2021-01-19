@@ -42,6 +42,7 @@ public class UsrMemberController {
 		Map<String, Object> joinArgs = new HashMap<>();
 		joinArgs.put("loginId", loginId);
 		joinArgs.put("loginPw", loginPw);
+		joinArgs.put("cellPhonNo", cellPhonNo);
 		joinArgs.put("name", name);
 		joinArgs.put("email", email);
 		joinArgs.put("nickName", nickName);

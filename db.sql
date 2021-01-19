@@ -12,9 +12,9 @@ CREATE TABLE `member` (
     `email` VARCHAR(100) NOT NULL,
     loginId CHAR(50) NOT NULL UNIQUE,
     loginPw VARCHAR(200) NOT NULL,
-    adminLevel TINYINT(1) UNSIGNED NOT NULL DEFAULT 2 COMMENT '0=탈퇴/1=로그인정지/2=일반/3=인증된,4=관리자'
+    authLevel TINYINT(1) UNSIGNED NOT NULL DEFAULT 2 COMMENT '0=탈퇴/1=로그인정지/2=일반/3=인증된,4=관리자'
 );
-
+SELECT * FROM `member`;
 # 회원1 생성
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -77,43 +77,95 @@ CREATE TABLE article (
     hitsCount INT(10) UNSIGNED NOT NULL DEFAULT 0
 );
 
+
 # 테스트 게시물 생성
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 boardId = 1,
-title = '제목1',
-`body` = '내용1';
+title = '공지1',
+`body` = '공지1';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 boardId = 1,
-title = '제목2',
-`body` = '내용2';
+title = '공지2',
+`body` = '공지2';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 boardId = 1,
-title = '제목3',
-`body` = '내용3';
+title = '공지3',
+`body` = '공지3';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
-boardId = 1,
-title = '제목4',
-`body` = '내용4';
+boardId = 2,
+title = '방명록1',
+`body` = '방명록1';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
-boardId = 1,
-title = '제목5',
-`body` = '내용5';
+boardId = 2,
+title = '방명록2',
+`body` = '방명록2'; 
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 2,
+title = '방명록3',
+`body` = '방명록3'; 
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 3,
+title = '자유1',
+`body` = '자유1'; 
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 3,
+title = '자유2',
+`body` = '자유2'; 
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 3,
+title = '자유3',
+`body` = '자유3'; 
+
+CREATE TABLE hashtag (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    articleId INT(10) UNSIGNED NOT NULL,    
+    `hash` CHAR(100)        
+);
+
+SELECT * FROM article;
+SELECT * FROM hashtag;
+SELECT * FROM `member`;
+
+USE jspCommunity;
+# cellphoneNo 추가 및 칼럼 순서 재정렬
+ALTER TABLE `member` CHANGE `loginId` `loginId` CHAR(50) NOT NULL AFTER `updateDate`,
+                     CHANGE `loginPw` `loginPw` VARCHAR(200) NOT NULL AFTER `loginId`,
+                     ADD COLUMN `cellphoneNo` CHAR(20) NOT NULL AFTER `email`; 
+    

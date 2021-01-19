@@ -27,21 +27,6 @@ public class MemberDao {
 		return members;
 	}
 
-	public int join(String loginId, String loginPw, int cellPhonNo, String name, String email, String nickName) {
-	
-		SecSql sql = new SecSql();
-		sql.append("INSERT INTO `member`");
-		sql.append("SET regDate = NOW(),");
-		sql.append("updateDate = NOW(),");
-		sql.append("loginId = ?,");
-		sql.append("loginPw = ?,");		
-		sql.append("`name` = ?,");
-		sql.append("`email` = ?,");
-		sql.append("`nickName` = ?",loginId,loginPw,name,email,nickName);
-
-		return MysqlUtil.insert(sql);
-	}
-
 	public Member getMemberLoginId(String loginId) {
 		SecSql sql = new SecSql();
 		
@@ -64,7 +49,8 @@ public class MemberDao {
 		sql.append("SET regDate = NOW(),");
 		sql.append("updateDate = NOW(),");
 		sql.append("loginId = ?,",joinArgs.get("loginId"));
-		sql.append("loginPw = ?,",joinArgs.get("loginPw"));		
+		sql.append("loginPw = ?,",joinArgs.get("loginPw"));
+		sql.append("cellPhonNo = ?,",joinArgs.get("cellPhonNo"));		
 		sql.append("`name` = ?,",joinArgs.get("name"));
 		sql.append("`email` = ?,",joinArgs.get("email"));
 		sql.append("`nickName` = ?",joinArgs.get("nickName"));
