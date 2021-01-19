@@ -4,11 +4,35 @@
 <c:set var="pageTitle" value="${board.name} 게시물 작성" />
 <%@ include file="../../part/head.jspf"%>
 <h1>${pageTitle}</h1>
+<script>
+	function check() {
+		
+		  if(doWrite.title.value == "") {
 
+		    alert("제목을 입력해주세요.");
+
+		    doWrite.title.focus();
+
+		    return false;
+
+		  }
+
+		  else if(doWrite.body.value == "") {
+
+		    alert("내용을 입력해 주세요.");
+
+		    doWrite.body.focus();
+
+		    return false;
+
+		  }		  
+		  else return true;
+		}
+</script>
 <div>
-	<form action="doWrite" method="POST">
+	<form name="doWrite" action="doWrite" method="POST" onsubmit="return check();">
 		<input type="hidden" name="boardId" value="${board.id}" />
-		<input type="hidden" name="memberId" value="1" />
+		<input type="hidden" name="memberId" value="${loginedMemberId}" />
 
 		<hr />
 		<div>

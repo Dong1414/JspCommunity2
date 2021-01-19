@@ -1,14 +1,13 @@
 package com.sbs.example.jspCommunity.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
-import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.service.MemberService;
 
@@ -76,7 +75,10 @@ public class UsrMemberController {
 			return "common/redirect";	
 		}
 		
-		Container.sesstion.setloginMemberId(member.getId());
+		int loginedMemberId = member.getId();
+		HttpSession session = req.getSession();
+		session.setAttribute("loginedMemberId", loginedMemberId);		
+		
 		req.setAttribute("alertMsg", member.getNickname() + "님이 로그인하였습니다.");
 		req.setAttribute("replaceUrl", String.format("list?boardId=1"));
 		return "common/redirect";		

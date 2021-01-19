@@ -7,11 +7,8 @@ import com.sbs.example.jspCommunity.dao.ArticleDao;
 import com.sbs.example.jspCommunity.dao.MemberDao;
 import com.sbs.example.jspCommunity.service.ArticleService;
 import com.sbs.example.jspCommunity.service.MemberService;
-import com.sbs.example.jspCommunity.sesstion.Sesstion;
 
-public class Container {
-	
-	public static Sesstion sesstion;
+public class Container {	
 	
 	public static ArticleDao articleDao;
 	public static MemberDao memberDao;
@@ -28,8 +25,6 @@ public class Container {
 	
 	
 	static {
-		
-		sesstion = new Sesstion();
 		
 		memberDao = new MemberDao();
 		articleDao = new ArticleDao();
