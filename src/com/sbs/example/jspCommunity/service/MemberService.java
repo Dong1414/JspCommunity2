@@ -19,10 +19,6 @@ public class MemberService {
 		return memberDao.getForPrintMembers();
 	}
 
-	public int join(String loginId, String loginPw, int cellPhonNo, String name, String email, String nickName) {
-		return memberDao.join(loginId,loginPw,cellPhonNo,name,email, nickName);
-	}
-
 	public Member getMemberLoginId(String loginId) {
 		return memberDao.getMemberLoginId(loginId);
 	}
