@@ -4,18 +4,70 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
+
 <title>${pageTitle}</title>
+<!-- 제이쿼리 불러오기 -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- 폰트어썸 불러오기 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/template/app.css" />
+<script src="${pageContext.request.contextPath}/template/app.js" defer></script>
+
 </head>
 <body>
+	<header>
 
-	<div>
-		<c:if test="${sessionScope.loginedMemberId > 0}">
-			<a href="../article/write?boardId=1">공지사항 글쓰기</a>
-			<a href="../member/doLogout">로그아웃</a>
-		</c:if>
+		<div>
 
-		<c:if test="${sessionScope.loginedMemberId == null}">
-			<a href="../member/login">로그인</a>
-			<a href="../member/join">회원가입</a>
-		</c:if>
-	</div>
+			<c:if test="${sessionScope.loginedMemberId > 0}">
+				<div>로그인된 회원의 번호 : ${sessionScope.loginedMemberId}</div>
+			</c:if>
+			<c:if test="${sessionScope.loginedMemberId > 0}">
+				<a href="../article/write?boardId=1">공지사항 글쓰기</a>
+				<a href="../member/doLogout">로그아웃</a>
+			</c:if>
+
+			<c:if test="${sessionScope.loginedMemberId == null}">
+				<a href="../member/login">로그인</a>
+				<a href="../member/join">회원가입</a>
+			</c:if>
+		</div>
+
+
+		<div class="top-bar con-min-width">
+			<div class="con flex flex-ai-c">
+				<a href="#" class=" logo flex  height-100p"> LottoC </a>
+				<div class="flex-grow-1"></div>
+				<nav class="search height-50p">
+					<input @input="searchKeywordInputed" type="text" placeholder="검색어"
+						:value="searchKeyword">
+				</nav>
+			</div>
+		</div>
+
+		<div class="con menu-bar visible-on-md-up">
+			<div class="con height-100p">
+				<nav class="menu-box-1">
+					<ul class="flex">
+						<li><a href="#" class="block">공지사항</a>
+							<ul>
+								<li><a href="#" class="block">로또번호</a></li>
+							</ul></li>
+						<li><a href="#" class="block">방명록</a></li>
+						<li><a href="#" class="block">커뮤니티</a>
+							<ul>
+								<li><a href="#" class="block">자유게시판</a></li>
+								<li><a href="#" class="block">2차 메뉴 아이템 3</a></li>
+								<li><a href="#" class="block">2차 메뉴 아이템 4</a></li>
+							</ul></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+</body>
