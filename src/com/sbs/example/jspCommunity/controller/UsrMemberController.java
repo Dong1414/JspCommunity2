@@ -42,10 +42,11 @@ public class UsrMemberController {
 		}
 		String loginId = (String) req.getParameter("loginId");
 		String loginPw = (String) req.getParameter("loginPw");
-		String cellPhonNo = (String) req.getParameter("cellPhonNo");
+		String cellphoneNo = (String) req.getParameter("cellphoneNo");		
 		String name = (String) req.getParameter("name");
 		String email = (String) req.getParameter("email");
-		String nickName = (String) req.getParameter("nickName");
+		String nickname = (String) req.getParameter("nickname");
+		
 
 		Member member = memberService.getMemberLoginId(loginId);
 
@@ -58,14 +59,14 @@ public class UsrMemberController {
 		Map<String, Object> joinArgs = new HashMap<>();
 		joinArgs.put("loginId", loginId);
 		joinArgs.put("loginPw", loginPw);
-		joinArgs.put("cellPhonNo", cellPhonNo);
+		joinArgs.put("cellphoneNo", cellphoneNo);
 		joinArgs.put("name", name);
 		joinArgs.put("email", email);
-		joinArgs.put("nickName", nickName);
+		joinArgs.put("nickname", nickname);
 
 		memberService.join(joinArgs);
 
-		req.setAttribute("alertMsg", nickName + "님이 회원이 가입되었습니다.");
+		req.setAttribute("alertMsg", nickname + "님이 회원이 가입되었습니다.");
 		req.setAttribute("replaceUrl", String.format("../home/main"));
 		return "common/redirect";
 	}
@@ -121,5 +122,23 @@ public class UsrMemberController {
 		req.setAttribute("alertMsg", "로그아웃 되었습니다.");
 		req.setAttribute("replaceUrl", "../home/main");
 		return "common/redirect";
+	}
+	
+	public String getLoginIdDup(HttpServletRequest req, HttpServletResponse resp) {
+		String loginId = req.getParameter("loginId");
+
+		Member member = memberService.getMemberLoginId(loginId);
+
+		String data = "";
+
+		if ( member != null ) {
+			data = "NO";
+		}
+		else {
+			data = "YES";
+		}
+
+		req.setAttribute("data", data);
+		return "common/pure";
 	}
 }

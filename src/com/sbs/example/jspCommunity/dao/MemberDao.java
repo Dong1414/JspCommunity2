@@ -50,10 +50,10 @@ public class MemberDao {
 		sql.append("updateDate = NOW(),");
 		sql.append("loginId = ?,",joinArgs.get("loginId"));
 		sql.append("loginPw = ?,",joinArgs.get("loginPw"));
-		sql.append("cellPhonNo = ?,",joinArgs.get("cellPhonNo"));		
+		sql.append("cellphoneNo = ?,",joinArgs.get("cellphoneNo"));		
 		sql.append("`name` = ?,",joinArgs.get("name"));
 		sql.append("`email` = ?,",joinArgs.get("email"));
-		sql.append("`nickName` = ?",joinArgs.get("nickName"));
+		sql.append("`nickname` = ?",joinArgs.get("nickname"));
 
 		MysqlUtil.insert(sql);
 		
