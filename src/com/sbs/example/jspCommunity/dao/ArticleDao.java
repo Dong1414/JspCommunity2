@@ -18,6 +18,7 @@ public class ArticleDao {
 		sql.append(", M.name AS extra__writer");
 		sql.append(", B.name AS extra__boardName");
 		sql.append(", B.code AS extra__boardCode");
+		sql.append(", M.nickname AS extra__nickname");
 		sql.append("FROM article AS A");
 		sql.append("INNER JOIN `member` AS M");
 		sql.append("ON A.memberId = M.id");

@@ -29,7 +29,8 @@ public class UsrArticleController {
 		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId);
 
 		req.setAttribute("articles", articles);
-
+		System.out.println(articles.toString());
+		
 		return "usr/article/list";
 	}
 

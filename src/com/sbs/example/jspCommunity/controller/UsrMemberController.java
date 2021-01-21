@@ -103,6 +103,7 @@ public class UsrMemberController {
 		int loginedMemberId = member.getId();
 		HttpSession session = req.getSession();
 		session.setAttribute("loginedMemberId", loginedMemberId);
+		session.setAttribute("loginedMemberNickname", member.getNickname());
 
 		req.setAttribute("alertMsg", member.getNickname() + "님이 로그인하였습니다.");
 		req.setAttribute("replaceUrl", String.format("../home/main"));

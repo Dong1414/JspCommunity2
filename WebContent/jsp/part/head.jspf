@@ -21,32 +21,34 @@
 </head>
 <body>
 	<header>
+		<div class="top-bar con">
+			<div class="con flex flex-jc-c">
+				<a href="#" class=" logo flex flex-ai-c height-100p"> LottoC <span>
 
-		<div>
-
-			<c:if test="${sessionScope.loginedMemberId > 0}">
-				<div>로그인된 회원의 번호 : ${sessionScope.loginedMemberId}</div>
-			</c:if>
-			<c:if test="${sessionScope.loginedMemberId > 0}">
-				<a href="../article/write?boardId=1">공지사항 글쓰기</a>
-				<a href="../member/doLogout">로그아웃</a>
-			</c:if>
-
-			<c:if test="${sessionScope.loginedMemberId == null}">
-				<a href="../member/login">로그인</a>
-				<a href="../member/join">회원가입</a>
-			</c:if>
-		</div>
-
-
-		<div class="top-bar con-min-width">
-			<div class="con flex flex-ai-c">
-				<a href="#" class=" logo flex  height-100p"> LottoC </a>
+				</span>
+				</a>
 				<div class="flex-grow-1"></div>
-				<nav class="search height-50p">
-					<input @input="searchKeywordInputed" type="text" placeholder="검색어"
-						:value="searchKeyword">
+				<nav class="flex flex-ai-c">
+					<input class="flex flex-ai-c height-100p"
+						@input="searchKeywordInputed" type="text" placeholder="검색어"
+						:value="searchKeyword" id="search">
 				</nav>
+				<div class="height-100p block" id="member">
+					<c:if test="${sessionScope.loginedMemberId > 0}">
+						<div>${sessionScope.loginedMemberNickname}님</div>
+					</c:if>
+					<c:if test="${sessionScope.loginedMemberId > 0}">
+						<a href="../member/doLogout">로그아웃</a>
+					</c:if>
+
+					<c:if test="${sessionScope.loginedMemberId == null}">
+
+						<a href="../member/login">로그인</a>
+						<br>
+						<a href="../member/join">회원가입</a>
+
+					</c:if>
+				</div>
 			</div>
 		</div>
 
@@ -54,14 +56,21 @@
 			<div class="con height-100p">
 				<nav class="menu-box-1">
 					<ul class="flex">
-						<li><a href="http://localhost:8083/jspCommunity/usr/article/list?boardId=1" class="block">공지사항</a>
+						<li><a
+							href="http://localhost:8083/jspCommunity/usr/article/list?boardId=1"
+							class="block">공지사항</a>
+
 							<ul>
 								<li><a href="#" class="block">로또번호</a></li>
 							</ul></li>
-						<li><a href="http://localhost:8083/jspCommunity/usr/article/list?boardId=2" class="block">방명록</a></li>
+						<li><a
+							href="http://localhost:8083/jspCommunity/usr/article/list?boardId=2"
+							class="block">방명록</a></li>
 						<li><a href="#" class="block">커뮤니티</a>
 							<ul>
-								<li><a href="http://localhost:8083/jspCommunity/usr/article/list?boardId=3" class="block">자유게시판</a></li>
+								<li><a
+									href="http://localhost:8083/jspCommunity/usr/article/list?boardId=3"
+									class="block">자유게시판</a></li>
 								<li><a href="#" class="block">2차 메뉴 아이템 3</a></li>
 								<li><a href="#" class="block">2차 메뉴 아이템 4</a></li>
 							</ul></li>
