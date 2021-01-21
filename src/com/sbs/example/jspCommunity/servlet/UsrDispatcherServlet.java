@@ -76,7 +76,7 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 				}
 			} else if (actionMethodName.equals("doWrite")) {
 				jspPath = usrArticleController.doWrite(req, resp);
-			} else if (actionMethodName.equals("delete")) {
+			} else if (actionMethodName.equals("doDelete")) {
 				if (isLogined == false) {
 
 					req.setAttribute("alertMsg", "로그인 후 이용해주세요");

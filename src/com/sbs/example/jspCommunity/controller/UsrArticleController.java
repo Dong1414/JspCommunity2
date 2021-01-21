@@ -96,7 +96,7 @@ public class UsrArticleController {
 			return "common/redirect";
 		}
 
-		articleService.delete(id);
+		articleService.doDelete(id);
 
 		req.setAttribute("alertMsg", id + "번 게시물이 삭제되었습니다.");
 		req.setAttribute("replaceUrl", String.format("../home/main"));
