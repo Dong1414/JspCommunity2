@@ -34,14 +34,14 @@
 						:value="searchKeyword" id="search">
 				</nav>
 				<div class="height-100p block" id="member">
-					<c:if test="${sessionScope.loginedMemberId > 0}">
+					<c:if test="${isLogined}">
 						<div>${sessionScope.loginedMemberNickname}님</div>
 					</c:if>
-					<c:if test="${sessionScope.loginedMemberId > 0}">
+					<c:if test="${isLogined}">
 						<a href="../member/doLogout">로그아웃</a>
 					</c:if>
 
-					<c:if test="${sessionScope.loginedMemberId == null}">
+					<c:if test="${isLogined == false}">
 
 						<a href="../member/login">로그인</a>
 						<br>
