@@ -4,3 +4,6 @@
 target/
 build/
 bin/
+.factorypath
+WebContent/META-INF/config.json
+

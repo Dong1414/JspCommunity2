@@ -35,18 +35,32 @@
 				</nav>
 				<div class="height-100p block" id="member">
 					<c:if test="${isLogined}">
-						<div>${sessionScope.loginedMemberNickname}님</div>
-					</c:if>
-					<c:if test="${isLogined}">
-						<a href="../member/doLogout">로그아웃</a>
+						<div class="login-box flex flex-jc-c flex-ai-c">
+							<div class="flex flex-jc-c flex-ai-c">
+								<a class="flex flex-ai-c height-100p" href="#">${sessionScope.loginedMemberNickname}님</a>
+							</div>
+						</div>
+						<div class="join-box flex flex-jc-c">
+							<div>
+								<a href="../member/doLogout">로그아웃</a> 
+							</div>
+						</div>
 					</c:if>
 
 					<c:if test="${isLogined == false}">
+						<div class="login-box flex flex-jc-c flex-ai-c">
+							<div class="text-align-center">
+								<a class="block" href="../member/login">로그인</a>
+							</div>
+						</div>
 
-						<a href="../member/login">로그인</a>
-						<br>
-						<a href="../member/join">회원가입</a>
-
+						<div class="join-box flex flex-jc-c">
+							<div>
+								<a class="join" href="../member/join">회원가입</a> <a
+									class="id-search" href="../member/join">아이디찾기</a> <a
+									class="pw-search" href="../member/join">비밀번호찾기</a>
+							</div>
+						</div>
 					</c:if>
 				</div>
 			</div>

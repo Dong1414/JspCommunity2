@@ -9,7 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
+import com.sbs.example.jspCommunity.service.EmailService;
 import com.sbs.example.jspCommunity.service.MemberService;
+import com.sbs.example.util.Util;
 
 public class UsrMemberController {
 	private MemberService memberService;
@@ -19,7 +21,7 @@ public class UsrMemberController {
 	}
 
 	public String join(HttpServletRequest req, HttpServletResponse resp) {
-		
+
 		return "usr/member/join";
 	}
 
@@ -27,11 +29,10 @@ public class UsrMemberController {
 
 		String loginId = (String) req.getParameter("loginId");
 		String loginPw = (String) req.getParameter("loginPw");
-		String cellphoneNo = (String) req.getParameter("cellphoneNo");		
+		String cellphoneNo = (String) req.getParameter("cellphoneNo");
 		String name = (String) req.getParameter("name");
 		String email = (String) req.getParameter("email");
 		String nickname = (String) req.getParameter("nickname");
-		
 
 		Member member = memberService.getMemberLoginId(loginId);
 
@@ -53,11 +54,15 @@ public class UsrMemberController {
 
 		req.setAttribute("alertMsg", nickname + "님이 회원이 가입되었습니다.");
 		req.setAttribute("replaceUrl", String.format("../home/main"));
+		
+		EmailService emailService = Container.emailService;
+		emailService.send((String)joinArgs.get("email"), "JSP커뮤니티입니다. 회원가입을 축하드립니다", "감사합니다.");
+		
 		return "common/redirect";
 	}
 
 	public String login(HttpServletRequest req, HttpServletResponse resp) {
-				return "usr/member/login";
+		return "usr/member/login";
 	}
 
 	public String doLogin(HttpServletRequest req, HttpServletResponse resp) {
@@ -89,7 +94,7 @@ public class UsrMemberController {
 	}
 
 	public String doLogout(HttpServletRequest req, HttpServletResponse resp) {
-		
+
 		HttpSession session = req.getSession();
 		session.removeAttribute("loginedMemberId");
 
@@ -97,22 +102,33 @@ public class UsrMemberController {
 		req.setAttribute("replaceUrl", "../home/main");
 		return "common/redirect";
 	}
-	
+
 	public String getLoginIdDup(HttpServletRequest req, HttpServletResponse resp) {
 		String loginId = req.getParameter("loginId");
 
 		Member member = memberService.getMemberLoginId(loginId);
 
-		String data = "";
+		Map<String, Object> rs = new HashMap<>();
 
-		if ( member != null ) {
-			data = "NO";
-		}
-		else {
-			data = "YES";
+		String resultCode = null;
+		String msg = null;
+
+		if (member != null) {
+			resultCode = "F-1";
+			msg = "이미 사용중인 로그인아이디 입니다.";
+		} else if (loginId.equals("")) {
+			resultCode = "F-2";
+			msg = "공백은 입력 할 수 없습니다.";
+		} else {
+			resultCode = "S-1";
+			msg = "사용가능한 로그인아이디 입니다.";
 		}
 
-		req.setAttribute("data", data);
+		rs.put("resultCode", resultCode);
+		rs.put("msg", msg);
+		rs.put("loginId", loginId);
+
+		req.setAttribute("data", Util.getJsonText(rs));
 		return "common/pure";
 	}
 }

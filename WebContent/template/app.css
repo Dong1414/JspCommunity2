@@ -365,20 +365,69 @@ label[for] {
 	min-width:1200px;
 }
 
-/* 탑바 시작 */
-.top-bar  {
-  
-}
+/* 로그인 창 시작 */
 #member{
 	margin-top:35px;
 	margin-right:25px;
 	padding-left: 255px;
 }
+:root {
+--join_width:76.66px;
+--id-search_width:76.66px;
+--pw-search_width:76.66px;
+}
+
+
+.join {
+width:var(--join_width);
+}
+.id-search {
+width:var(--id-search_width);
+}
+.pw-search {
+width:var(--pw-search_width);
+}
+
+#member > .login-box{
+	width:230px;
+	height:50px;
+	border:1px solid black;
+}
+
+#member > .login-box > div{
+	width:170px;
+	border:1px solid black;
+}
+
+#member > .login-box > div > a{
+	padding:6px 0;
+	
+}
+
+#member > .join-box{
+	width:230px;
+	height:25px;
+	border:1px solid black;
+}
+#member > .join-box a{
+	font-size:13px;
+}
+
+
+/* 로그인 창 끝 */
+
+
+/* 탑바 시작 */
+.top-bar  {
+  
+}
+
 #search{
 	width:300px;
 	height:42px;
 	font-size:20px;
 }
+
 .menu-bar { 
   background-color:black;
   color:white;
@@ -722,3 +771,16 @@ text-align:left;
 padding-left:10px;
 }
 /* 디테일 페이지 끝 */
+
+/* 게시글 작성 페이지 시작 */
+.input-title{
+	width:700px; 
+    resize:none;
+}
+
+.textarea-body{
+	width:700px; 
+	height:400px; 
+    resize:none;
+}
+/* 게시글 작성 페이지 끝 */
