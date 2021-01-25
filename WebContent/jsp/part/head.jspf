@@ -23,7 +23,7 @@
 	<header>
 		<div class="top-bar con">
 			<div class="con flex flex-jc-c">
-				<a href="#" class=" logo flex flex-ai-c height-100p"> LottoC <span>
+				<a href="../home/main" class=" logo flex flex-ai-c height-100p"> LottoC <span>
 
 				</span>
 				</a>
@@ -31,7 +31,7 @@
 				<nav class="flex flex-ai-c">
 					<input class="flex flex-ai-c height-100p"
 						@input="searchKeywordInputed" type="text" placeholder="검색어"
-						:value="searchKeyword" id="search">
+						:value="searchKeyword" id="search" autocomplete="off">
 				</nav>
 				<div class="height-100p block" id="member">
 					<c:if test="${isLogined}">
@@ -57,8 +57,8 @@
 						<div class="join-box flex flex-jc-c">
 							<div>
 								<a class="join" href="../member/join">회원가입</a> <a
-									class="id-search" href="../member/join">아이디찾기</a> <a
-									class="pw-search" href="../member/join">비밀번호찾기</a>
+									class="id-search" href="../member/findLoginId">아이디찾기</a> <a
+									class="pw-search" href="../member/findLoginPw">비밀번호찾기</a>
 							</div>
 						</div>
 					</c:if>

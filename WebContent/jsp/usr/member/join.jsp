@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../../part/head.jspf"%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 <div>
 	<script>
 	let DoJoinForm__submited = false;
@@ -21,8 +22,8 @@
 				if ( data.msg ) {
 					alert(data.msg);
 				}
-				if ( data.resultCode.substr(0, 2) == "S-" ) {
-					DoJoinForm__checkedLoginId = data.loginId;
+				if ( data.success ) {
+					DoJoinForm__checkedLoginId = data.body.loginId;
 				}
 			},
 			"json"
@@ -113,6 +114,10 @@
 			return;
 		}
 		
+		form.loginPwReal.value = sha256(form.loginPw.value);
+		form.loginPw.value = "";
+		form.loginPwConfirm.value = "";
+		
 		form.submit();
 		DoJoinForm__submited = true;
 	}
@@ -123,6 +128,7 @@
 				<main>
 					<form action="doJoin" method="POST"
 						onsubmit="DoJoinForm__submit(this); return false;">
+						<input type="hidden" name="loginPwReal" />
 						<hr />
 						<div>
 							<div>로그인 아이디</div>
@@ -180,7 +186,7 @@
 						<div>
 							<div>전화번호</div>
 							<div>
-								<input name="cellphoneNo" type="number" maxlength="100"
+								<input name="cellphoneNo" type="tel" maxlength="100"
 									placeholder="전화번호를 입력해주세요." />
 							</div>
 						</div>

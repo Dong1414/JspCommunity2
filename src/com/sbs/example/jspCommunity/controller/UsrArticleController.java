@@ -27,9 +27,11 @@ public class UsrArticleController {
 		req.setAttribute("board", board);
 
 		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId);
-
+		int totalCount = articleService.getArticlesCountByBoardId(boardId);
+		
+		req.setAttribute("totalCount", totalCount);
 		req.setAttribute("articles", articles);
-		System.out.println(articles.toString());
+		
 		
 		return "usr/article/list";
 	}

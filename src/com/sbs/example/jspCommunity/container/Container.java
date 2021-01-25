@@ -14,10 +14,11 @@ public class Container {
 	
 	public static ArticleDao articleDao;
 	public static MemberDao memberDao;
-		
+	
+	public static EmailService emailService;	
 	public static ArticleService articleService;
 	public static MemberService memberService;
-	public static EmailService emailService;
+	
 	
 	public static UsrArticleController usrArticleController;
 	public static AdmMemberController admMembrController;
@@ -33,9 +34,10 @@ public class Container {
 		memberDao = new MemberDao();
 		articleDao = new ArticleDao();
 		
+		emailService = new EmailService();
 		memberService = new MemberService();
 		articleService = new ArticleService();
-		emailService = new EmailService();
+		
 		
 		admMembrController = new AdmMemberController();
 		usrMemberController = new UsrMemberController();

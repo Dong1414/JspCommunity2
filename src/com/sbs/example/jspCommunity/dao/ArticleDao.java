@@ -112,13 +112,24 @@ public class ArticleDao {
 			needToUpdate = true;
 			sql.append(", `body` = ?", args.get("body"));
 		}
-		
-		if ( needToUpdate == false ) {
+
+		if (needToUpdate == false) {
 			return 0;
 		}
 
 		sql.append("WHERE id = ?", args.get("id"));
 
 		return MysqlUtil.update(sql);
+	}
+
+	public int getArticlesCountByBoardId(int boardId) {
+		SecSql sql = new SecSql();
+		sql.append("SELECT COUNT(*) AS cnt");
+		sql.append("FROM article AS A");
+		if (boardId != 0) {
+			sql.append("WHERE A.boardId = ?", boardId);
+		}
+
+		return MysqlUtil.selectRowIntValue(sql);
 	}
 }

@@ -11,6 +11,8 @@
 <div class="con flex flex-jc-r">
 	<a href="write?boardId=${param.boardId}">게시물 작성</a>
 </div>
+
+<div>총 게시물 수 : ${totalCount}</div>
 <section class="section-2">
 	<div class="con">
 		<div class="article-list">
@@ -43,6 +45,46 @@
 					</div>
 				</c:forEach>
 			</main>
+		</div>
+		<div>
+			<script>
+				let DoSearchForm__submited = false;
+				function DoSearchForm__submit(form) {
+					if (DoSearchForm__submited) {
+						alert('처리중입니다');
+						return;
+					}
+
+					form.searchKeyword.value = form.searchKeyword.value.trim();
+
+					if (form.searchKeyword.value.length == 0) {
+						alert('검색어를 입력해주세요.');
+						form.searchKeyword.focus();
+						return;
+					}
+
+					form.submit();
+					DoSearchForm__submited = true;
+				}
+			</script>
+			<form action="" onsubmit="DoSearchForm__submit(this); return false;">
+				<input type="hidden" name="boardId" value="${param.boardId}" /> <select
+					name="searchKeywordType">
+					<option value="title">제목</option>
+					<option value="body">본문</option>
+				</select>
+				<script>
+					const param__searchKeywordType = '${param.searchKeywordType}';
+
+					if (param__searchKeywordType) {
+						$('select[name="searchKeywordType"]').val(
+								param__searchKeywordType);
+					}
+				</script>
+				<input value="${param.searchKeyword}" type="text"
+					name="searchKeyword" placeholder="검색어를 입력해주세요." /> <input
+					type="submit" value="검색" />
+			</form>
 		</div>
 
 		<div class="article-page-menu">
