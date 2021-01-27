@@ -6,34 +6,47 @@
 <%@ include file="../../part/head.jspf"%>
 <h1>${pageTitle}</h1>
 <script>
-	function check() {
-		
-		  if(doModify.title.value == "") {
+	let DoWriteForm__submited = false;
+	let DoWriteForm__checkedLoginId = "";
 
-		    alert("제목을 입력해주세요.");
-
-		    doModify.title.focus();
-
-		    return false;
-
-		  }
-
-		  else if(doModify.body.value == "") {
-
-		    alert("내용을 입력해 주세요.");
-
-		    doModify.body.focus();
-
-		    return false;
-
-		  }		  
-		  else return true;
+	// 폼 발송전 체크
+	function DoWriteForm__submit(form) {
+		if (DoWriteForm__submited) {
+			alert('처리중입니다.');
+			return;
 		}
+
+		form.title.value = form.title.value.trim();
+
+		if (form.title.value.length == 0) {
+			alert('제목을 입력해주세요.');
+			form.title.focus();
+
+			return;
+		}
+
+		const editor = $(form).find('.toast-ui-editor').data(
+				'data-toast-editor');
+		const body = editor.getMarkdown().trim();
+
+		if (body.length == 0) {
+			alert('내용을 입력해주세요.');
+			editor.focus();
+
+			return;
+		}
+
+		form.body.value = body;
+
+		form.submit();
+		DoWriteForm__submited = true;
+	}
 </script>
 <div>
-	<form name="doModify" action="doModify" method="POST" onsubmit="return check();">
+	<form name="doModify" action="doModify" method="POST" onsubmit="DoWriteForm__submit(this); return false;">
 		<input type="hidden" name="id" value="${article.id}" />
-		<input type="hidden" name="memberId" value="1" />
+		<input type="hidden" name="memberId" value="1" />		
+		<input type="hidden" name="body"/>
 
 		<hr />
 		<div>
@@ -49,7 +62,8 @@
 		<div>
 			<div>내용</div>
 			<div>
-				<textarea placeholder="내용을 입력해주세요." name="body" maxlength="5000">${article.body}</textarea>
+				<script type="text/x-template"></script>
+ 				<div class="toast-ui-editor"></div>
 			</div>
 		</div>
 		<hr />

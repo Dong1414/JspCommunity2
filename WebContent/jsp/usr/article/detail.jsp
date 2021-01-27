@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="pageTitle" value="${article.extra__boardName} 게시물 상세페이지" />
-<c:set var="memberID" value="${article.memberId}"/>
+<c:set var="memberID" value="${article.memberId}" />
 <%@ include file="../../part/head.jspf"%>
 <section class="section-1 con">
 	<h1>${pageTitle}</h1>
@@ -20,8 +20,8 @@
 					<div class="article-detail__cell-regDate">${article.regDate}</div>
 				</div>
 			</header>
-			
-			
+
+
 			<c:if test="${sessionScope.loginedMemberId == memberID}">
 				<div class="text-align-right">
 					<a href="modify?id=${article.id}">수정</a> <a
@@ -29,9 +29,10 @@
 						href="doDelete?id=${article.id}">삭제</a>
 				</div>
 			</c:if>
-			
+
 			<main>
-				<div>${article.body}</div>
+				<script type="text/x-template">${article.body}</script>
+				<div class="toast-ui-viewer"></div>
 			</main>
 		</div>
 

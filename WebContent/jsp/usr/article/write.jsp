@@ -5,48 +5,60 @@
 <%@ include file="../../part/head.jspf"%>
 
 <section class="section-1 con">
-<h1>${pageTitle}</h1>
+	<h1>${pageTitle}</h1>
 </section>
 <script>
-	function check() {
+	let DoWriteForm__submited = false;
+	let DoWriteForm__checkedLoginId = "";
 
-		if (doWrite.title.value == "") {
-
-			alert("제목을 입력해주세요.");
-
-			doWrite.title.focus();
-
-			return false;
-
+	// 폼 발송전 체크
+	function DoWriteForm__submit(form) {
+		if (DoWriteForm__submited) {
+			alert('처리중입니다.');
+			return;
 		}
 
-		else if (doWrite.body.value == "") {
+		form.title.value = form.title.value.trim();
 
-			alert("내용을 입력해 주세요.");
+		if (form.title.value.length == 0) {
+			alert('제목을 입력해주세요.');
+			form.title.focus();
 
-			doWrite.body.focus();
+			return;
+		}
 
-			return false;
+		const editor = $(form).find('.toast-ui-editor').data(
+				'data-toast-editor');
+		const body = editor.getMarkdown().trim();
 
-		} else
-			return true;
+		if (body.length == 0) {
+			alert('내용을 입력해주세요.');
+			editor.focus();
+
+			return;
+		}
+
+		form.body.value = body;
+
+		form.submit();
+		DoWriteForm__submited = true;
 	}
 </script>
 <section class="section-2">
 	<div class="con">
 		<div class="join-detail">
 			<main>
-				<form name="doWrite" action="doWrite" method="POST"
-					onsubmit="return check();">
-					<input type="hidden" name="boardId" value="${board.id}" /> <input
-						type="hidden" name="memberId" value="${loginedMemberId}" />
+			<form action="doWrite" method="POST" onsubmit="DoWriteForm__submit(this); return false;">				
+					<input type="hidden" name="boardId" value="${board.id}" />
+					<input type="hidden" name="memberId" value="${loginedMemberId}" />
+					<input type="hidden" name="body" />
 
 					<hr />
 					<div>
 						<div>제목</div>
 						<div>
-							<input class="input-title" name="title" type="text" maxlength="50"
-								placeholder="제목을 입력해주세요." />
+							<input class="input-title" name="title" type="text"
+								maxlength="50" placeholder="제목을 입력해주세요." />
 						</div>
 					</div>
 
@@ -55,7 +67,8 @@
 					<div>
 						<div>내용</div>
 						<div>
-							<textarea class="textarea-body" placeholder="내용을 입력해주세요." name="body" maxlength="5000"></textarea>
+							<script type="text/x-template"></script>
+ 							<div class="toast-ui-editor"></div>
 						</div>
 					</div>
 					<hr />

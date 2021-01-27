@@ -67,9 +67,10 @@
 					DoSearchForm__submited = true;
 				}
 			</script>
-			<form action="" onsubmit="DoSearchForm__submit(this); return false;">
+			<form onsubmit="DoSearchForm__submit(this); return false;">
 				<input type="hidden" name="boardId" value="${param.boardId}" /> <select
 					name="searchKeywordType">
+					<option value="titleAndBody">제목+본문</option>
 					<option value="title">제목</option>
 					<option value="body">본문</option>
 				</select>
@@ -86,12 +87,46 @@
 					type="submit" value="검색" />
 			</form>
 		</div>
-
+		<style>
+.red {
+	color: red;
+}
+</style>
 		<div class="article-page-menu">
-			<ul class="flex flex-jc-r">${list-page}
-			</ul>
+			<div class="con">
+				<ul class="flex flex-jc-c">
+					<!--
+	<c:set var="aUrl" value="?page=1&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+	<a href="${aUrl}">◀◀</a>
+	-->
+
+					<c:if test="${pageBoxStartBeforeBtnNeedToShow}">
+						<c:set var="aUrl"
+							value="?page=${pageBoxStartBeforePage}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+						<a href="${aUrl}">◀</a>
+					</c:if>
+					<c:forEach var="i" begin="${pageBoxStartPage}"
+						end="${pageBoxEndPage}" step="1">
+						<c:set var="aClass" value="${page == i ? 'red' : ''}" />
+						<c:set var="aUrl"
+							value="?page=${i}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+						<a class="${aClass}" href="${aUrl}">${i}</a>
+					</c:forEach>
+
+					<c:if test="${pageBoxEndAfterBtnNeedToShow}">
+						<c:set var="aUrl"
+							value="?page=${pageBoxEndAfterPage}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+						<a href="${aUrl}">▶</a>
+					</c:if>
+
+					<!--
+	<c:set var="aUrl" value="?page=${totalPage}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+	<a href="${aUrl}">▶▶</a>
+	-->
+
+				</ul>
+			</div>
 		</div>
-	</div>
 </section>
 
 <%@ include file="../../part/foot.jspf"%>

@@ -19,7 +19,7 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 
 		int loginedMemberId = -1;
 		boolean isLogined = false;
-		Member member = null;
+		
 		HttpSession session = req.getSession();
 
 		String jspPath = null;
@@ -60,7 +60,9 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			UsrArticleController usrArticleController = Container.usrArticleController;
 
 			if (actionMethodName.equals("list")) {
+				
 				jspPath = usrArticleController.showList(req, resp);
+				
 			} else if (actionMethodName.equals("detail")) {
 				jspPath = usrArticleController.showDetail(req, resp);
 			} else if (actionMethodName.equals("modify")) {
