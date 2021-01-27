@@ -66,12 +66,12 @@ public class MemberDao {
 		sql.append("WHERE id = ?", id);
 
 		Map<String, Object> map = MysqlUtil.selectRow(sql);
-
+		Member member = new Member(map);
 		if ( map.isEmpty() ) {
 			return null;
 		}
 
-		return new Member(map);
+		return member;
 	}
 	
 	public Member getMemberByNameAndEmail(String name, String email) {
@@ -133,7 +133,7 @@ public class MemberDao {
 		}
 
 		sql.append("WHERE id = ?", args.get("id"));
-
+System.out.println(sql);
 		return MysqlUtil.update(sql);
 	}
 }

@@ -56,12 +56,13 @@
 					<c:if test="${isLogined}">
 						<div class="login-box flex flex-jc-c flex-ai-c">
 							<div class="flex flex-jc-c flex-ai-c">
-								<a class="flex flex-ai-c height-100p" href="#">${sessionScope.loginedMemberNickname}님</a>
+								<spen class="flex flex-ai-c height-100p" href="#">${sessionScope.loginedMemberNickname}님</spen>
 							</div>
 						</div>
 						<div class="join-box flex flex-jc-c">
 							<div>
 								<a href="../member/doLogout">로그아웃</a> 
+								<a href="../member/modify?id=${loginedMemberId}">회원정보수정</a>
 							</div>
 						</div>
 					</c:if>

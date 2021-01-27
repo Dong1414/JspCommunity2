@@ -24,8 +24,8 @@
 
 			<c:if test="${sessionScope.loginedMemberId == memberID}">
 				<div class="text-align-right">
-					<a href="modify?id=${article.id}">수정</a> <a
-						onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
+					<a href="modify?id=${article.id}">수정</a>
+					 <a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
 						href="doDelete?id=${article.id}">삭제</a>
 				</div>
 			</c:if>

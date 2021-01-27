@@ -214,6 +214,51 @@ public class UsrMemberController {
 		req.setAttribute("replaceUrl", "../member/login");
 		return "common/redirect";
 	}
+
+	public String modify(HttpServletRequest req, HttpServletResponse resp) {
+		String id = req.getParameter("id");
+		
+		Member member = memberService.getMemberById(Integer.parseInt(id));	
+		
+		req.setAttribute("member", member);
+		
+		return "usr/member/modify";
+	}
+
+	public String doModify(HttpServletRequest req, HttpServletResponse resp) {
+		
+		String id = req.getParameter("id");
+		String loginId = req.getParameter("loginId");
+		String loginPwReal = req.getParameter("loginPwReal");
+		String name = req.getParameter("name");
+		String nickname = req.getParameter("nickname");
+		String email = req.getParameter("email");
+		String cellphoneNo = req.getParameter("cellphoneNo");		
+		
+		Map<String, Object> modifyArgs = new HashMap<>();
+		modifyArgs.put("id",id);
+		modifyArgs.put("loginID",loginId);
+		modifyArgs.put("loginPw",loginPwReal);
+		modifyArgs.put("nickname",nickname);
+		modifyArgs.put("email",email);
+		modifyArgs.put("cellphoneNo",cellphoneNo);
+		
+		System.out.println(modifyArgs);
+		memberService.modify(modifyArgs);
+		
+		
+		req.setAttribute("alertMsg", name + "님의 회원정보가 수정되었습니다.");
+		req.setAttribute("replaceUrl", String.format("../home/main"));
+		
+		HttpSession session = req.getSession();
+		session.setAttribute("loginedMemberNickname",nickname);
+		
+		EmailService emailService = Container.emailService;
+		emailService.send((String)modifyArgs.get("email"), "JSP커뮤니티입니다. 회원님의 회원 정보가 수정되었습니다.", "감사합니다.");
+		
+		return "common/redirect";
+		
+	}
 	
 	
 }

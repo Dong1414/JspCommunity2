@@ -19,7 +19,7 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 
 		int loginedMemberId = -1;
 		boolean isLogined = false;
-		
+
 		HttpSession session = req.getSession();
 
 		String jspPath = null;
@@ -47,22 +47,33 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 				jspPath = usrMemberController.doLogout(req, resp);
 			} else if (actionMethodName.equals("getLoginIdDup")) {
 				jspPath = usrMemberController.getLoginIdDup(req, resp);
-			}else if (actionMethodName.equals("findLoginId")) {
+			} else if (actionMethodName.equals("findLoginId")) {
 				jspPath = usrMemberController.showFindLoginId(req, resp);
 			} else if (actionMethodName.equals("doFindLoginId")) {
 				jspPath = usrMemberController.doFindLoginId(req, resp);
-			}else if (actionMethodName.equals("findLoginPw")) {
+			} else if (actionMethodName.equals("findLoginPw")) {
 				jspPath = usrMemberController.showFindLoginPw(req, resp);
 			} else if (actionMethodName.equals("doFindLoginPw")) {
 				jspPath = usrMemberController.doFindLoginPw(req, resp);
+			} else if (actionMethodName.equals("modify")) {
+				if (isLogined == false) {
+					req.setAttribute("alertMsg", "로그인 후 이용해주세요");
+					req.setAttribute("replaceUrl", "../home/main");
+					jspPath = "common/redirect";
+				} else {
+					jspPath = usrMemberController.modify(req, resp);
+				}
+
+			} else if (actionMethodName.equals("doModify")) {
+				jspPath = usrMemberController.doModify(req, resp);
 			}
 		} else if (controllerName.equals("article")) {
 			UsrArticleController usrArticleController = Container.usrArticleController;
 
 			if (actionMethodName.equals("list")) {
-				
+
 				jspPath = usrArticleController.showList(req, resp);
-				
+
 			} else if (actionMethodName.equals("detail")) {
 				jspPath = usrArticleController.showDetail(req, resp);
 			} else if (actionMethodName.equals("modify")) {
