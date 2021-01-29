@@ -32,6 +32,7 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 
 			if (actionMethodName.equals("main")) {
 				jspPath = homeController.showMain(req, resp);
+				
 			}
 		} else if (controllerName.equals("member")) {
 			UsrMemberController usrMemberController = Container.usrMemberController;
@@ -56,13 +57,8 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			} else if (actionMethodName.equals("doFindLoginPw")) {
 				jspPath = usrMemberController.doFindLoginPw(req, resp);
 			} else if (actionMethodName.equals("modify")) {
-				if (isLogined == false) {
-					req.setAttribute("alertMsg", "로그인 후 이용해주세요");
-					req.setAttribute("replaceUrl", "../home/main");
-					jspPath = "common/redirect";
-				} else {
-					jspPath = usrMemberController.modify(req, resp);
-				}
+
+				jspPath = usrMemberController.modify(req, resp);
 
 			} else if (actionMethodName.equals("doModify")) {
 				jspPath = usrMemberController.doModify(req, resp);
@@ -77,36 +73,22 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			} else if (actionMethodName.equals("detail")) {
 				jspPath = usrArticleController.showDetail(req, resp);
 			} else if (actionMethodName.equals("modify")) {
-				if (isLogined == false) {
-					req.setAttribute("alertMsg", "로그인 후 이용해주세요");
-					req.setAttribute("replaceUrl", "../home/main");
-					jspPath = "common/redirect";
-				} else {
-					jspPath = usrArticleController.showModify(req, resp);
-				}
+
+				jspPath = usrArticleController.showModify(req, resp);
+
 			} else if (actionMethodName.equals("doModify")) {
 				jspPath = usrArticleController.doModify(req, resp);
 
 			} else if (actionMethodName.equals("write")) {
-				if (isLogined == false) {
-					req.setAttribute("alertMsg", "로그인 후 이용해주세요");
-					req.setAttribute("replaceUrl", "../home/main");
-					jspPath = "common/redirect";
-				} else {
-					jspPath = usrArticleController.showWrite(req, resp);
-				}
+
+				jspPath = usrArticleController.showWrite(req, resp);
+
 			} else if (actionMethodName.equals("doWrite")) {
 				jspPath = usrArticleController.doWrite(req, resp);
 			} else if (actionMethodName.equals("doDelete")) {
-				if (isLogined == false) {
 
-					req.setAttribute("alertMsg", "로그인 후 이용해주세요");
-					req.setAttribute("replaceUrl", "../home/main");
-					jspPath = "common/redirect";
+				jspPath = usrArticleController.doDelete(req, resp, loginedMemberId);
 
-				} else {
-					jspPath = usrArticleController.doDelete(req, resp, loginedMemberId);
-				}
 			}
 		}
 

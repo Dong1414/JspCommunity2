@@ -62,7 +62,7 @@
 		<div>
 			<div>내용</div>
 			<div>
-				<script type="text/x-template"></script>
+				<script type="text/x-template">${article.body}</script>
  				<div class="toast-ui-editor"></div>
 			</div>
 		</div>

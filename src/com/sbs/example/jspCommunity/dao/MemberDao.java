@@ -133,7 +133,7 @@ public class MemberDao {
 		}
 
 		sql.append("WHERE id = ?", args.get("id"));
-System.out.println(sql);
+
 		return MysqlUtil.update(sql);
 	}
 }

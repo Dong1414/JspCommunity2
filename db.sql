@@ -20,8 +20,8 @@ INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
 `name` = "김민수",
-`nickname` = "강바람",
-`email` = "jangka512@gmail.com",
+`nickname` = "관리자",
+`email` = "asdf@asdf",
 loginId = "user1",
 loginPw = "user1";
 
@@ -31,7 +31,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 `name` = "김미소",
 `nickname` = "이또한지나가리라",
-`email` = "jangka512@gmail.com",
+`email` = "asdf@asdf",
 loginId = "user2",
 loginPw = "user2";
 
@@ -100,8 +100,8 @@ SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 boardId = 1,
-title = '공지3',
-`body` = '공지3';
+title = '공지31',
+`body` = '공지31';
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -151,17 +151,31 @@ boardId = 3,
 title = '자유3',
 `body` = '자유3'; 
 
-CREATE TABLE hashtag (
+CREATE TABLE attr (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
-    articleId INT(10) UNSIGNED NOT NULL,    
-    `hash` CHAR(100)        
+    `relTypeCode` CHAR(20) NOT NULL, #관련타입코드
+    `relId` INT(10) UNSIGNED NOT NULL, # 관련데이터번호
+    `typeCode` CHAR(30) NOT NULL, #extra
+    `type2Code` CHAR(30) NOT NULL, #isTempPasswordUsing
+    `value` TEXT NOT NULL    
 );
+#유니크 인덱스 걸기
+## 중복변수 생성 금지
+## 변수 찾는 속도 최적화
+ALTER TABLE `attr` ADD UNIQUE INDEX (`relTypeCode`, `relId`, `typeCode`, `type2Code`);
+
+## 특정 조건을 만족하는 회원 또는 게시물(기타 데이터)를 빠르게 찾기 위해서
+ALTER TABLE `attr` ADD INDEX (`relTypeCode`, `typeCode`, `type2Code`);
+
+# attr에 만료날짜 추가
+ALTER TABLE `attr` ADD COLUMN `expireDate` DATETIME NULL AFTER `value`;
 
 SELECT * FROM article;
-SELECT * FROM hashtag;
+
 SELECT * FROM `member`;
+SELECT * FROM `attr`;
 
 USE jspCommunity;
 # cellphoneNo 추가 및 칼럼 순서 재정렬
@@ -169,7 +183,7 @@ ALTER TABLE `member` CHANGE `loginId` `loginId` CHAR(50) NOT NULL AFTER `updateD
                      CHANGE `loginPw` `loginPw` VARCHAR(200) NOT NULL AFTER `loginId`,
                      ADD COLUMN `cellphoneNo` CHAR(20) NOT NULL AFTER `email`; 
                      
-                     # 기존회원의 비번을 암호화
+# 기존회원의 비번을 암호화
 UPDATE `member`
 SET loginPw = SHA2(loginPw, 256);
 

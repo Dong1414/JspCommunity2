@@ -1,5 +1,8 @@
 package com.sbs.example.jspCommunity.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,14 +13,17 @@ import javax.servlet.http.HttpSession;
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.dto.ResultData;
+import com.sbs.example.jspCommunity.service.AttrService;
 import com.sbs.example.jspCommunity.service.EmailService;
 import com.sbs.example.jspCommunity.service.MemberService;
 
 public class UsrMemberController {
 	private MemberService memberService;
-
+	private AttrService attrService;
+	
 	public UsrMemberController() {
 		memberService = Container.memberService;
+		attrService = Container.attrService;
 	}
 
 	public String join(HttpServletRequest req, HttpServletResponse resp) {
@@ -76,6 +82,7 @@ public class UsrMemberController {
 			req.setAttribute("historyBack", true);
 			return "common/redirect";
 		}
+	
 
 		if (!member.getLoginPw().equals(loginPw)) {
 			req.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
@@ -87,6 +94,16 @@ public class UsrMemberController {
 		HttpSession session = req.getSession();
 		session.setAttribute("loginedMemberId", loginedMemberId);
 		session.setAttribute("loginedMemberNickname", member.getNickname());
+				
+		String value = attrService.getValue("member__" + member.getId() + "__extra__isUsingTempPassword");
+		if (!value.equals("")) {
+			req.setAttribute("alertMsg", "임시비밀번호를 사용하고 있습니다. 빠르게 변경해주세요.");			
+			req.setAttribute("replaceUrl", String.format("../home/main"));
+			return "common/redirect";
+		}
+		
+		
+		
 
 		req.setAttribute("alertMsg", member.getNickname() + "님이 로그인하였습니다.");
 		req.setAttribute("replaceUrl", String.format("../home/main"));
@@ -243,8 +260,14 @@ public class UsrMemberController {
 		modifyArgs.put("email",email);
 		modifyArgs.put("cellphoneNo",cellphoneNo);
 		
-		System.out.println(modifyArgs);
+		
 		memberService.modify(modifyArgs);
+		
+		
+		String value = attrService.getValue("member__" + modifyArgs.get("id") + "__extra__isUsingTempPassword");
+		if (!value.equals("")) {
+			attrService.remove("member__" + modifyArgs.get("id") + "__extra__isUsingTempPassword");
+		}
 		
 		
 		req.setAttribute("alertMsg", name + "님의 회원정보가 수정되었습니다.");
