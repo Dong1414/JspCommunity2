@@ -38,9 +38,7 @@
 						</div>
 						<div class="article-list__cell-writer">${article.extra__nickname}</div>
 						<div class="article-list__cell-reg-date">${article.regDate}</div>
-						<div class="article-list__cell-lookup">
-							<i class="fas fa-eye"></i>
-						</div>
+						<div class="article-list__cell-lookup">${article.hitsCount}</div>
 
 					</div>
 				</c:forEach>

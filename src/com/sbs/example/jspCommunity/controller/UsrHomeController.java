@@ -16,22 +16,8 @@ import com.sbs.example.jspCommunity.service.MemberService;
 
 public class UsrHomeController {
 	public String showMain(HttpServletRequest req, HttpServletResponse resp) {
-		MemberService memberService = Container.memberService;
-
-		Member member = memberService.getMemberById(1);
-
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		try {
-			Date date = df.parse(member.getUpdateDate());
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(date);
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		req.setAttribute("data", member.getId());
-
-		return "common/pure";
+		return "usr/home/main";
 	}
+
+
 }

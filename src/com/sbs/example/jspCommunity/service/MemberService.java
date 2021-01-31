@@ -1,5 +1,9 @@
 package com.sbs.example.jspCommunity.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,5 +82,52 @@ public class MemberService {
 
 	public int modify(Map<String, Object> args) {
 		 return memberDao.modify(args);
+	}
+
+	public boolean dateCompareTo(Member member) {
+		String dump = member.getUpdateDate().substring(0, 10);
+		String[] dumpSet = dump.split("-");
+		String date = "";
+		
+		for(int i = 0 ; i < dumpSet.length ; i++) {
+			date += dumpSet[i];
+		}
+		
+		String endDate = "";
+		try {
+			endDate = AddDate(date, 0, 0, 90);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		Date day1 = new Date();
+		Date day2 = null;		
+		try {
+			day2 = dateFormat.parse(endDate);
+		} catch (ParseException e) {
+			
+		}
+		System.out.println(day1);
+		System.out.println(day2);
+		int compare = day1.compareTo(day2);
+		if(compare > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	private String AddDate(String strDate, int year, int month, int day) throws Exception {
+		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyyMMdd");
+		Calendar cal = Calendar.getInstance();
+		Date dt = dtFormat.parse(strDate);
+		cal.setTime(dt);
+		cal.add(Calendar.YEAR, year);
+		cal.add(Calendar.MONTH, month);
+		cal.add(Calendar.DATE, day);
+		return dtFormat.format(cal.getTime());
 	}
 }

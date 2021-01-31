@@ -100,14 +100,19 @@ public class UsrMemberController {
 			req.setAttribute("alertMsg", "임시비밀번호를 사용하고 있습니다. 빠르게 변경해주세요.");			
 			req.setAttribute("replaceUrl", String.format("../home/main"));
 			return "common/redirect";
-		}
-		
-		
-		
+		}	
+		boolean date = memberService.dateCompareTo(member);
 
-		req.setAttribute("alertMsg", member.getNickname() + "님이 로그인하였습니다.");
-		req.setAttribute("replaceUrl", String.format("../home/main"));
-		return "common/redirect";
+		if (date==true) {
+			req.setAttribute("alertMsg", "비밀번호를 사용한지 90일이 지났습니다. 빠르게 변경해주세요.");			
+			req.setAttribute("replaceUrl", String.format("../home/main"));
+			return "common/redirect";
+		}
+		else {
+			req.setAttribute("alertMsg", member.getNickname() + "님이 로그인하였습니다.");
+			req.setAttribute("replaceUrl", String.format("../home/main"));
+			return "common/redirect";
+		}
 	}
 
 	public String doLogout(HttpServletRequest req, HttpServletResponse resp) {

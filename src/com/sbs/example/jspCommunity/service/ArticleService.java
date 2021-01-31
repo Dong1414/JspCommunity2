@@ -42,4 +42,8 @@ public class ArticleService {
 	public List<Article> getForPrintArticlesByBoardId(int boardId, int limitStart, int limitCount, String searchKeywordType, String searchKeyword) {
 		return articleDao.getForPrintArticlesByBoardId(boardId, limitStart, limitCount, searchKeywordType, searchKeyword);
 	}
+
+	public void updateHit(int id) {
+		articleDao.updateHit(id);
+	}
 }

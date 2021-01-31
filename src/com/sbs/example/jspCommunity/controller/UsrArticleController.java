@@ -95,7 +95,7 @@ public class UsrArticleController {
 			req.setAttribute("historyBack", true);
 			return "common/redirect";
 		}
-
+		articleService.updateHit(id);
 		req.setAttribute("article", article);
 
 		return "usr/article/detail";
