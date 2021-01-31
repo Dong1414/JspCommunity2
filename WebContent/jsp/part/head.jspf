@@ -40,7 +40,7 @@
 </head>
 <body>
 	<header>
-		<div class="top-bar con">
+		<div class="top-bar con-min-width">
 			<div class="con flex flex-jc-c">
 				<a href="../home/main" class=" logo flex flex-ai-c height-100p"> LottoC <span>
 
