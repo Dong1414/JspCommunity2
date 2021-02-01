@@ -39,6 +39,7 @@
 	}
 </script>
 <section class="section-1 con">
+	<h1><i class="fas fa-sign-in-alt"></i></h1>
 	<h1>로그인</h1>
 </section>
 <section class="section-2">

@@ -30,6 +30,7 @@
 <!-- 토스트 UI 에디터, 신택스 하이라이트 플러그인 추가 -->
 <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.js" defer></script>
 <!-- 토스트 UI 끝 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/template/app.css" />
@@ -40,9 +41,10 @@
 </head>
 <body>
 	<header>
-		<div class="top-bar con-min-width">
+		<div class="logo-bar top-bar con-min-width">
 			<div class="con flex flex-jc-c">
-				<a href="../home/main" class=" logo flex flex-ai-c height-100p"> LottoC <span>
+				<a href="../home/main" class="logo flex flex-ai-c height-100p">
+				<span>
 
 				</span>
 				</a>
@@ -93,10 +95,6 @@
 						<li><a
 							href="http://localhost:8083/jspCommunity/usr/article/list?boardId=1"
 							class="block">공지사항</a>
-
-							<ul>
-								<li><a href="#" class="block">로또번호</a></li>
-							</ul></li>
 						<li><a
 							href="http://localhost:8083/jspCommunity/usr/article/list?boardId=2"
 							class="block">방명록</a></li>
@@ -105,8 +103,11 @@
 								<li><a
 									href="http://localhost:8083/jspCommunity/usr/article/list?boardId=3"
 									class="block">자유게시판</a></li>
-								<li><a href="#" class="block">2차 메뉴 아이템 3</a></li>
-								<li><a href="#" class="block">2차 메뉴 아이템 4</a></li>
+								<li><a href="#" class="block">요리 레시피</a></li>
+								<li><a href="#" class="block">벌레 퇴치</a></li>
+								<li><a href="#" class="block">자취 아이템</a></li>
+								<li><a href="#" class="block">질문 게시판</a></li>
+								<li><a href="#" class="block">꿀팁</a></li>									
 							</ul></li>
 					</ul>
 				</nav>
