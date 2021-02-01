@@ -47,17 +47,24 @@
 			</h1>
 		</div>
 
-		<div class="login-form-box form-box padding-0-10 con-min-width">
-			<form class="con" name="doLogin" action="doLogin" method="POST"
+		<div class="login-form-box form-box form-box-50 padding-0-10 con-min-width flex flex-ai-c min-height-100vh">
+			<div class="block width-850 con">
+			<div class = "flex flex-jc-c">
+			<div class = "block con login-top-bar">
+				<span class="">HOUSE</span>
+			</div>
+			</div>
+			<form class="con block" name="doLogin" action="doLogin" method="POST"
 				onsubmit="DoLoginForm__submit(this); return false;">
 				<input type="hidden" name="loginPwReal" />
+				<input type="hidden" name="afterLoginUrl" value="${param.afterLoginUrl}" />
 				<table>
 					<colgroup>
 						<col width="150">
 					</colgroup>
 					<tbody>
 						<tr>
-							<th><span> 로그인아이디 </span></th>
+							<th><span> ID </span></th>
 							<td>
 								<div>
 									<input type="text" name="loginId" maxlength="50"
@@ -66,7 +73,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th><span> 로그인비밀번호 </span></th>
+							<th><span> PW </span></th>
 							<td>
 								<div>
 									<input type="password" name="loginPw" maxlength="50"
@@ -80,7 +87,9 @@
 								<div>
 									<div class="btn-wrap">
 										<button type="submit" class="btn btn-success" href="#">LOGIN</button>
-										<a class="btn btn-info" href="#">LIST</a>
+										<a class="btn btn-info" href="../member/join">회원가입</a>
+										<a class="btn btn-info" href="../member/findLoginId">아이디찾기</a>
+										<a class="btn btn-info" href="../member/findLoginPw">비밀번호찾기</a>
 									</div>
 								</div>
 							</td>
@@ -88,7 +97,8 @@
 					</tbody>
 				</table>
 			</form>
-		</div>		
+			</div>	
+		</div>	
 	</main>
 </div>
 <%@ include file="../../part/foot.jspf"%>

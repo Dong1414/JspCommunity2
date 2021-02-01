@@ -14,7 +14,7 @@ import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.service.MemberService;
 
-public class UsrHomeController {
+public class UsrHomeController extends Controller{
 	public String showMain(HttpServletRequest req, HttpServletResponse resp) {
 		return "usr/home/main";
 	}

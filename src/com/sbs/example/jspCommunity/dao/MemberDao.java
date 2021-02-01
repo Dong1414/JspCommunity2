@@ -43,7 +43,7 @@ public class MemberDao {
 		return member;
 	}
 
-	public void join(Map<String, Object> joinArgs) {
+	public int join(Map<String, Object> joinArgs) {
 		SecSql sql = new SecSql();
 		sql.append("INSERT INTO `member`");
 		sql.append("SET regDate = NOW(),");
@@ -55,7 +55,7 @@ public class MemberDao {
 		sql.append("`email` = ?,",joinArgs.get("email"));
 		sql.append("`nickname` = ?",joinArgs.get("nickname"));
 
-		MysqlUtil.insert(sql);
+		return MysqlUtil.insert(sql);
 		
 	}
 

@@ -100,7 +100,7 @@
 							<div>로그인 아이디</div>
 							<div>
 								<input name="loginId" type="text" maxlength="50" readonly
-									value="${member.loginId}" />							
+									value="${loginedMember.loginId}" />							
 							</div>
 						</div>
 
@@ -123,28 +123,28 @@
 						<div>
 							<div>이름</div>
 							<div>
-								<input name="name" type="text" maxlength="50" readonly value="${member.name}"/>
+								<input name="name" type="text" maxlength="50" readonly value="${loginedMember.name}"/>
 							</div>
 						</div>
 						<hr />
 						<div>
 							<div>별명</div>
 							<div>
-								<input name="nickname" type="text" maxlength="50" value="${member.nickname}"/>
+								<input name="nickname" type="text" maxlength="50" value="${loginedMember.nickname}"/>
 							</div>
 						</div>
 						<hr />
 						<div>
 							<div>이메일</div>
 							<div>
-								<input name="email" type="email" maxlength="100" value="${member.email}" />
+								<input name="email" type="email" maxlength="100" value="${loginedMember.email}" />
 							</div>
 						</div>
 						<hr />
 						<div>
 							<div>전화번호</div>
 							<div>
-								<input name="cellphoneNo" type="tel" maxlength="100" value="${member.cellphoneNo}"/>
+								<input name="cellphoneNo" type="tel" maxlength="100" value="${loginedMember.cellphoneNo}"/>
 							</div>
 						</div>
 						<hr />

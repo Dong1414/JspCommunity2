@@ -16,26 +16,35 @@
 
 <!-- 토스트 UI 시작 -->
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.1/highlight.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.1/styles/default.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.1/highlight.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.1/styles/default.min.css">
 
 <!-- 토스트 UI 에디터, 자바스크립트 코어 -->
-<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js" defer></script>
+<script
+	src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"
+	defer></script>
 
 <!-- 코드 미러 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css" />
 <!-- 토스트 UI 에디터, CSS 코어 -->
-<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 
 <!-- 토스트 UI 에디터, 신택스 하이라이트 플러그인 추가 -->
-<script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.js" defer></script>
+<script
+	src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.js"
+	defer></script>
 <!-- 토스트 UI 끝 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/template/app.css" />
 <script src="${pageContext.request.contextPath}/template/app.js" defer></script>
-<script src="${pageContext.request.contextPath}/template/common.js" defer></script>
+<script src="${pageContext.request.contextPath}/template/common.js"
+	defer></script>
 
 
 </head>
@@ -44,70 +53,47 @@
 		<div class="logo-bar top-bar con-min-width">
 			<div class="con flex flex-jc-c">
 				<a href="../home/main" class="logo flex flex-ai-c height-100p">
-				<span>
-
-				</span>
+					<span> </span>
 				</a>
-				<div class="flex-grow-1"></div>
 				<nav class="flex flex-ai-c">
 					<input class="flex flex-ai-c height-100p"
 						@input="searchKeywordInputed" type="text" placeholder="검색어"
 						:value="searchKeyword" id="search" autocomplete="off">
 				</nav>
-				<div class="height-100p block" id="member">
-					<c:if test="${isLogined}">
-						<div class="login-box flex flex-jc-c flex-ai-c">
-							<div class="flex flex-jc-c flex-ai-c">
-								<spen class="flex flex-ai-c height-100p" href="#">${sessionScope.loginedMemberNickname}님</spen>
-							</div>
-						</div>
-						<div class="join-box flex flex-jc-c">
-							<div>
-								<a href="../member/doLogout">로그아웃</a> 
-								<a href="../member/modify?id=${loginedMemberId}">회원정보수정</a>
-							</div>
-						</div>
-					</c:if>
+				<div class="flex-grow-1"></div>
 
-					<c:if test="${isLogined == false}">
-						<div class="login-box flex flex-jc-c flex-ai-c">
-							<div class="text-align-center">
-								<a class="block" href="../member/login">로그인</a>
-							</div>
-						</div>
-
-						<div class="join-box flex flex-jc-c">
-							<div>
-								<a class="join" href="../member/join">회원가입</a> <a
-									class="id-search" href="../member/findLoginId">아이디찾기</a> <a
-									class="pw-search" href="../member/findLoginPw">비밀번호찾기</a>
-							</div>
-						</div>
-					</c:if>
-				</div>
+				<nav class="login-box">
+					<ul class="flex height-100p">
+						<c:if test="${isLogined == false}">
+							<li><a href="../member/login"
+								class="flex flex-ai-c height-100p"> <span>Login</span>
+							</a></li>
+						</c:if>
+						<c:if test="${isLogined}">
+							<li><a href="../member/login"
+								class="flex flex-ai-c height-100p"> <span>Logout</span>
+							</a></li>
+						</c:if>
+					</ul>
+				</nav>
 			</div>
 		</div>
+
 
 		<div class="con menu-bar visible-on-md-up">
 			<div class="con height-100p">
 				<nav class="menu-box-1">
 					<ul class="flex">
-						<li><a
-							href="../article/list?boardId=1"
-							class="block">공지사항</a>
-						<li><a
-							href="../article/list?boardId=2"
-							class="block">방명록</a></li>
+						<li><a href="../article/list?boardId=1" class="block">공지사항</a>
+						<li><a href="../article/list?boardId=2" class="block">방명록</a></li>
 						<li><a href="#" class="block">커뮤니티</a>
 							<ul>
-								<li><a
-									href="../article/list?boardId=3"
-									class="block">자유게시판</a></li>
+								<li><a href="../article/list?boardId=3" class="block">자유게시판</a></li>
 								<li><a href="#" class="block">요리 레시피</a></li>
 								<li><a href="#" class="block">벌레 퇴치</a></li>
 								<li><a href="#" class="block">자취 아이템</a></li>
 								<li><a href="#" class="block">질문 게시판</a></li>
-								<li><a href="#" class="block">꿀팁</a></li>									
+								<li><a href="#" class="block">꿀팁</a></li>
 							</ul></li>
 					</ul>
 				</nav>

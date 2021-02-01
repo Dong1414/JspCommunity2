@@ -13,8 +13,9 @@ import com.sbs.example.jspCommunity.dto.ResultData;
 import com.sbs.example.jspCommunity.service.AttrService;
 import com.sbs.example.jspCommunity.service.EmailService;
 import com.sbs.example.jspCommunity.service.MemberService;
+import com.sbs.example.util.Util;
 
-public class UsrMemberController {
+public class UsrMemberController extends Controller{
 	private MemberService memberService;
 	private AttrService attrService;
 	
@@ -29,20 +30,44 @@ public class UsrMemberController {
 	}
 
 	public String doJoin(HttpServletRequest req, HttpServletResponse resp) {
-
-		String loginId = (String) req.getParameter("loginId");
+		String loginId = req.getParameter("loginId");
+		
+		if (Util.isEmpty(loginId)) {
+			return msgAndBack(req, "로그인아이디를 입력해주세요.");
+		}
+		
 		String loginPw = (String) req.getParameter("loginPwReal");
+		
+		if (Util.isEmpty(loginPw)) {
+			return msgAndBack(req, "로그인비번을 입력해주세요.");
+		}
+
 		String cellphoneNo = (String) req.getParameter("cellphoneNo");
+		
+		if (Util.isEmpty(cellphoneNo)) {
+			return msgAndBack(req, "휴대전화번호를 입력해주세요.");
+		}
+		
 		String name = (String) req.getParameter("name");
+		
+		if (Util.isEmpty(name)) {
+			return msgAndBack(req, "이름을 입력해주세요.");
+		}
 		String email = (String) req.getParameter("email");
+		
+		if (Util.isEmpty(email)) {
+			return msgAndBack(req, "이메일을 입력해주세요.");
+		}
 		String nickname = (String) req.getParameter("nickname");
 
+		if (Util.isEmpty(nickname)) {
+			return msgAndBack(req, "별명을 입력해주세요.");
+		}
+		
 		Member member = memberService.getMemberLoginId(loginId);
 
 		if (member != null) {
-			req.setAttribute("alertMsg", loginId + "는 이미 존재하는 아이디 입니다.");
-			req.setAttribute("historyBack", true);
-			return "common/redirect";
+			return msgAndBack(req, "해당 로그인 아이디는 이미 사용중입니다.");
 		}
 
 		Map<String, Object> joinArgs = new HashMap<>();
@@ -53,15 +78,13 @@ public class UsrMemberController {
 		joinArgs.put("email", email);
 		joinArgs.put("nickname", nickname);
 
-		memberService.join(joinArgs);
-
-		req.setAttribute("alertMsg", nickname + "님이 회원이 가입되었습니다.");
-		req.setAttribute("replaceUrl", String.format("../home/main"));
-		
+		int newArticleId = memberService.join(joinArgs);
 		EmailService emailService = Container.emailService;
 		emailService.send((String)joinArgs.get("email"), "JSP커뮤니티입니다. 회원가입을 축하드립니다", "감사합니다.");
 		
-		return "common/redirect";
+		return msgAndReplace(req, newArticleId + "번 회원이 생성되었습니다.", "../home/main");
+		
+		
 	}
 
 	public String login(HttpServletRequest req, HttpServletResponse resp) {
@@ -69,65 +92,64 @@ public class UsrMemberController {
 	}
 
 	public String doLogin(HttpServletRequest req, HttpServletResponse resp) {
-		String loginId = (String) req.getParameter("loginId");
-		String loginPw = (String) req.getParameter("loginPwReal");
+		HttpSession session = req.getSession();
+		
+		String loginId = req.getParameter("loginId");
 
+		if (Util.isEmpty(loginId)) {
+			return msgAndBack(req, "로그인아이디를 입력해주세요.");
+		}
+
+		String loginPw = (String) req.getParameter("loginPwReal");
+		
+		if (Util.isEmpty(loginPw)) {
+			return msgAndBack(req, "로그인비밀번호를 입력해주세요.");
+		}
+		
 		Member member = memberService.getMemberLoginId(loginId);
 
 		if (member == null) {
-			req.setAttribute("alertMsg", loginId + "은 존재하지 않는 아이디 입니다.");
-			req.setAttribute("historyBack", true);
-			return "common/redirect";
+			return msgAndBack(req, "일치하는 회원이 존재하지 않습니다.");
 		}
 	
 
 		if (!member.getLoginPw().equals(loginPw)) {
-			req.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
-			req.setAttribute("historyBack", true);
-			return "common/redirect";
+			return msgAndBack(req, "비밀번호가 일치하지 않습니다.");
 		}
 
 		int loginedMemberId = member.getId();
-		HttpSession session = req.getSession();
+		
 		session.setAttribute("loginedMemberId", loginedMemberId);
 		session.setAttribute("loginedMemberNickname", member.getNickname());
-				
-		String value = attrService.getValue("member__" + member.getId() + "__extra__isUsingTempPassword");
-		if (!value.equals("")) {
-			req.setAttribute("alertMsg", "임시비밀번호를 사용하고 있습니다. 빠르게 변경해주세요.");			
-			req.setAttribute("replaceUrl", String.format("../home/main"));
-			return "common/redirect";
+		
+		boolean isUsingTempPassword = memberService.getIsUsingTempPassword(member.getId());
+
+		String alertMsg = String.format("%s님 환영합니다.", member.getNickname());
+		String replaceUrl = "../home/main";
+
+		if ( isUsingTempPassword ) {
+			alertMsg = String.format("%s님은 현재 임시 비밀번호를 사용중입니다. 변경 후 이용해주세요.", member.getNickname());
+			replaceUrl = "../member/modify";
 		}	
 		boolean date = memberService.dateCompareTo(member);
 
 		if (date==true) {
-			req.setAttribute("alertMsg", "비밀번호를 사용한지 90일이 지났습니다. 빠르게 변경해주세요.");			
-			req.setAttribute("replaceUrl", String.format("../home/main"));
-			return "common/redirect";
+			alertMsg = "비밀번호를 사용한지 90일이 지났습니다. 빠르게 변경해주세요.";			
+			replaceUrl = "../member/modify";
 		}
-		else {
-			req.setAttribute("alertMsg", member.getNickname() + "님이 로그인하였습니다.");
-			req.setAttribute("replaceUrl", String.format("../home/main"));
-			return "common/redirect";
-		}
+		return msgAndReplace(req, alertMsg, replaceUrl);
 	}
 
 	public String doLogout(HttpServletRequest req, HttpServletResponse resp) {
-
 		HttpSession session = req.getSession();
 		session.removeAttribute("loginedMemberId");
-
-		req.setAttribute("alertMsg", "로그아웃 되었습니다.");
-		req.setAttribute("replaceUrl", "../home/main");
-		return "common/redirect";
+		return msgAndReplace(req, "로그아웃 되었습니다.", "../home/main");
 	}
 
 	public String getLoginIdDup(HttpServletRequest req, HttpServletResponse resp) {
 		String loginId = req.getParameter("loginId");
 
 		Member member = memberService.getMemberLoginId(loginId);
-
-		
 
 		String resultCode = null;
 		String msg = null;
@@ -143,145 +165,122 @@ public class UsrMemberController {
 			msg = "사용가능한 로그인아이디 입니다.";
 		}
 
-		req.setAttribute("data", new ResultData(resultCode, msg, "loginId", loginId));
-		return "common/json";
+		return json(req, new ResultData(resultCode, msg, "loginId", loginId));
 	}
 	public String showFindLoginId(HttpServletRequest req, HttpServletResponse resp) {
-		HttpSession session = req.getSession();
-
-		if (session.getAttribute("loginedMemberId") != null) {
-			req.setAttribute("alertMsg", "로그아웃 후 진행해주세요.");
-			req.setAttribute("historyBack", true);
-			return "common/redirect";
-		}
-
 		return "usr/member/findLoginId";
 	}
 
 	public String doFindLoginId(HttpServletRequest req, HttpServletResponse resp) {
-		HttpSession session = req.getSession();
-
-		if (session.getAttribute("loginedMemberId") != null) {
-			req.setAttribute("alertMsg", "로그아웃 후 진행해주세요.");
-			req.setAttribute("historyBack", true);
-			return "common/redirect";
-		}
-
 		String name = req.getParameter("name");
+		if (Util.isEmpty(name)) {
+			return msgAndBack(req, "이름을 입력해주세요.");
+		}
+	
 		String email = req.getParameter("email");
-
+		if (Util.isEmpty(email)) {
+			return msgAndBack(req, "이메일을 입력해주세요.");
+		}
+		
 		Member member = memberService.getMemberByNameAndEmail(name, email);
 
 		if (member == null) {
-			req.setAttribute("alertMsg", "일치하는 회원이 존재하지 않습니다.");
-			req.setAttribute("historyBack", true);
-			return "common/redirect";
+			return msgAndBack(req, "일치하는 회원이 존재하지 않습니다.");
 		}
 
-		req.setAttribute("alertMsg", String.format("로그인아이디는 %s 입니다.", member.getLoginId()));
-		req.setAttribute("replaceUrl", "../member/login");
-		return "common/redirect";
+		return msgAndReplace(req, String.format("로그인아이디는 %s 입니다.", member.getLoginId()), "../member/login");
 	}
 	
 	public String showFindLoginPw(HttpServletRequest req, HttpServletResponse resp) {
-		HttpSession session = req.getSession();
-
-		if (session.getAttribute("loginedMemberId") != null) {
-			req.setAttribute("alertMsg", "로그아웃 후 진행해주세요.");
-			req.setAttribute("historyBack", true);
-			return "common/redirect";
-		}
-
+		
 		return "usr/member/findLoginPw";
 	}
 
 	public String doFindLoginPw(HttpServletRequest req, HttpServletResponse resp) {
-		HttpSession session = req.getSession();
-
-		if (session.getAttribute("loginedMemberId") != null) {
-			req.setAttribute("alertMsg", "로그아웃 후 진행해주세요.");
-			req.setAttribute("historyBack", true);
-			return "common/redirect";
+		String loginId = req.getParameter("loginId");
+		if (Util.isEmpty(loginId)) {
+			return msgAndBack(req, "로그인아이디를 입력해주세요.");
+		}
+		
+		String email = req.getParameter("email");
+		if (Util.isEmpty(email)) {
+			return msgAndBack(req, "이메일을 입력해주세요.");
 		}
 
-		String loginId = req.getParameter("loginId");
-		String email = req.getParameter("email");
-
+		
 		Member member = memberService.getMemberLoginId(loginId);
 
 		if (member == null) {
-			req.setAttribute("alertMsg", "일치하는 회원이 존재하지 않습니다.");
-			req.setAttribute("historyBack", true);
-			return "common/redirect";
+			return msgAndBack(req, "일치하는 회원이 존재하지 않습니다.");
 		}
 
 		if (member.getEmail().equals(email) == false) {
-			req.setAttribute("alertMsg", "회원이 이메일주소를 정확히 입력해주세요.");
-			req.setAttribute("historyBack", true);
-			return "common/redirect";
+			return msgAndBack(req, "회원이 이메일주소를 정확히 입력해주세요.");
 		}
 
 		ResultData sendTempLoginPwToEmailRs = memberService.sendTempLoginPwToEmail(member);
 		
 		if ( sendTempLoginPwToEmailRs.isFail() ) {
-			req.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
-			req.setAttribute("historyBack", true);
-			return "common/redirect";
+			return msgAndBack(req, sendTempLoginPwToEmailRs.getMsg());
 		}
 
-		req.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
-		req.setAttribute("replaceUrl", "../member/login");
-		return "common/redirect";
+		return msgAndReplace(req, sendTempLoginPwToEmailRs.getMsg(), "../member/login");
 	}
 
 	public String modify(HttpServletRequest req, HttpServletResponse resp) {
-		String id = req.getParameter("id");
-		
-		Member member = memberService.getMemberById(Integer.parseInt(id));	
-		
-		req.setAttribute("member", member);
-		
+
 		return "usr/member/modify";
 	}
 
 	public String doModify(HttpServletRequest req, HttpServletResponse resp) {
 		
-		String id = req.getParameter("id");
-		String loginId = req.getParameter("loginId");
-		String loginPwReal = req.getParameter("loginPwReal");
-		String name = req.getParameter("name");
-		String nickname = req.getParameter("nickname");
-		String email = req.getParameter("email");
-		String cellphoneNo = req.getParameter("cellphoneNo");		
-		
-		Map<String, Object> modifyArgs = new HashMap<>();
-		modifyArgs.put("id",id);
-		modifyArgs.put("loginID",loginId);
-		modifyArgs.put("loginPw",loginPwReal);
-		modifyArgs.put("nickname",nickname);
-		modifyArgs.put("email",email);
-		modifyArgs.put("cellphoneNo",cellphoneNo);
-		
-		
-		memberService.modify(modifyArgs);
-		
-		
-		String value = attrService.getValue("member__" + modifyArgs.get("id") + "__extra__isUsingTempPassword");
-		if (!value.equals("")) {
-			attrService.remove("member__" + modifyArgs.get("id") + "__extra__isUsingTempPassword");
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+
+		String loginPw = req.getParameter("loginPwReal");
+
+		if (loginPw != null && loginPw.length() == 0) {
+			loginPw = null;
 		}
-		
-		
-		req.setAttribute("alertMsg", name + "님의 회원정보가 수정되었습니다.");
-		req.setAttribute("replaceUrl", String.format("../home/main"));
-		
-		HttpSession session = req.getSession();
-		session.setAttribute("loginedMemberNickname",nickname);
-		
-		EmailService emailService = Container.emailService;
-		emailService.send((String)modifyArgs.get("email"), "JSP커뮤니티입니다. 회원님의 회원 정보가 수정되었습니다.", "감사합니다.");
-		
-		return "common/redirect";
+
+		String name = req.getParameter("name");
+
+		if (Util.isEmpty(name)) {
+			return msgAndBack(req, "이름을 입력해주세요.");
+		}
+
+		String nickname = req.getParameter("nickname");
+
+		if (Util.isEmpty(nickname)) {
+			return msgAndBack(req, "별명을 입력해주세요.");
+		}
+
+		String email = req.getParameter("email");
+
+		if (Util.isEmpty(email)) {
+			return msgAndBack(req, "이메일을 입력해주세요.");
+		}
+
+		String cellphoneNo = req.getParameter("cellphoneNo");
+
+		if (Util.isEmpty(cellphoneNo)) {
+			return msgAndBack(req, "휴대전화번호를 입력해주세요.");
+		}
+
+		Map<String, Object> modifyParam = new HashMap<>();
+		modifyParam.put("loginPw", loginPw);
+		modifyParam.put("name", name);
+		modifyParam.put("nickname", nickname);
+		modifyParam.put("email", email);
+		modifyParam.put("cellphoneNo", cellphoneNo);
+		modifyParam.put("id", loginedMemberId);
+
+		memberService.modify(modifyParam);
+
+		if (loginPw != null) {
+			memberService.setIsUsingTempPassword(loginedMemberId, false);
+		}
+
+		return msgAndReplace(req, "회원정보가 수정되었습니다.", "../home/main");
 		
 	}
 	

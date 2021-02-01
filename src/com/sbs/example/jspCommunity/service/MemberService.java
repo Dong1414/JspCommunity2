@@ -35,8 +35,8 @@ public class MemberService {
 		return memberDao.getMemberLoginId(loginId);
 	}
 
-	public void join(Map<String, Object> joinArgs) {
-		memberDao.join(joinArgs);
+	public int join(Map<String, Object> joinArgs) {
+		return memberDao.join(joinArgs);
 		
 	}
 
@@ -76,8 +76,16 @@ public class MemberService {
 		modifyParam.put("loginPw", Util.sha256(tempPassword));
 		modify(modifyParam);
 	
-		attrService.setValue("member__" + actor.getId() + "__extra__isUsingTempPassword", "1", null);
+		setIsUsingTempPassword(actor.getId(), true);
 		//릴타입코드,ID,타입코드,타입2코드 순
+	}
+	
+	public void setIsUsingTempPassword(int actorId, boolean use) {
+		attrService.setValue("member__" + actorId + "__extra__isUsingTempPassword", use, null);
+	}
+
+	public boolean getIsUsingTempPassword(int actorId) {
+		return attrService.getValueAsBoolean("member__" + actorId + "__extra__isUsingTempPassword");
 	}
 
 	public int modify(Map<String, Object> args) {
