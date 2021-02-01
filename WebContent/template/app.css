@@ -699,6 +699,48 @@ border-top:1px solid black;
 
 /* 게시글 리스트 페이징 끝 */
 
+/* 폼박스 시작 */
+.form-box > form {
+  display:block;
+  width:100%;
+}
+
+.form-box > form > table {
+  border-top:3px solid black;
+  width:100%;
+  border-collapse:collapse;
+}
+
+.form-box > form > table > tbody > tr > th {
+  text-align:left;
+}
+
+.form-box > form > table > tbody > tr > th,
+.form-box > form > table > tbody > tr > td {
+  padding:10px 0;
+}
+
+.form-box > form > table > tbody > tr > td > div > input[type="text"],
+.form-box > form > table > tbody > tr > td > div > input[type="password"]{
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+  padding:10px;
+}
+
+@media ( max-width:800px ) {
+  .form-box > form > table > tbody > tr,
+  .form-box > form > table > tbody > tr > th,
+  .form-box > form > table > tbody > tr > td {
+    display:block;
+  }
+
+  .form-box > form > table > tbody > tr {
+    border-bottom: 1px solid #dfdfdf;
+  }
+}
+/* 폼박스 끝 */
+
 /* 디테일 페이지 시작 */
 :root {
 --article-detail__cell-id__width:70px;
@@ -792,7 +834,9 @@ padding-left:10px;
 	width:700px; 
     resize:none;
 }
-
+.min-height-100vh{
+	min-height: 100vh;
+}
 .textarea-body{
 	width:700px; 
 	height:400px; 

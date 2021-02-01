@@ -4,7 +4,7 @@
 
 <c:set var="pageTitle" value="${board.name} 게시물 수정" />
 <%@ include file="../../part/head.jspf"%>
-<h1>${pageTitle}</h1>
+
 <script>
 	let DoWriteForm__submited = false;
 	let DoWriteForm__checkedLoginId = "";
@@ -42,39 +42,46 @@
 		DoWriteForm__submited = true;
 	}
 </script>
-<div>
-	<form name="doModify" action="doModify" method="POST" onsubmit="DoWriteForm__submit(this); return false;">
-		<input type="hidden" name="id" value="${article.id}" />
-		<input type="hidden" name="memberId" value="1" />		
-		<input type="hidden" name="body"/>
+<section class="section-2">
+	<div class="con">
+		<div class="join-detail">
+			<main>
+			<h1>${pageTitle}</h1>
+				<form name="doModify" action="doModify" method="POST"
+					onsubmit="DoWriteForm__submit(this); return false;">
+					<input type="hidden" name="id" value="${article.id}" /> <input
+						type="hidden" name="memberId" value="1" /> <input type="hidden"
+						name="body" />
 
-		<hr />
-		<div>
-			<div>제목</div>
-			<div>
-				<input name="title" type="text" maxlength="50"
-					placeholder="제목을 입력해주세요." value="${article.title}" />
-			</div>
+					<hr />
+					<div>
+						<div>제목</div>
+						<div>
+							<input name="title" type="text" maxlength="50"
+								placeholder="제목을 입력해주세요." value="${article.title}" />
+						</div>
+					</div>
+
+					<hr />
+
+					<div>
+						<div>내용</div>
+						<div>
+							<script type="text/x-template">${article.body}</script>
+							<div class="toast-ui-editor"></div>
+						</div>
+					</div>
+					<hr />
+					<div>
+						<div>수정</div>
+						<div>
+							<input type="submit" value="수정" />
+							<button type="button" onclick="history.back();">뒤로가기</button>
+						</div>
+					</div>
+				</form>
+			</main>
 		</div>
-
-		<hr />
-
-		<div>
-			<div>내용</div>
-			<div>
-				<script type="text/x-template">${article.body}</script>
- 				<div class="toast-ui-editor"></div>
-			</div>
-		</div>
-		<hr />
-		<div>
-			<div>수정</div>
-			<div>
-				<input type="submit" value="수정" />
-				<button type="button" onclick="history.back();">뒤로가기</button>
-			</div>
-		</div>
-	</form>
-</div>
-
+	</div>
+</section>
 <%@ include file="../../part/foot.jspf"%>

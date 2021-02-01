@@ -38,44 +38,57 @@
 		DoLoginForm__submited = true;
 	}
 </script>
-<section class="section-1 con">
-	<h1><i class="fas fa-sign-in-alt"></i></h1>
-	<h1>로그인</h1>
-</section>
-<section class="section-2">
-	<div class="con">
-		<div class="login-detail">
-			<main>
-				<form name="doLogin" action="doLogin" method="POST"
-					onsubmit="DoLoginForm__submit(this); return false;">
-					<input type="hidden" name="loginPwReal" />
-					<hr />
-					<div>
-						<div>ID</div>
-						<div>
-							<input name="loginId" type="text" maxlength="50"
-								placeholder="아이디를 입력해주세요." />
-						</div>
-					</div>
-
-					<hr />
-
-					<div>
-						<div>PW</div>
-						<div>
-							<input name="loginPw" type="password" maxlength="50"
-								placeholder="패스워드를 입력해주세요." />
-						</div>
-
-						<hr />
-						<div>
-							<input type="submit" value="login" />
-							<button type="button" onclick="history.back();">뒤로가기</button>
-						</div>
-					</div>
-				</form>
-			</main>
+<div class="body-content flex">
+	<main class="flex-grow-1 flex-ai-c">
+		
+		<div class="title-bar padding-0-10 con-min-width">
+			<h1 class="con">
+				<span><i class="fas fa-sign-in-alt"></i></span> <span>로그인</span>
+			</h1>
 		</div>
-	</div>
-</section>
+
+		<div class="login-form-box form-box padding-0-10 con-min-width">
+			<form class="con" name="doLogin" action="doLogin" method="POST"
+				onsubmit="DoLoginForm__submit(this); return false;">
+				<input type="hidden" name="loginPwReal" />
+				<table>
+					<colgroup>
+						<col width="150">
+					</colgroup>
+					<tbody>
+						<tr>
+							<th><span> 로그인아이디 </span></th>
+							<td>
+								<div>
+									<input type="text" name="loginId" maxlength="50"
+										placeholder="로그인아이디를 입력해주세요.">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th><span> 로그인비밀번호 </span></th>
+							<td>
+								<div>
+									<input type="password" name="loginPw" maxlength="50"
+										placeholder="로그인비밀번호를 입력해주세요.">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th><span> 로그인 </span></th>
+							<td>
+								<div>
+									<div class="btn-wrap">
+										<button type="submit" class="btn btn-success" href="#">LOGIN</button>
+										<a class="btn btn-info" href="#">LIST</a>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>		
+	</main>
+</div>
 <%@ include file="../../part/foot.jspf"%>
