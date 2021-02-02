@@ -39,7 +39,7 @@
 	}
 </script>
 <div class="body-content flex">
-	<main class="flex-grow-1 flex-ai-c">
+	
 		
 		<div class="title-bar padding-0-10 con-min-width">
 			<h1 class="con">
@@ -99,6 +99,6 @@
 			</form>
 			</div>	
 		</div>	
-	</main>
+	
 </div>
 <%@ include file="../../part/foot.jspf"%>

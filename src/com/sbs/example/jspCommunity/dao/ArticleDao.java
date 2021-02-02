@@ -167,4 +167,15 @@ public class ArticleDao {
 		System.out.println("asdf");
 		MysqlUtil.update(sql);
 	}
+
+
+	public int getLikeCount(int articleId) {
+		
+		SecSql sql = new SecSql();
+		sql.append("SELECT likeCount");
+		sql.append("FROM article");
+		sql.append("WHERE id = ?", articleId);
+
+		return MysqlUtil.selectRowIntValue(sql);
+	}
 }

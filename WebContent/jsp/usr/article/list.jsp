@@ -5,7 +5,7 @@
 
 <c:set var="pageTitle" value="${board.name} 게시물 리스트" />
 <%@ include file="../../part/head.jspf"%>
-<main>
+
 	<div class="con title-bar padding-0-10 con-min-width">
 		<h1>${pageTitle}</h1>
 	</div>
@@ -72,7 +72,7 @@
 			<!-- <a class="btn btn-info" href="#">LIST</a> -->
 		</div>
 	</div>
-</main>
+
 
 <div class="con">
 	<script>

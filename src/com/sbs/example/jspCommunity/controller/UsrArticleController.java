@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
+import com.sbs.example.jspCommunity.dao.ArticleDao;
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Board;
 import com.sbs.example.jspCommunity.service.ArticleService;
@@ -249,5 +250,17 @@ public class UsrArticleController extends Controller{
 		articleService.modify(modifyArgs);
 
 		return msgAndReplace(req, id + "번 게시물이 수정되었습니다.", String.format("detail?id=%d", id));
+	}
+
+	public String doLike(HttpServletRequest req, HttpServletResponse resp, int memberId) {
+		articleService.likeUp(memberId,articleid);
+		return null;
+	}
+
+	public String doLikeCount(HttpServletRequest req, HttpServletResponse resp) {
+		int articleId = Util.getAsInt(req.getParameter("id"), 0);
+		int Count = articleService.getLikeCount(articleId);
+		
+		return null;
 	}
 }

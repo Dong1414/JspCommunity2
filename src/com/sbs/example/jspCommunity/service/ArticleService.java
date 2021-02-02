@@ -46,4 +46,9 @@ public class ArticleService {
 	public void updateHit(int id) {
 		articleDao.updateHit(id);
 	}
+
+	public int getLikeCount(int articleId) {
+		return articleDao.getLikeCount(articleId);
+		
+	}
 }

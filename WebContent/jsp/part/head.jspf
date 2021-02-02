@@ -48,56 +48,60 @@
 
 
 </head>
+
 <body>
-	<header>
-		<div class="logo-bar top-bar con-min-width">
-			<div class="con flex flex-jc-c">
-				<a href="../home/main" class="logo flex flex-ai-c height-100p">
-					<span> </span>
-				</a>
-				<nav class="flex flex-ai-c">
-					<input class="flex flex-ai-c height-100p"
-						@input="searchKeywordInputed" type="text" placeholder="검색어"
-						:value="searchKeyword" id="search" autocomplete="off">
-				</nav>
-				<div class="flex-grow-1"></div>
+	<div class="body-content min-height-100vh flex flex-column">
+		<header>
+			<div class="logo-bar top-bar con-min-width">
+				<div class="con flex flex-jc-c">
+					<a href="../home/main" class="logo flex flex-ai-c height-100p">
+						<span> </span>
+					</a>
+					<nav class="flex flex-ai-c">
+						<input class="flex flex-ai-c height-100p"
+							@input="searchKeywordInputed" type="text" placeholder="검색어"
+							:value="searchKeyword" id="search" autocomplete="off">
+					</nav>
+					<div class="flex-grow-1"></div>
 
-				<nav class="login-box">
-					<ul class="flex height-100p">
-						<c:if test="${isLogined == false}">
-							<li><a href="../member/login"
-								class="flex flex-ai-c height-100p"> <span>Login</span>
-							</a></li>
-						</c:if>
-						<c:if test="${isLogined}">
-							<li><a href="../member/login"
-								class="flex flex-ai-c height-100p"> <span>Logout</span>
-							</a></li>
-						</c:if>
-					</ul>
-				</nav>
+					<nav class="login-box">
+						<ul class="flex height-100p">
+							<c:if test="${isLogined == false}">
+								<li><a href="../member/login"
+										class="flex flex-ai-c height-100p">
+										<span>Login</span>
+									</a></li>
+							</c:if>
+							<c:if test="${isLogined}">
+								<li><a href="../member/login"
+										class="flex flex-ai-c height-100p">
+										<span>Logout</span>
+									</a></li>
+							</c:if>
+						</ul>
+					</nav>
+				</div>
 			</div>
-		</div>
 
 
-		<div class="con menu-bar visible-on-md-up">
-			<div class="con height-100p">
-				<nav class="menu-box-1">
-					<ul class="flex">
-						<li><a href="../article/list?boardId=1" class="block">공지사항</a>
-						<li><a href="../article/list?boardId=2" class="block">방명록</a></li>
-						<li><a href="#" class="block">커뮤니티</a>
-							<ul>
-								<li><a href="../article/list?boardId=3" class="block">자유게시판</a></li>
-								<li><a href="#" class="block">요리 레시피</a></li>
-								<li><a href="#" class="block">벌레 퇴치</a></li>
-								<li><a href="#" class="block">자취 아이템</a></li>
-								<li><a href="#" class="block">질문 게시판</a></li>
-								<li><a href="#" class="block">꿀팁</a></li>
-							</ul></li>
-					</ul>
-				</nav>
+			<div class="con menu-bar visible-on-md-up">
+				<div class="con height-100p">
+					<nav class="menu-box-1">
+						<ul class="flex">
+							<li><a href="../article/list?boardId=1" class="block">공지사항</a>
+							<li><a href="../article/list?boardId=2" class="block">방명록</a></li>
+							<li><a href="#" class="block">커뮤니티</a>
+								<ul>
+									<li><a href="../article/list?boardId=3" class="block">자유게시판</a></li>
+									<li><a href="#" class="block">요리 레시피</a></li>
+									<li><a href="#" class="block">벌레 퇴치</a></li>
+									<li><a href="#" class="block">자취 아이템</a></li>
+									<li><a href="#" class="block">질문 게시판</a></li>
+									<li><a href="#" class="block">꿀팁</a></li>
+								</ul></li>
+						</ul>
+					</nav>
+				</div>
 			</div>
-		</div>
-	</header>
-</body>
+		</header>	
+		<main class="flex-grow-1">
