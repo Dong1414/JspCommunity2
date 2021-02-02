@@ -87,12 +87,12 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 				jspPath = usrArticleController.doWrite(req, resp);
 			} else if (actionMethodName.equals("doDelete")) {
 				jspPath = usrArticleController.doDelete(req, resp, loginedMemberId);
-			} else if (actionMethodName.equals("doLikeCount")) {
-				jspPath = usrArticleController.doLikeCount(req, resp);
 			} else if (actionMethodName.equals("doLike")) {
-				jspPath = usrArticleController.doLike(req, resp, loginedMemberId);
+				jspPath = usrArticleController.doLike(req, resp);
 			} else if (actionMethodName.equals("doHate")) {
-				jspPath = usrArticleController.doDelete(req, resp, loginedMemberId);
+				jspPath = usrArticleController.doHate(req, resp);
+			} else if (actionMethodName.equals("doComment")) {
+				jspPath = usrArticleController.doComment(req, resp);
 			}
 			
 		}

@@ -3,5 +3,5 @@
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%
 Object data = request.getAttribute("data");
-response.getWriter().print(Util.getJsonText(data));
+response.getDetailr().print(Util.getJsonText(data));
 %>

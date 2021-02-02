@@ -164,18 +164,117 @@ public class ArticleDao {
 		sql.append("UPDATE article");
 		sql.append("SET hitsCount = hitsCount + 1");
 		sql.append("WHERE id = ?", id);
-		System.out.println("asdf");
+		
 		MysqlUtil.update(sql);
 	}
 
 
 	public int getLikeCount(int articleId) {
+		String article = "article";
+		SecSql sql = new SecSql();
+		sql.append("SELECT COUNT(`point`) AS COUNT");
+		sql.append("FROM `like`");
+		sql.append("WHERE relId = ?", articleId);
+		sql.append("AND relTypeCode = ?",article);
+		sql.append("AND `point` = 1");
+		Map<String, Object> map = MysqlUtil.selectRow(sql);
+		int count = 0;
+		
+		if(null == map.get("COUNT") || map.isEmpty()) {
+			return count;
+		}
+		count = Integer.parseInt(String.valueOf(map.get("COUNT")));		
+		return count;
+	}
+	public int getHateCount(int articleId) {
+		String article = "article";
+		SecSql sql = new SecSql();
+		sql.append("SELECT COUNT(`point`) AS COUNT");
+		sql.append("FROM `like`");
+		sql.append("WHERE relId = ?", articleId);
+		sql.append("AND relTypeCode = ?",article);
+		sql.append("AND `point` = 0");
+		Map<String, Object> map = MysqlUtil.selectRow(sql);
+		int count = 0;
+		
+		if(null == map.get("COUNT") || map.isEmpty()) {
+			return count;
+		}
+		count = Integer.parseInt(String.valueOf(map.get("COUNT")));		
+		return count;
+	}
+
+	public int likeUp(int memberId, int articleId) {
+		SecSql sql1 = new SecSql();
+		String article = "article";
+		sql1.append("SELECT *");
+		sql1.append("FROM `like`");
+		sql1.append("WHERE relId = ?",articleId);
+		sql1.append("AND relTypeCode = ?",article);
+		sql1.append("AND memberId = ?", memberId);
+				
+		Map<String, Object> map = MysqlUtil.selectRow(sql1);		
+		if(!map.isEmpty()) {
+			return 0;
+		}
 		
 		SecSql sql = new SecSql();
-		sql.append("SELECT likeCount");
-		sql.append("FROM article");
-		sql.append("WHERE id = ?", articleId);
-
-		return MysqlUtil.selectRowIntValue(sql);
+		
+		sql.append("INSERT INTO `like`");
+		sql.append("SET regDate = NOW()");
+		sql.append(", updateDate = NOW()");
+		sql.append(", relTypeCode = ?",article);
+		sql.append(", relId = ?", articleId);
+		sql.append(", memberId = ?", memberId);
+		sql.append(", `point` = 1");
+				
+		return MysqlUtil.insert(sql);		
 	}
+
+
+	public int hateUp(int memberId, int articleId) {
+		SecSql sql1 = new SecSql();
+		String article = "article";
+		sql1.append("SELECT *");
+		sql1.append("FROM `like`");
+		sql1.append("WHERE relId = ?",articleId);
+		sql1.append("AND relTypeCode = ?",article);
+		sql1.append("AND memberId = ?", memberId);
+		sql1.append("AND `point` = 0");
+				
+		Map<String, Object> map = MysqlUtil.selectRow(sql1);		
+		if(!map.isEmpty()) {
+			return 0;
+		}
+		
+		SecSql sql = new SecSql();
+		
+		sql.append("INSERT INTO `like`");
+		sql.append("SET regDate = NOW()");
+		sql.append(", updateDate = NOW()");
+		sql.append(", relTypeCode = ?",article);
+		sql.append(", relId = ?", articleId);
+		sql.append(", memberId = ?", memberId);
+		sql.append(", `point` = 0");
+				
+		return MysqlUtil.insert(sql);	
+	}
+
+
+	public void addReple(int memberId, int articleId, String body) {		
+		SecSql sql = new SecSql();
+		String article = "article";
+		sql.append("INSERT INTO `reply`");
+		sql.append("SET regDate = NOW()");
+		sql.append(", updateDate = NOW()");
+		sql.append(", relTypeCode = ?",article);
+		sql.append(", relId = ?", articleId);
+		sql.append(", memberId = ?", memberId);
+		sql.append(", `body` = ?",body);
+	    
+		MysqlUtil.insert(sql);
+	}
+
+
+	
 }

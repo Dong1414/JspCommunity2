@@ -51,4 +51,32 @@ public class ArticleService {
 		return articleDao.getLikeCount(articleId);
 		
 	}
+
+	public int likeUp(int memberId, int articleId) {
+	
+		int i = articleDao.likeUp(memberId, articleId);
+		if(i == 0) {
+			return 0; 
+		}
+		return 1;
+		
+	}
+
+	public int hateUp(int memberId, int articleId) {
+		int i = articleDao.hateUp(memberId, articleId);
+		if(i == 0) {
+			return 0; 
+		}
+		return 1;
+		
+	}
+
+	public int getHateCount(int id) {
+		return articleDao.getHateCount(id);
+	}
+
+	public void addReple(int memberId, int articleId, String body) {
+		articleDao.addReple(memberId, articleId, body);
+		
+	}
 }

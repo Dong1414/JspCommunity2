@@ -101,6 +101,13 @@ public class UsrArticleController extends Controller{
 		articleService.updateHit(id);
 		req.setAttribute("article", article);
 
+		int likeCount = articleService.getLikeCount(id);
+		int hateCount = articleService.getHateCount(id);
+		
+		HttpSession session = req.getSession();
+		session.setAttribute("isArticleId", id);
+		session.setAttribute("likeCount", likeCount);
+		session.setAttribute("hateCount", hateCount);
 		return "usr/article/detail";
 	}
 
@@ -117,7 +124,7 @@ public class UsrArticleController extends Controller{
 		}
 		
 		req.setAttribute("board", board);
-
+		
 		return "usr/article/write";
 	}
 
@@ -252,15 +259,36 @@ public class UsrArticleController extends Controller{
 		return msgAndReplace(req, id + "번 게시물이 수정되었습니다.", String.format("detail?id=%d", id));
 	}
 
-	public String doLike(HttpServletRequest req, HttpServletResponse resp, int memberId) {
-		articleService.likeUp(memberId,articleid);
-		return null;
+	public String doLike(HttpServletRequest req, HttpServletResponse resp) {
+		HttpSession session = req.getSession();
+		int memberId = (int) session.getAttribute("loginedMemberId");
+		int articleId = (int) session.getAttribute("isArticleId");
+		int i = articleService.likeUp(memberId,articleId);
+		
+		if(i == 0) {
+			return msgAndReplace(req, "이미 좋아요를 누른 게시물 입니다.", String.format("detail?id=%d",articleId));
+		}
+		return "usr/article/detail";
 	}
 
-	public String doLikeCount(HttpServletRequest req, HttpServletResponse resp) {
-		int articleId = Util.getAsInt(req.getParameter("id"), 0);
-		int Count = articleService.getLikeCount(articleId);
+	public String doHate(HttpServletRequest req, HttpServletResponse resp) {
+		HttpSession session = req.getSession();
+		int memberId = (int) session.getAttribute("loginedMemberId");
+		int articleId = (int) session.getAttribute("isArticleId");
+		int i = articleService.hateUp(memberId,articleId);
 		
-		return null;
+		if(i == 0) {
+			return msgAndReplace(req, "이미 싫어요를 누른 게시물 입니다.", String.format("detail?id=%d",articleId));
+		}
+		return "usr/article/detail";
+	}
+
+	public String doComment(HttpServletRequest req, HttpServletResponse resp) {
+		HttpSession session = req.getSession();
+		int memberId = (int) session.getAttribute("loginedMemberId");
+		int articleId = (int) session.getAttribute("isArticleId");		
+		String body = req.getParameter("body");
+		articleService.addReple(memberId,articleId,body);	
+		return "usr/article/detail";
 	}
 }

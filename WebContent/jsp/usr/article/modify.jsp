@@ -6,12 +6,12 @@
 <%@ include file="../../part/head.jspf"%>
 
 <script>
-	let DoWriteForm__submited = false;
-	let DoWriteForm__checkedLoginId = "";
+	let DoDetailForm__submited = false;
+	let DoDetailForm__checkedLoginId = "";
 
 	// 폼 발송전 체크
-	function DoWriteForm__submit(form) {
-		if (DoWriteForm__submited) {
+	function DoDetailForm__submit(form) {
+		if (DoDetailForm__submited) {
 			alert('처리중입니다.');
 			return;
 		}
@@ -39,7 +39,7 @@
 		form.body.value = body;
 
 		form.submit();
-		DoWriteForm__submited = true;
+		DoDetailForm__submited = true;
 	}
 </script>
 <section class="section-2">
@@ -48,7 +48,7 @@
 			<main>
 			<h1>${pageTitle}</h1>
 				<form name="doModify" action="doModify" method="POST"
-					onsubmit="DoWriteForm__submit(this); return false;">
+					onsubmit="DoDetailForm__submit(this); return false;">
 					<input type="hidden" name="id" value="${article.id}" /> <input
 						type="hidden" name="memberId" value="1" /> <input type="hidden"
 						name="body" />

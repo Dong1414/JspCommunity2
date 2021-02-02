@@ -55,7 +55,7 @@
 
 								<div class="flex">
 									<span
-										class="article-list-box__writer article-list-box__writer--mobile">${article.extra__nickname}</span>
+										class="article-list-box__Detailr article-list-box__Detailr--mobile">${article.extra__nickname}</span>
 									<span>|</span> <span
 										class="article-list-box__reg-date article-list-box__reg-date--mobile">${article.regDate}</span>
 								</div>
@@ -68,7 +68,7 @@
 	</div>
 	<div class="article-btn-box padding-0-10 con-min-width">
 		<div class="con btn-wrap flex flex-jc-e">
-			<a class="btn btn-primary" href="write?boardId=${param.boardId}">WRITE</a>
+			<a class="btn btn-primary" href="Detail?boardId=${param.boardId}">Detail</a>
 			<!-- <a class="btn btn-info" href="#">LIST</a> -->
 		</div>
 	</div>

@@ -21,7 +21,7 @@ updateDate = NOW(),
 `nickname` = "강바람",
 `email` = "jangka512@gmail.com",
 loginId = "user1",
-loginPw = "user1";
+loginPw = "asdf";
 # 회원2 생성
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -30,7 +30,7 @@ updateDate = NOW(),
 `nickname` = "이또한지나가리라",
 `email` = "jangka512@gmail.com",
 loginId = "user2",
-loginPw = "user2";
+loginPw = "asdf";
 # 게시판 테이블 생성
 CREATE TABLE board (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -127,7 +127,7 @@ CREATE TABLE attr (
     `type2Code` CHAR(30) NOT NULL,
     `value` TEXT NOT NULL
 );
-
+SELECT * FROM `attr`;
 # attr 유니크 인덱스 걸기
 ## 중복변수 생성금지
 ## 변수찾는 속도 최적화
@@ -138,3 +138,30 @@ ALTER TABLE `attr` ADD INDEX (`relTypeCode`, `typeCode`, `type2Code`);
 
 # attr에 만료날짜 추가
 ALTER TABLE `attr` ADD COLUMN `expireDate` DATETIME NULL AFTER `value`;
+
+CREATE TABLE `like`(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    relTypeCode CHAR(30) NOT NULL,
+    relId INT(10) UNSIGNED NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    `point` TINYINT(2) UNSIGNED NOT NULL
+);
+SELECT * FROM `like`;
+SELECT SUM(`point`) AS 'COUNT'
+FROM `like`
+WHERE relId = 5
+AND relTypeCode = 'article';
+
+CREATE TABLE `reply`(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    relTypeCode CHAR(30) NOT NULL,
+    relId INT(10) UNSIGNED NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    `body` TEXT NOT NULL
+);
+SELECT * FROM `reply`;
+SELECT * FROM `member`;

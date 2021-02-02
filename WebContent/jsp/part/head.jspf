@@ -73,7 +73,11 @@
 									</a></li>
 							</c:if>
 							<c:if test="${isLogined}">
-								<li><a href="../member/login"
+								<li><a href="../member/modify"
+										class="flex flex-ai-c height-100p">
+										<span>${loginedMemberNickname}님</span>
+									</a></li>
+									<li><a href="../member/doLogout"
 										class="flex flex-ai-c height-100p">
 										<span>Logout</span>
 									</a></li>

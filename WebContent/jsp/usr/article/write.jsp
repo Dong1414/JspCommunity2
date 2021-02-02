@@ -8,12 +8,12 @@
 	<h1>${pageTitle}</h1>
 </section>
 <script>
-	let DoWriteForm__submited = false;
-	let DoWriteForm__checkedLoginId = "";
+	let DoDetailForm__submited = false;
+	let DoDetailForm__checkedLoginId = "";
 
 	// 폼 발송전 체크
-	function DoWriteForm__submit(form) {
-		if (DoWriteForm__submited) {
+	function DoDetailForm__submit(form) {
+		if (DoDetailForm__submited) {
 			alert('처리중입니다.');
 			return;
 		}
@@ -41,14 +41,14 @@
 		form.body.value = body;
 
 		form.submit();
-		DoWriteForm__submited = true;
+		DoDetailForm__submited = true;
 	}
 </script>
 <section class="section-2">
 	<div class="con">
 		<div class="join-detail">
 			<main>
-			<form action="doWrite" method="POST" onsubmit="DoWriteForm__submit(this); return false;">				
+			<form action="doDetail" method="POST" onsubmit="DoDetailForm__submit(this); return false;">				
 					<input type="hidden" name="boardId" value="${board.id}" />
 					<input type="hidden" name="memberId" value="${loginedMemberId}" />
 					<input type="hidden" name="body" />
