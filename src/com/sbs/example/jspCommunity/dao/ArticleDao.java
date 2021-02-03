@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Board;
+import com.sbs.example.jspCommunity.dto.Reply;
 import com.sbs.example.mysqlutil.MysqlUtil;
 import com.sbs.example.mysqlutil.SecSql;
 
@@ -212,7 +213,7 @@ public class ArticleDao {
 		sql1.append("WHERE relId = ?",articleId);
 		sql1.append("AND relTypeCode = ?",article);
 		sql1.append("AND memberId = ?", memberId);
-				
+		sql1.append("AND `point` = 1");		
 		Map<String, Object> map = MysqlUtil.selectRow(sql1);		
 		if(!map.isEmpty()) {
 			return 0;
@@ -276,5 +277,89 @@ public class ArticleDao {
 	}
 
 
-	
+	public boolean likeCheck(int articleId, int memberId) {
+		SecSql sql1 = new SecSql();
+		String article = "article";
+		sql1.append("SELECT *");
+		sql1.append("FROM `like`");
+		sql1.append("WHERE relId = ?",articleId);
+		sql1.append("AND relTypeCode = ?",article);
+		sql1.append("AND memberId = ?", memberId);
+		sql1.append("AND `point` = 1");
+		
+		Map<String, Object> map = MysqlUtil.selectRow(sql1);		
+		if(!map.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+
+
+	public boolean hateCheck(int articleId, int memberId) {
+		SecSql sql1 = new SecSql();
+		String article = "article";
+		sql1.append("SELECT *");
+		sql1.append("FROM `like`");
+		sql1.append("WHERE relId = ?",articleId);
+		sql1.append("AND relTypeCode = ?",article);
+		sql1.append("AND memberId = ?", memberId);
+		sql1.append("AND `point` = 0");
+		
+		Map<String, Object> map = MysqlUtil.selectRow(sql1);		
+		if(!map.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+
+
+	public int likeDown(int memberId, int articleId) {
+		SecSql sql = new SecSql();
+		String article = "article";
+		sql.append("DELETE FROM `like`");
+		sql.append("WHERE relId = ?",articleId);
+		sql.append("AND relTypeCode = ?",article);
+		sql.append("AND memberId = ?", memberId);
+		sql.append("AND `point` = 1");
+		
+		return MysqlUtil.delete(sql); 
+	}
+
+
+	public int hateDown(int memberId, int articleId) {
+		SecSql sql = new SecSql();
+		String article = "article";
+		sql.append("DELETE FROM `like`");
+		sql.append("WHERE relId = ?",articleId);
+		sql.append("AND relTypeCode = ?",article);
+		sql.append("AND memberId = ?", memberId);
+		sql.append("AND `point` = 0");
+		
+		return MysqlUtil.delete(sql); 
+	}
+
+
+	public void deleteReple(int replyId) {
+		SecSql sql = new SecSql();
+		
+		sql.append("DELETE FROM `reply`");
+		sql.append("WHERE id = ?",replyId);
+		
+		MysqlUtil.delete(sql);		
+	}
+
+
+	public Reply getReply(int replyId) {
+		SecSql sql1 = new SecSql();
+		
+		sql1.append("SELECT *");
+		sql1.append("FROM `reply`");
+		sql1.append("WHERE id = ?", replyId);
+		
+		Map<String, Object> map = MysqlUtil.selectRow(sql1);		
+		if(map.isEmpty()) {
+			return null;
+		}
+		return new Reply(map);
+	}
 }

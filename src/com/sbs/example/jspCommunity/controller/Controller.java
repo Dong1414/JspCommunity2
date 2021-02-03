@@ -16,6 +16,12 @@ public class Controller {
 		req.setAttribute("replaceUrl", replaceUrl);
 		return "common/redirect";
 	}
+	
+	protected String replace(HttpServletRequest req, String replaceUrl) {		
+		req.setAttribute("alertMsg", null);
+		req.setAttribute("replaceUrl", replaceUrl);
+		return "common/redirect";
+	}
 
 	protected String json(HttpServletRequest req, ResultData resultData) {
 		req.setAttribute("data", resultData);

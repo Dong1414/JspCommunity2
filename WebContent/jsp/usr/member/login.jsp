@@ -60,7 +60,7 @@
 				<input type="hidden" name="afterLoginUrl" value="${param.afterLoginUrl}" />
 				<table>
 					<colgroup>
-						<col width="150">
+						<col width="150">						
 					</colgroup>
 					<tbody>
 						<tr>

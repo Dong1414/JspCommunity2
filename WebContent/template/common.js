@@ -55,6 +55,25 @@ function Editor__init() {
 	$(node).data('data-toast-editor', editor);
   });
 }
+/* 댓글용 토스트 에디터 시작*/
+function Editor__init() {
+	  $('.toast-ui-editor-comment').each(function(index, node) {
+	    var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
+
+	    var editor = new toastui.Editor({
+	      el: node,
+	      previewStyle: 'vertical',
+	      initialValue: initialValue,
+	      height:150,
+	      plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
+	    });
+
+		$(node).data('data-toast-editor', editor);
+	  });
+	}
+/* 댓글용 토스트 에디터 끝 */
+
+
 
 function EditorViewer__init() {
   $('.toast-ui-viewer').each(function(index, node) {

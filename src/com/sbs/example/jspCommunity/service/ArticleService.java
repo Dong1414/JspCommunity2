@@ -7,6 +7,7 @@ import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dao.ArticleDao;
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Board;
+import com.sbs.example.jspCommunity.dto.Reply;
 
 public class ArticleService {
 	private ArticleDao articleDao;
@@ -56,16 +57,15 @@ public class ArticleService {
 	
 		int i = articleDao.likeUp(memberId, articleId);
 		if(i == 0) {
-			return 0; 
+			articleDao.likeDown(memberId,articleId); 
 		}
-		return 1;
-		
+		return 1;		
 	}
 
 	public int hateUp(int memberId, int articleId) {
 		int i = articleDao.hateUp(memberId, articleId);
 		if(i == 0) {
-			return 0; 
+			articleDao.hateDown(memberId,articleId);  
 		}
 		return 1;
 		
@@ -78,5 +78,22 @@ public class ArticleService {
 	public void addReple(int memberId, int articleId, String body) {
 		articleDao.addReple(memberId, articleId, body);
 		
+	}
+
+	public boolean likeCheck(int articleId, int memberId) {
+		return articleDao.likeCheck(articleId,memberId);
+		
+	}
+	public boolean hateCheck(int articleId, int memberId) {		
+		return articleDao.hateCheck(articleId,memberId);
+	}
+
+	public void deleteReple(int replyId) {
+		articleDao.deleteReple(replyId);
+		
+	}
+
+	public Reply getReply(int replyId) {
+		return articleDao.getReply(replyId);
 	}
 }

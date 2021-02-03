@@ -136,4 +136,6 @@ public class MemberDao {
 
 		return MysqlUtil.update(sql);
 	}
+
+
 }

@@ -152,8 +152,7 @@ public class MemberService {
 		} catch (ParseException e) {
 			
 		}
-		System.out.println(day1);
-		System.out.println(day2);
+		
 		int compare = day1.compareTo(day2);
 		if(compare > 0) {
 			return true;
@@ -172,4 +171,6 @@ public class MemberService {
 		cal.add(Calendar.DATE, day);
 		return dtFormat.format(cal.getTime());
 	}
+
+	
 }

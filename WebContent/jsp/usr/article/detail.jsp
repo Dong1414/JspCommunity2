@@ -7,24 +7,31 @@
 <%@ include file="../../part/head.jspf"%>
 
 <script>
-	let DoCommentForm__submited = false;
-	function DoCommentForm__submit(form) {
-		if (DoCommentForm__submited) {
+	let DoDetailForm__submited = false;
+	let DoDetailForm__checkedLoginId = "";
+
+	// 폼 발송전 체크
+	function DoDetailForm__submit(form) {
+		if (DoDetailForm__submited) {
 			alert('처리중입니다.');
 			return;
 		}
 
-		form.body.value = form.body.value.trim();
+		const editor = $(form).find('.toast-ui-editor-comment').data(
+				'data-toast-editor');
+		const body = editor.getMarkdown().trim();
 
-		if (form.body.value.length == 0) {
-			alert('로그인 아이디를 입력해주세요.');
-			form.body.focus();
+		if (body.length == 0) {
+			alert('내용을 입력해주세요.');
+			editor.focus();
 
 			return;
 		}
 
+		form.body.value = body;
+
 		form.submit();
-		DoCommentForm__submited = true;
+		DoDetailForm__submited = true;
 	}
 </script>
 <section class="section-1 con">
@@ -62,12 +69,22 @@
 
 			<div class="like-hate con flex flex-jc-c">
 				<div class="like flex flex-ai-c">
-					<a href="../article/doLike"><i class="far fa-thumbs-up"></i> <span
-						class="rec_count">${likeCount}</span></a>
+					<a href="doLike"> <c:if test="${likeCheck}">
+							<i class="fas fa-thumbs-up"></i>
+						</c:if> <c:if test="${likeCheck == false}">
+							<i class="far fa-thumbs-up"></i>
+						</c:if> <c:if test="${isLogined == false}">
+							<i class="far fa-thumbs-up"></i>
+						</c:if> <span>${likeCount}</span></a>
 				</div>
 				<div class="hate flex flex-ai-c">
-					<a href="../article/doHate"><i class="far fa-thumbs-down"></i>
-						<span class="rec_count">${hateCount}</span></a>
+					<a href="doHate"> <c:if test="${hateCheck}">
+							<i class="fas fa-thumbs-down"></i>
+						</c:if> <c:if test="${hateCheck == false}">
+							<i class="far fa-thumbs-down"></i>
+						</c:if> <c:if test="${isLogined == false}">
+							<i class="far fa-thumbs-down"></i>
+						</c:if> <span class="rec_count">${hateCount}</span></a>
 				</div>
 			</div>
 			<div>
@@ -79,22 +96,63 @@
 <section class="section-2 con-min-width">
 	<div class="con reple-box">
 		<div class="comments">
-			<span>전체 댓글: 0개</span>
+			<span>전체 댓글: </span>
 		</div>
-		<div class="comment-body">			
+		<div class="comment-body">
 			<form name="CommentForm" action="doComment" method="POST"
-				onsubmit="DoCommentForm__submit(this); return false;">
+				onsubmit="DoDetailForm__submit(this); return false;">
 				<input type="hidden" name="body" />
-				
-				<textarea name="body" style="width: 95%" rows="3" cols="30"  placeholder="댓글을 입력하세요"></textarea>
-				
-				<div class="btn-wrap flex flex-jc-e">
-					<button type="submit" class="btn btn-success" href="#">LOGIN</button>
-				</div>
+				<c:if test="${isLogined}">
+					<script type="text/x-template"></script>
+					<div class="toast-ui-editor-comment" style="width: 95%"></div>
+
+
+					<div class="btn-wrap flex flex-jc-e">
+						<button type="submit" class="btn btn-success" href="#">작성</button>
+					</div>
+				</c:if>
 			</form>
 		</div>
+		<div class="comment-main con">
+			<c:if test="${replys.size() < 1}">
+				<script type="text/x-template">등록된 댓글이 없습니다.</script>
+				<div class="toast-ui-viewer"></div>
+			</c:if>
+			<c:if test="${replys.size() > 0}">
+				<table>
+					<colgroup>
+						<col width="100">
+						<col width="800">
+						<col width="200">
+						<col width="70">
+						<col width="70">
+					</colgroup>
+					<tbody>
+
+						<c:forEach items="${replys}" var="reply">
+							<tr>
+								<th><span> ${reply.memberId} </span></th>
+								<td><script type="text/x-template">${reply.body}</script>
+									<div class="toast-ui-viewer"></div></td>
+								<td>
+									<div>${reply.updateDate}</div>
+								</td>
+								<c:if test="${sessionScope.loginedMemberId == reply.memberId}">
+									<td><a href="doReplyModify?id=${reply.id}">수정</a></td>
+									<td><a href="doReplyDelete?id=${reply.id}">삭제</a></td>
+								</c:if>
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+			</c:if>
+
+		</div>
+
 
 	</div>
+
 
 </section>
 <%@ include file="../../part/foot.jspf"%>

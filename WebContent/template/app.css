@@ -866,6 +866,18 @@ padding-left:10px;
 .reple-box > .btn-wrap{	
 	text-align:right;
 }
+.comment-box{
+	height:20%;
+} 
+
+.comment-main table tbody tr  td .toast-ui-viewer{
+	margin-left:15px;
+	width:75%;
+}
+/*.comment-main table tbody tr  td .reply-updateDate
+,.comment-main table tbody tr  td a{
+	padding:0 7px;
+}*/
 /* 댓글 박스 끝 */
 
 /* 게시글 작성 페이지 시작 */
