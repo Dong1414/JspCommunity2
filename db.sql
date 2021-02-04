@@ -146,8 +146,9 @@ CREATE TABLE `like`(
     relTypeCode CHAR(30) NOT NULL,
     relId INT(10) UNSIGNED NOT NULL,
     memberId INT(10) UNSIGNED NOT NULL,
-    `point` TINYINT(2) UNSIGNED NOT NULL
+    `point` SMALLINT(1)  NOT NULL
 );
+ALTER TABLE `jspCommunity`.`like` ADD INDEX (`relTypeCode`, `relId`, `memberId`); 
 SELECT * FROM `like`;
 SELECT SUM(`point`) AS 'COUNT'
 FROM `like`

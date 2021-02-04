@@ -27,4 +27,18 @@ public class ReplyDao {
 		}
 		return replys;
 	}
+
+	public void modify(int replyId, String body) {
+		SecSql sql = new SecSql();
+		String article = "article";
+		sql.append("UPDATE `reply`");
+		sql.append("SET updateDate = NOW(),");
+		sql.append("`body` = ?",body);
+		sql.append("WHERE id = ?",replyId);
+		sql.append("AND relTypeCode = ?",article);
+		
+		
+		MysqlUtil.update(sql);
+		
+	}
 }

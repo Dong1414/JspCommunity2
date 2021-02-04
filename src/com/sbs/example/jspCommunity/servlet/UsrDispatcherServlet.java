@@ -32,7 +32,7 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 
 			if (actionMethodName.equals("main")) {
 				jspPath = homeController.showMain(req, resp);
-				
+
 			}
 		} else if (controllerName.equals("member")) {
 			UsrMemberController usrMemberController = Container.usrMemberController;
@@ -89,13 +89,17 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 				jspPath = usrArticleController.doDelete(req, resp, loginedMemberId);
 			} else if (actionMethodName.equals("doComment")) {
 				jspPath = usrArticleController.doComment(req, resp);
+			} else if (actionMethodName.equals("showReplyModify")) {
+				jspPath = usrArticleController.showReplyModify(req, resp);
 			} else if (actionMethodName.equals("doReplyModify")) {
 				jspPath = usrArticleController.doReplyModify(req, resp);
+			} else if (actionMethodName.equals("doCancelModifyReply")) {
+				jspPath = usrArticleController.doCancelModifyReply(req, resp);
 			} else if (actionMethodName.equals("doReplyDelete")) {
 				jspPath = usrArticleController.doReplyDelete(req, resp);
 			}
-			
-		}else if (controllerName.equals("like")) {
+
+		} else if (controllerName.equals("like")) {
 			UsrLikeController likeController = Container.usrLikeController;
 
 			if (actionMethodName.equals("doLike")) {

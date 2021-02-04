@@ -17,4 +17,9 @@ public class ReplyService {
 		return replyDao.getReplys(id);
 	}
 
+	public void modify(int replyId, String body) {
+		replyDao.modify(replyId, body);
+		
+	}
+
 }

@@ -33,6 +33,33 @@
 		form.submit();
 		DoDetailForm__submited = true;
 	}
+
+	let DoModifyForm__submited = false;
+	let DoModifyForm__checkedLoginId = "";
+
+	// 폼 발송전 체크
+	function DoModifyForm__submit(form) {
+		if (DoModifyForm__submited) {
+			alert('처리중입니다.');
+			return;
+		}
+
+		const editor = $(form).find('.toast-ui-editor-comment').data(
+				'data-toast-editor');
+		const body = editor.getMarkdown().trim();
+
+		if (body.length == 0) {
+			alert('내용dd을 입력해주세요.');
+			editor.focus();
+
+			return;
+		}
+
+		form.body.value = body;
+
+		form.submit();
+		DoModifyForm__submited = true;
+	}
 </script>
 <section class="section-1 con">
 	<h1>${pageTitle}</h1>
@@ -45,16 +72,16 @@
 				<div class="flex flex-jc-c detail-div">
 					<div class="article-detail__cell-id">${article.id}</div>
 					<div class="article-detail__cell-title">${article.title}</div>
-					<div class="article-detail__cell-Commentr">${article.extra__writer}</div>
-					<div class="article-detail__cell-regDate">${article.regDate}</div>
+					<div class="article-detail__cell-writer">${article.extra__writer}</div>
+					<div class="article-detail__cell-reg-date">${article.regDate}</div>
+					<div class="article-detail__hit-count"><i class="fas fa-eye"></i> ${article.hitsCount}</div>
 				</div>
 			</header>
 
 
 			<c:if test="${sessionScope.loginedMemberId == memberID}">
 				<div class="text-align-right">
-					<a href="modify?id=${article.id}">수정</a>
-					<a
+					<a href="modify?id=${article.id}">수정</a> <a
 						onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
 						href="doDelete?id=${article.id}">삭제</a>
 				</div>
@@ -75,12 +102,10 @@
 						<a class="btn btn-primary"
 							href="../like/doLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
 							onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
-							<span>
-								<span>
-									<i class="fas fa-thumbs-up"></i>
-									<span> ${likeCount}</span>
-								</span>
+							<span> <span> <i class="fas fa-thumbs-up"></i> <span>
+										${likeCount}</span>
 							</span>
+						</span>
 						</a>
 					</div>
 				</c:if>
@@ -90,21 +115,16 @@
 							<a class="btn btn-info"
 								href="../like/doCancelLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
 								onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
-								<span>
-									<span>
-										<i class="far fa-thumbs-up"></i>
-										<span> ${likeCount}</span>
-									</span>
+								<span> <span> <i class="far fa-thumbs-up"></i> <span>
+											${likeCount}</span>
 								</span>
+							</span>
 							</a>
 						</div>
 						<div class="flex flex-ai-c">
-						<a class="btn btn-danger" href="#" >
-								<span>
-							<span>
-								<i class="far fa-thumbs-down"></i>
-								<span> ${hateCount}</span>
-							</span>
+							<a class="btn btn-danger" href="#"> <span> <span>
+										<i class="far fa-thumbs-down"></i> <span> ${hateCount}</span>
+								</span>
 							</span>
 							</a>
 						</div>
@@ -118,23 +138,18 @@
 							href="../like/doDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
 							onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
 
-							<span>
-								<span>
-									<i class="far fa-thumbs-down"></i>
-									<span> ${hateCount}</span>
-								</span>
+							<span> <span> <i class="far fa-thumbs-down"></i> <span>
+										${hateCount}</span>
 							</span>
+						</span>
 						</a>
 					</div>
 				</c:if>
 				<c:if test="${article.extra.actorCanCancelDislike}">
 					<div class="Dislike flex flex-ai-c">
 						<div class="flex flex-ai-c">
-							<a class="btn btn-danger" href="#">							
-							<span>
-							<span>
-								<i class="far fa-thumbs-up"></i>
-								<span> ${likeCount}</span>
+							<a class="btn btn-danger" href="#"> <span> <span>
+										<i class="far fa-thumbs-up"></i> <span> ${likeCount}</span>
 								</span>
 							</span>
 							</a>
@@ -144,12 +159,10 @@
 							<a class="btn btn-info"
 								href="../like/doCancelDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
 								onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
-								<span>
-									<span>
-										<i class="far fa-thumbs-down"></i>
-										<span> ${hateCount}</span>
-									</span>
+								<span> <span> <i class="far fa-thumbs-down"></i> <span>
+											${hateCount}</span>
 								</span>
+							</span>
 							</a>
 						</div>
 
@@ -169,8 +182,9 @@
 			<span>전체 댓글: </span>
 		</div>
 		<div class="comment-body">
-			<form name="CommentForm" action="doComment?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" method="POST"
-				onsubmit="DoDetailForm__submit(this); return false;">
+			<form name="CommentForm"
+				action="doComment?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
+				method="POST" onsubmit="DoDetailForm__submit(this); return false;">
 				<input type="hidden" name="body" />
 				<c:if test="${isLogined}">
 					<script type="text/x-template"></script>
@@ -178,7 +192,8 @@
 
 
 					<div class="btn-wrap flex flex-jc-e">
-						<button type="submit" class="btn btn-success" href="../article/doComment?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}">작성</button>
+						<button type="submit" class="btn btn-success"
+							href="../article/doComment?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}">작성</button>
 					</div>
 				</c:if>
 			</form>
@@ -201,27 +216,46 @@
 
 						<c:forEach items="${replys}" var="reply">
 							<tr>
-								<th>
-									<span> ${reply.memberId} </span>
-								</th>
-								<td>
-									<script type="text/x-template">${reply.body}</script>
-									<div class="toast-ui-viewer"></div>
-								</td>
+								<th><span> ${reply.memberId} </span></th>
+								<td><script type="text/x-template">${reply.body}</script>
+									<div class="toast-ui-viewer"></div></td>
 								<td>
 									<div>${reply.updateDate}</div>
 								</td>
 								<c:if test="${sessionScope.loginedMemberId == reply.memberId}">
-									<td>
-										<a href="../article/doComment?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}">수정</a>
+									<td><a
+										href="../article/showReplyModify?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}&id=${reply.id}">수정</a>
 									</td>
-									<td>
-										<a href="../article/doReplyDelete?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}&id=${reply.id}">삭제</a>
+									<td><a
+										href="../article/doReplyDelete?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}&id=${reply.id}">삭제</a>
 									</td>
 								</c:if>
 							</tr>
-						</c:forEach>
+							<c:if test="${modifyMode == reply.id}">
+								<tr>
+									<th style="width: 20px"></th>
 
+									<td style="width: 800px">
+										<form name="ModifyForm"
+											action="doReplyModify?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
+											method="POST"
+											onsubmit="DoModifyForm__submit(this); return false;">
+											<input type="hidden" name="body" /> <input type="hidden"
+												name="replyId" value="${reply.id}" />
+
+											<script type="text/x-template">${reply.body}</script>
+											<div class="toast-ui-editor-comment" style="width: 95%"></div>
+											<button type="submit" class="btn btn-success">작성</button>
+											<a class="btn btn-info"
+												href="../article/doCancelModifyReply?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
+												onclick="if ( !confirm('댓글 수정을 취소하시겠습니까?') ) return false;">취소</a>
+										</form>
+									</td>
+
+								</tr>
+
+							</c:if>
+						</c:forEach>
 					</tbody>
 				</table>
 			</c:if>

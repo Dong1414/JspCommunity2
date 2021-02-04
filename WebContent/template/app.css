@@ -750,9 +750,10 @@ border-top:1px solid black;
 --article-detail__cell-id__width:70px;
 --article-detail__cell-reg-date__width:190px;
 --article-detail__cell-writer__width:120px;
---article-detail__cell-title__width:calc(100% - var(--article-detail__cell-id__width) - var(--article-detail__cell-reg-date__width) - var(--article-detail__cell-writer__width) - var(--article-detail__likes-count__width) - var(--article-detail__comments-count__width));
+--article-detail__cell-title__width:calc(100% - var(--article-detail__cell-id__width) - var(--article-detail__cell-reg-date__width) - var(--article-detail__cell-writer__width) - var(--article-detail__hit-count__width));
 --article-detail__likes-count__width:70px;
 --article-detail__comments-count__width:70px;
+--article-detail__hit-count__width:70px;
 }
 
 
@@ -826,6 +827,10 @@ width:var(--article-detail__comments-count__width);
 
 .article-detail__likes-count {
 width:var(--article-detail__likes-count__width);
+}
+
+.article-detail__hit-count {
+width:var(--article-detail__hit-count__width);
 }
 .article-list > main .article-list__cell-title {
 text-align:left;
