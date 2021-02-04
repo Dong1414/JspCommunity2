@@ -1,6 +1,5 @@
 package com.sbs.example.jspCommunity.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
-import com.sbs.example.jspCommunity.dao.ArticleDao;
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Board;
+import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.dto.Reply;
 import com.sbs.example.jspCommunity.service.ArticleService;
+import com.sbs.example.jspCommunity.service.LikeService;
 import com.sbs.example.jspCommunity.service.MemberService;
 import com.sbs.example.jspCommunity.service.ReplyService;
 import com.sbs.example.util.Util;
@@ -23,11 +23,13 @@ public class UsrArticleController extends Controller {
 	private ArticleService articleService;
 	private ReplyService replyService;
 	private MemberService memberService;
+	private LikeService likeService;
 
 	public UsrArticleController() {
 		articleService = Container.articleService;
 		replyService = Container.replyService;
 		memberService = Container.memberService;
+		likeService = Container.likeService;
 	}
 
 	public String showList(HttpServletRequest req, HttpServletResponse resp) {
@@ -47,6 +49,9 @@ public class UsrArticleController extends Controller {
 		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId, limitStart, itemsInAPage,
 				searchKeywordType, searchKeyword);
 
+	
+
+	
 		int totalPage = (int) Math.ceil(totalCount / (double) itemsInAPage);
 
 		int pageBoxSize = 10;
@@ -100,7 +105,8 @@ public class UsrArticleController extends Controller {
 			return msgAndBack(req, "게시물번호를 입력해주세요.");
 		}
 
-		Article article = articleService.getForPrintArticleById(id);
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
+		Article article = articleService.getForPrintArticleById(id, loginedMember);
 
 		if (article == null) {
 			return msgAndBack(req, id + "번 게시물은 존재하지 않습니다.");
@@ -110,25 +116,18 @@ public class UsrArticleController extends Controller {
 
 		boolean isLogin = (boolean) req.getAttribute("isLogined");
 		HttpSession session = req.getSession();
-
-		if (isLogin == true) {
-			int loginedMemberId = (int) req.getAttribute("loginedMemberId");
-			boolean likeCheck = articleService.likeCheck(id, loginedMemberId);
-			boolean hateCheck = articleService.hateCheck(id, loginedMemberId);
-
-			session.setAttribute("likeCheck", likeCheck);
-			session.setAttribute("hateCheck", hateCheck);
-		}
-
+		
 		int likeCount = articleService.getLikeCount(id);
 		int hateCount = articleService.getHateCount(id);
 
 		List<Reply> replys = replyService.getReplys(id);
+		
 
 		session.setAttribute("replys", replys);
 		session.setAttribute("isArticleId", id);
 		session.setAttribute("likeCount", likeCount);
 		session.setAttribute("hateCount", hateCount);
+		
 		return "usr/article/detail";
 	}
 
@@ -280,34 +279,31 @@ public class UsrArticleController extends Controller {
 		
 	}
 
-	public String doLike(HttpServletRequest req, HttpServletResponse resp) {
-		HttpSession session = req.getSession();
-		int memberId = (int) session.getAttribute("loginedMemberId");
-		int articleId = (int) session.getAttribute("isArticleId");
-		int i = articleService.likeUp(memberId, articleId);
-		
-		int id = 1;
-		
-		return replace(req,String.format("detail?id=%d", id));
-
-	}
-
-	public String doHate(HttpServletRequest req, HttpServletResponse resp) {
-		HttpSession session = req.getSession();
-		int memberId = (int) session.getAttribute("loginedMemberId");
-		int articleId = (int) session.getAttribute("isArticleId");
-		int i = articleService.hateUp(memberId, articleId);
-
-		return "usr/article/detail";
-	}
-
 	public String doComment(HttpServletRequest req, HttpServletResponse resp) {
+		String relTypeCode = req.getParameter("relTypeCode");
 		HttpSession session = req.getSession();
 		int memberId = (int) session.getAttribute("loginedMemberId");
 		int articleId = (int) session.getAttribute("isArticleId");
 		String body = req.getParameter("body");
 		articleService.addReple(memberId, articleId, body);
-		return "usr/article/detail";
+		
+		
+
+		if (relTypeCode == null) {
+			return msgAndBack(req, "관련데이터코드를 입력해주세요.");
+		}
+
+		int relId = Util.getAsInt(req.getParameter("relId"), 0);
+
+		if (relId == 0) {
+			return msgAndBack(req, "관련데이터번호를 입력해주세요.");
+		}
+
+		int actorId = (int) req.getAttribute("loginedMemberId");
+		
+		
+		
+		return msgAndReplace(req, "댓글이 작성되었습니다.", req.getParameter("redirectUrl"));
 	}
 
 	public String doReplyModify(HttpServletRequest req, HttpServletResponse resp) {
@@ -317,15 +313,29 @@ public class UsrArticleController extends Controller {
 	}
 
 	public String doReplyDelete(HttpServletRequest req, HttpServletResponse resp) {
+		
 		HttpSession session = req.getSession();
 		int memberId = (int) session.getAttribute("loginedMemberId");		
 		int replyId = Util.getAsInt(req.getParameter("id"), 0);
-		 
+		System.out.println(replyId);
 		Reply reply = articleService.getReply(replyId);
 		
 		if(reply != null) {
 			articleService.deleteReple(replyId);
 		}
-		return "usr/article/detail";
+		String relTypeCode = req.getParameter("relTypeCode");
+		if (relTypeCode == null) {
+			return msgAndBack(req, "관련데이터코드를 입력해주세요.");
+		}
+
+		int relId = Util.getAsInt(req.getParameter("relId"), 0);
+
+		if (relId == 0) {
+			return msgAndBack(req, "관련데이터번호를 입력해주세요.");
+		}
+
+		int actorId = (int) req.getAttribute("loginedMemberId");				
+		
+		return msgAndReplace(req, "댓글이 삭제되었습니다.", req.getParameter("redirectUrl"));		
 	}
 }

@@ -124,7 +124,7 @@
 	</script>
 	<section class="section-1">
 		<div class="con">
-			<div class="join-detail">
+			<div class="join-Write">
 				<main>
 					<form action="doJoin" method="POST"
 						onsubmit="DoJoinForm__submit(this); return false;">

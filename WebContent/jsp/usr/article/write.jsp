@@ -8,47 +8,38 @@
 	<h1>${pageTitle}</h1>
 </section>
 <script>
-	let DoDetailForm__submited = false;
-	let DoDetailForm__checkedLoginId = "";
-
+	let DoWriteForm__submited = false;
+	let DoWriteForm__checkedLoginId = "";
 	// 폼 발송전 체크
-	function DoDetailForm__submit(form) {
-		if (DoDetailForm__submited) {
+	function DoWriteForm__submit(form) {
+		if (DoWriteForm__submited) {
 			alert('처리중입니다.');
 			return;
 		}
-
 		form.title.value = form.title.value.trim();
-
 		if (form.title.value.length == 0) {
 			alert('제목을 입력해주세요.');
 			form.title.focus();
-
 			return;
 		}
-
 		const editor = $(form).find('.toast-ui-editor').data(
 				'data-toast-editor');
 		const body = editor.getMarkdown().trim();
-
 		if (body.length == 0) {
 			alert('내용을 입력해주세요.');
 			editor.focus();
-
 			return;
 		}
-
 		form.body.value = body;
-
 		form.submit();
-		DoDetailForm__submited = true;
+		DoWriteForm__submited = true;
 	}
 </script>
 <section class="section-2">
 	<div class="con">
 		<div class="join-detail">
 			<main>
-			<form action="doDetail" method="POST" onsubmit="DoDetailForm__submit(this); return false;">				
+			<form action="doWrite" method="POST" onsubmit="DoWriteForm__submit(this); return false;">				
 					<input type="hidden" name="boardId" value="${board.id}" />
 					<input type="hidden" name="memberId" value="${loginedMemberId}" />
 					<input type="hidden" name="body" />

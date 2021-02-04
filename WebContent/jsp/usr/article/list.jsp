@@ -68,7 +68,7 @@
 	</div>
 	<div class="article-btn-box padding-0-10 con-min-width">
 		<div class="con btn-wrap flex flex-jc-e">
-			<a class="btn btn-primary" href="Detail?boardId=${param.boardId}">Detail</a>
+			<a class="btn btn-primary" href="write?boardId=${param.boardId}">글쓰기</a>
 			<!-- <a class="btn btn-info" href="#">LIST</a> -->
 		</div>
 	</div>
@@ -82,15 +82,12 @@
 				alert('처리중입니다');
 				return;
 			}
-
 			form.searchKeyword.value = form.searchKeyword.value.trim();
-
 			if (form.searchKeyword.value.length == 0) {
 				alert('검색어를 입력해주세요.');
 				form.searchKeyword.focus();
 				return;
 			}
-
 			form.submit();
 			DoSearchForm__submited = true;
 		}
@@ -104,7 +101,6 @@
 		</select>
 		<script>
 			const param__searchKeywordType = '${param.searchKeywordType}';
-
 			if (param__searchKeywordType) {
 				$('select[name="searchKeywordType"]').val(
 						param__searchKeywordType);

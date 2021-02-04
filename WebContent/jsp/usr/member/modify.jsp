@@ -89,7 +89,7 @@
 	</script>
 	<section class="section-1">
 		<div class="con">
-			<div class="join-detail">
+			<div class="join-Write">
 				<main>
 					<form action="doModify" method="POST"
 						onsubmit="DoModifyForm__submit(this); return false;">

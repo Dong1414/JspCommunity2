@@ -14,7 +14,7 @@ public class ArticleDao {
 	
 	public List<Article> getForPrintArticlesByBoardId(int boardId, int limitStart, int limitCount, String searchKeywordType, String searchKeyword) {
 		List<Article> articles = new ArrayList<>();
-
+		String article = "article";
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
 		sql.append(", M.name AS extra__writer");
@@ -26,6 +26,8 @@ public class ArticleDao {
 		sql.append("ON A.memberId = M.id");
 		sql.append("INNER JOIN `board` AS B");
 		sql.append("ON A.boardId = B.id");
+
+		
 		if (boardId != 0) {
 			sql.append("WHERE A.boardId = ?", boardId);
 		}
@@ -194,7 +196,7 @@ public class ArticleDao {
 		sql.append("FROM `like`");
 		sql.append("WHERE relId = ?", articleId);
 		sql.append("AND relTypeCode = ?",article);
-		sql.append("AND `point` = 0");
+		sql.append("AND `point` = -1");
 		Map<String, Object> map = MysqlUtil.selectRow(sql);
 		int count = 0;
 		

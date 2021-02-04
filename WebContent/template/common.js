@@ -41,11 +41,12 @@ function renderCodepen(wrapperId, url) {
 // codepen 플러그인 끝
 
 function Editor__init() {
+
   $('.toast-ui-editor').each(function(index, node) {
     var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
 
     var editor = new toastui.Editor({
-      el: node,
+      el: node,	
       previewStyle: 'vertical',
       initialValue: initialValue,
       height:600,
@@ -56,7 +57,8 @@ function Editor__init() {
   });
 }
 /* 댓글용 토스트 에디터 시작*/
-function Editor__init() {
+function Editor__init_comment() {
+
 	  $('.toast-ui-editor-comment').each(function(index, node) {
 	    var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
 
@@ -89,3 +91,4 @@ function EditorViewer__init() {
 
 EditorViewer__init();
 Editor__init(); 
+Editor__init_comment()
