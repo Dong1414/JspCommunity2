@@ -103,7 +103,7 @@
 							href="../like/doLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
 							onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
 							<span> <span> <i class="fas fa-thumbs-up"></i> <span>
-										${likeCount}</span>
+										${article.extra__likeOnlyPoint}</span>
 							</span>
 						</span>
 						</a>
@@ -116,14 +116,14 @@
 								href="../like/doCancelLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
 								onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
 								<span> <span> <i class="far fa-thumbs-up"></i> <span>
-											${likeCount}</span>
+											${article.extra__likeOnlyPoint}</span>
 								</span>
 							</span>
 							</a>
 						</div>
 						<div class="flex flex-ai-c">
 							<a class="btn btn-danger" href="#"> <span> <span>
-										<i class="far fa-thumbs-down"></i> <span> ${hateCount}</span>
+										<i class="far fa-thumbs-down"></i> <span> ${article.extra__dislikeOnlyPoint}</span>
 								</span>
 							</span>
 							</a>
@@ -139,7 +139,7 @@
 							onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
 
 							<span> <span> <i class="far fa-thumbs-down"></i> <span>
-										${hateCount}</span>
+										${article.extra__dislikeOnlyPoint}</span>
 							</span>
 						</span>
 						</a>
@@ -149,7 +149,7 @@
 					<div class="Dislike flex flex-ai-c">
 						<div class="flex flex-ai-c">
 							<a class="btn btn-danger" href="#"> <span> <span>
-										<i class="far fa-thumbs-up"></i> <span> ${likeCount}</span>
+										<i class="far fa-thumbs-up"></i> <span> ${article.extra__likeOnlyPoint}</span>
 								</span>
 							</span>
 							</a>
@@ -160,7 +160,7 @@
 								href="../like/doCancelDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
 								onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
 								<span> <span> <i class="far fa-thumbs-down"></i> <span>
-											${hateCount}</span>
+											${article.extra__dislikeOnlyPoint}</span>
 								</span>
 							</span>
 							</a>
@@ -191,8 +191,8 @@
 					<div class="toast-ui-editor-comment" style="width: 95%"></div>
 
 
-					<div class="btn-wrap flex flex-jc-e">
-						<button type="submit" class="btn btn-success"
+					<div class="btn-wrap flex flex-jc-s">
+						<button type="submit" class="btn-reply btn-success"
 							href="../article/doComment?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}">작성</button>
 					</div>
 				</c:if>
@@ -208,7 +208,7 @@
 					<colgroup>
 						<col width="100">
 						<col width="800">
-						<col width="200">
+						<col class="visible-md-up" width="200">
 						<col width="70">
 						<col width="70">
 					</colgroup>
@@ -219,7 +219,7 @@
 								<th><span> ${reply.memberId} </span></th>
 								<td><script type="text/x-template">${reply.body}</script>
 									<div class="toast-ui-viewer"></div></td>
-								<td>
+								<td class="visible-md-up">								
 									<div>${reply.updateDate}</div>
 								</td>
 								<c:if test="${sessionScope.loginedMemberId == reply.memberId}">
@@ -245,8 +245,8 @@
 
 											<script type="text/x-template">${reply.body}</script>
 											<div class="toast-ui-editor-comment" style="width: 95%"></div>
-											<button type="submit" class="btn btn-success">작성</button>
-											<a class="btn btn-info"
+											<button type="submit" class="btn-reply btn-success">수정</button>
+											<a class="btn-reply btn-info"
 												href="../article/doCancelModifyReply?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}"
 												onclick="if ( !confirm('댓글 수정을 취소하시겠습니까?') ) return false;">취소</a>
 										</form>

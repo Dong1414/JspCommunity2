@@ -44,7 +44,11 @@ function Editor__init() {
 
   $('.toast-ui-editor').each(function(index, node) {
     var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
-
+ // 토스트 UI에
+	// <br/> 두개 들어가는 버그를 없애기 위한 궁여지책
+	if ( initialValue.length == 0 ) {
+		initialValue = " ";
+	}
     var editor = new toastui.Editor({
       el: node,	
       previewStyle: 'vertical',
@@ -61,7 +65,11 @@ function Editor__init_comment() {
 
 	  $('.toast-ui-editor-comment').each(function(index, node) {
 	    var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
-
+	 // 토스트 UI에
+		// <br/> 두개 들어가는 버그를 없애기 위한 궁여지책
+		if ( initialValue.length == 0 ) {
+			initialValue = " ";
+		}
 	    var editor = new toastui.Editor({
 	      el: node,
 	      previewStyle: 'vertical',

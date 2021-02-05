@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sbs.example.jspCommunity.App;
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.mysqlutil.MysqlUtil;
@@ -54,30 +55,39 @@ public abstract class DispatcherServlet extends HttpServlet {
 		String requestUri = req.getRequestURI();
 		String[] requestUriBits = requestUri.split("/");
 
-		if (requestUriBits.length < 5) {
-			resp.getWriter().append("올바른 요청이 아닙니다.");
+		int minBitsCount = 5;
+
+		if (App.isProductMode()) {
+			minBitsCount = 4;
+		}
+
+		String min = String.valueOf(minBitsCount);
+
+		if (requestUriBits.length < minBitsCount) {
+			resp.getWriter().append(min);
 			return null;
 		}
 
-		String profilesActive = System.getProperty("spring.profiles.active");
-		
-		boolean isProductionMode = false;
-
-		if (profilesActive != null && profilesActive.equals("production")) {
-		  isProductionMode = true;
-		}
-				
-		if ( isProductionMode ) {
-		  MysqlUtil.setDBInfo("127.0.0.1", "sbsstLocal", "sbs123414", "jspCommunity");
-		}
-		else {
-		  MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
-		  MysqlUtil.setDevMode(true);
+		if (App.isProductMode()) {
+			MysqlUtil.setDBInfo("127.0.0.1", "sbsstLocal", "sbs123414", "jspCommunityReal");
+		} else {
+			MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
+			MysqlUtil.setDevMode(true);
 		}
 
-		String controllerTypeName = requestUriBits[2];
-		String controllerName = requestUriBits[3];
-		String actionMethodName = requestUriBits[4];
+		int controllerTypeNameIndex = 2;
+		int controllerNameIndex = 3;
+		int actionMethodNameIndex = 4;
+
+		if (App.isProductMode()) {
+			controllerTypeNameIndex = 1;
+			controllerNameIndex = 2;
+			actionMethodNameIndex = 3;
+		}
+
+		String controllerTypeName = requestUriBits[controllerTypeNameIndex];
+		String controllerName = requestUriBits[controllerNameIndex];
+		String actionMethodName = requestUriBits[actionMethodNameIndex];
 
 		String actionUrl = "/" + controllerTypeName + "/" + controllerName + "/" + actionMethodName;
 
@@ -97,7 +107,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 		req.setAttribute("isLogined", isLogined);
 		req.setAttribute("loginedMemberId", loginedMemberId);
 		req.setAttribute("loginedMember", loginedMember);
-		
+
 		String currentUrl = req.getRequestURI();
 
 		if (req.getQueryString() != null) {
@@ -146,7 +156,6 @@ public abstract class DispatcherServlet extends HttpServlet {
 		needToLooutActionUrls.add("/usr/member/doLogin");
 		needToLooutActionUrls.add("/usr/member/join");
 		needToLooutActionUrls.add("/usr/member/doJoin");
-	
 
 		if (needToLooutActionUrls.contains(actionUrl)) {
 			if ((boolean) req.getAttribute("isLogined")) {

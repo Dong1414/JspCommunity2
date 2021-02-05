@@ -597,7 +597,9 @@ border-top:1px solid black;
     margin-top:10px;
   }
 
-  .article-list-box > .con > table > tbody > tr > td.visible-sm-down > .flex:nth-child(2) > span:nth-child(2) {
+  .article-list-box > .con > table > tbody > tr > td.visible-sm-down > .flex:nth-child(2) > span:nth-child(2),
+  .article-list-box > .con > table > tbody > tr > td.visible-sm-down > .flex:nth-child(2) > span:nth-child(4),
+  .article-list-box > .con > table > tbody > tr > td.visible-sm-down > .flex:nth-child(2) > span:nth-child(6) {
     margin-left:5px;
     margin-right:5px;
   }
@@ -615,6 +617,25 @@ border-top:1px solid black;
 
 /* 버튼 시작 */
 .btn {
+  font-size: 1rem;
+  line-height: 1rem;
+  padding: 10px 15px 7px 15px;
+  display: inline-flex;
+  font-weight: bold;
+  border-radius: 10px;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: #3D94F6;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 20px #000000;
+  text-decoration: none;
+  box-sizing: border-box;
+  justify-content: center;
+  text-align: center;
+}
+
+.btn-reply {
   font-size: 1rem;
   line-height: 1rem;
   padding: 10px 15px 7px 15px;
@@ -665,6 +686,12 @@ border-top:1px solid black;
   .btn {
     display: block;
     width: 100%;
+    border-radius: 4px;
+  }
+  
+  .btn-reply {
+    display: block;
+    width: 95%;
     border-radius: 4px;
   }
   
@@ -887,10 +914,9 @@ padding-left:10px;
 	margin-left:15px;
 	width:75%;
 }
-/*.comment-main table tbody tr  td .reply-updateDate
-,.comment-main table tbody tr  td a{
-	padding:0 7px;
-}*/
+.toast-ui-editor-comment {
+	margin-bottom:5px;
+}
 /* 댓글 박스 끝 */
 
 /* 게시글 작성 페이지 시작 */

@@ -112,21 +112,15 @@ public class UsrArticleController extends Controller {
 			return msgAndBack(req, id + "번 게시물은 존재하지 않습니다.");
 		}
 		articleService.updateHit(id);
-		req.setAttribute("article", article);
-
-		boolean isLogin = (boolean) req.getAttribute("isLogined");
-		HttpSession session = req.getSession();
+		req.setAttribute("article", article);		
 		
-		int likeCount = articleService.getLikeCount(id);
-		int hateCount = articleService.getHateCount(id);
+		HttpSession session = req.getSession();
+				
 
 		List<Reply> replys = replyService.getReplys(id);
 		
-
 		session.setAttribute("replys", replys);
-		session.setAttribute("isArticleId", id);
-		session.setAttribute("likeCount", likeCount);
-		session.setAttribute("hateCount", hateCount);
+		session.setAttribute("isArticleId", id);		
 		
 		return "usr/article/detail";
 	}

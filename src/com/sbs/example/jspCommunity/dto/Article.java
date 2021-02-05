@@ -18,12 +18,15 @@ public class Article {
 
 	private Map<String, Object> extra;
 	
-	private int extra__up;
-	private int extra__down;
+	private int extra__likePoint;
+	private int extra__likeOnlyPoint;
+	private int extra__dislikeOnlyPoint;
 	private String extra__nickname;
 	private String extra__writer;
 	private String extra__boardName;
 	private String extra__boardCode;
+	
+	
 
 	public Article(Map<String, Object> map) {
 		this.id = (int) map.get("id");
@@ -50,11 +53,16 @@ public class Article {
 		if (map.containsKey("extra__nickname")) {
 			this.extra__nickname = (String) map.get("extra__nickname");			
 		}
-		if (map.containsKey("extra__up")) {
-			this.extra__up = (int) map.get("extra__up");			
+		if (map.containsKey("extra__likePoint")) {
+			this.extra__likePoint = (int) map.get("extra__likePoint");
 		}
-		if (map.containsKey("extra__down")) {
-			this.extra__down = (int) map.get("extra__down");			
+
+		if (map.containsKey("extra__likeOnlyPoint")) {
+			this.extra__likeOnlyPoint = (int) map.get("extra__likeOnlyPoint");
+		}
+
+		if (map.containsKey("extra__dislikeOnlyPoint")) {
+			this.extra__dislikeOnlyPoint = (int) map.get("extra__dislikeOnlyPoint");
 		}
 		this.extra = new LinkedHashMap<>();
 	}
