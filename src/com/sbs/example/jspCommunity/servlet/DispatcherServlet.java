@@ -183,7 +183,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 			throws ServletException, IOException {
 		MysqlUtil.closeConnection();
 
-		RequestDispatcher rd = req.getRequestDispatcher("/jsp/" + jspPath + ".jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/" + jspPath + ".jsp");
 		rd.forward(req, resp);
 	}
 }
