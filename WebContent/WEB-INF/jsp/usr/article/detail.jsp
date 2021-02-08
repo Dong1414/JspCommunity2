@@ -237,7 +237,7 @@
 								</c:if>
 							</tr>
 							<tr>
-								<th><span> 추천 수 </span></th>
+								<th><span> </span></th>
 								<td>
 								
 									<div class="like-hate con flex flex-jc-e ">
