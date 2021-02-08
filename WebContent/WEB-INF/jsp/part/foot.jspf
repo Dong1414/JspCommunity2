@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 </main>
-<footer class="bottom-bar con-min-width">
-	<div class="con flex flex-ai-c">
-		<a href="index.html" class="logo logo--mini flex flex-ai-c">
-			<span> </span>
-		</a>
+<div class="visible-md-up">
+	<footer class="bottom-bar con-min-width">
+		<div class="con flex flex-ai-c">
+			<a href="../home/main" class="logo logo--mini flex flex-ai-c"> <span>
+			</span>
+			</a>
 
-		<div class="bottom-bar__site-info">HOUSE</div>
-		<br>
-		<div class="bottom-bar__site-info">Copyright 2020 homar. all
-			rights reserved.</div>
-	</div>
-</footer>
+			<div class="bottom-bar__site-info">HOUSE</div>
+			<br>
+			<div class="bottom-bar__site-info">Copyright 2020 homar. all
+				rights reserved.</div>
+		</div>
+	</footer>
 </div>
-
+</div>
 </body>
 </html>
 

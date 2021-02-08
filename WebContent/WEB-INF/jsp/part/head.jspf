@@ -51,8 +51,8 @@
 
 <body>
 	<div class="body-content min-height-100vh flex flex-column">
-		<header>
-			<div class="logo-bar top-bar con-min-width">
+		<header class="visible-md-up">
+			<div class="logo-bar top-bar con-min-width ">
 				<div class="con flex flex-jc-c">
 					<a href="../home/main" class="logo flex flex-ai-c height-100p">
 						<span> </span>
@@ -68,19 +68,16 @@
 						<ul class="flex height-100p">
 							<c:if test="${isLogined == false}">
 								<li><a href="../member/login"
-										class="flex flex-ai-c height-100p">
-										<span>Login</span>
-									</a></li>
+									class="flex flex-ai-c height-100p"> <span>Login</span>
+								</a></li>
 							</c:if>
 							<c:if test="${isLogined}">
 								<li><a href="../member/modify"
-										class="flex flex-ai-c height-100p">
-										<span>${loginedMemberNickname}님</span>
-									</a></li>
-									<li><a href="../member/doLogout"
-										class="flex flex-ai-c height-100p">
-										<span>Logout</span>
-									</a></li>
+									class="flex flex-ai-c height-100p"> <span>${loginedMemberNickname}님</span>
+								</a></li>
+								<li><a href="../member/doLogout"
+									class="flex flex-ai-c height-100p"> <span>Logout</span>
+								</a></li>
 							</c:if>
 						</ul>
 					</nav>
@@ -107,5 +104,78 @@
 					</nav>
 				</div>
 			</div>
-		</header>	
+		</header>
+		<header class="mobile-top-bar con-min-width visible-sm-down">
+			<div class="con flex height-100p">
+				<a href="../home/main" class="logo flex"> <span>HOUSE</span>
+				</a>
+				<div class="flex-1-0-0"></div>	
+				<div class="flex-1-0-0 flex flex-jc-e flex-ai-c">
+					<div class="mobile-top-bar__btn-toggle-mobile-side-bar">
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+			</div>
+			<div class="mobile-top-bar-padding visible-sm-down"></div>
+			<aside class="mobile-side-bar visible-sm-down">
+				<nav class="mobile-side-bar__menu-box-1">
+					<ul>
+						<li><a class="block"> <span> <i
+									class="fas fa-sign-in-alt"></i>
+							</span> <span>게시판</span>
+						</a>
+
+							<ul>
+								<li><a href="../article/list?boardId=1" class="block">
+										<span> <i class="far fa-flag"></i>
+									</span> <span>공지사항</span>
+								</a></li>
+								<li><a href="#" class="block"> <span> <i
+											class="fas fa-users"></i>
+									</span> <span>커뮤니티</span>
+								</a>
+									<ul>
+										<li><a href="../article/list?boardId=3" class="block">자유게시판</a></li>
+										<li><a href="#" class="block">요리 레시피</a></li>
+										<li><a href="#" class="block">벌레 퇴치</a></li>
+										<li><a href="#" class="block">자취 아이템</a></li>
+										<li><a href="#" class="block">질문 게시판</a></li>
+										<li><a href="#" class="block">꿀팁</a></li>
+									</ul></li>
+							</ul></li>
+						<c:if test="${isLogined}">
+							<li><a href="../member/modify" class="block"> <span>
+										<i class="fas fa-sign-in-alt"></i>
+								</span> <span>회원정보수정</span>
+							</a></li>
+							<li><a href="../member/doLogout" class="block"> <span>
+										<i class="fas fa-sign-in-alt"></i>
+								</span> <span>로그아웃</span>
+							</a></li>
+						</c:if>
+
+						<c:if test="${isLogined == false}">
+							<li><a href="../member/login" class="block"> <span>
+										<i class="fas fa-sign-in-alt"></i>
+								</span> <span>로그인</span>
+							</a></li>
+							<li><a href="../member/join" class="block"> <span>
+										<i class="fas fa-user-plus"></i>
+								</span> <span>회원가입</span>
+							</a></li>
+							<li><a href="../member/findLoginId" class="block"> <span>
+										<i class="far fa-user-circle"></i>
+								</span> <span>아이디찾기</span>
+							</a></li>
+							<li><a href="../member/findLoginPw" class="block"> <span>
+										<i class="far fa-user-circle"></i>
+								</span> <span>비번찾기</span>
+							</a></li>
+						</c:if>
+					</ul>
+				</nav>
+			</aside>
+		</header>
 		<main class="flex-grow-1">

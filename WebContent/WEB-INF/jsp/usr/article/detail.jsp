@@ -74,7 +74,9 @@
 					<div class="article-detail__cell-title">${article.title}</div>
 					<div class="article-detail__cell-writer">${article.extra__writer}</div>
 					<div class="article-detail__cell-reg-date">${article.regDate}</div>
-					<div class="article-detail__hit-count"><i class="fas fa-eye"></i> ${article.hitsCount}</div>
+					<div class="article-detail__hit-count">
+						<i class="fas fa-eye"></i> ${article.hitsCount}
+					</div>
 				</div>
 			</header>
 
@@ -123,7 +125,8 @@
 						</div>
 						<div class="flex flex-ai-c">
 							<a class="btn btn-danger" href="#"> <span> <span>
-										<i class="far fa-thumbs-down"></i> <span> ${article.extra__dislikeOnlyPoint}</span>
+										<i class="far fa-thumbs-down"></i> <span>
+											${article.extra__dislikeOnlyPoint}</span>
 								</span>
 							</span>
 							</a>
@@ -149,7 +152,8 @@
 					<div class="Dislike flex flex-ai-c">
 						<div class="flex flex-ai-c">
 							<a class="btn btn-danger" href="#"> <span> <span>
-										<i class="far fa-thumbs-up"></i> <span> ${article.extra__likeOnlyPoint}</span>
+										<i class="far fa-thumbs-up"></i> <span>
+											${article.extra__likeOnlyPoint}</span>
 								</span>
 							</span>
 							</a>
@@ -219,7 +223,8 @@
 								<th><span> ${reply.memberId} </span></th>
 								<td><script type="text/x-template">${reply.body}</script>
 									<div class="toast-ui-viewer"></div></td>
-								<td class="visible-md-up">								
+
+								<td class="visible-md-up">
 									<div>${reply.updateDate}</div>
 								</td>
 								<c:if test="${sessionScope.loginedMemberId == reply.memberId}">
@@ -231,6 +236,91 @@
 									</td>
 								</c:if>
 							</tr>
+							<tr>
+								<th><span> 추천 수 </span></th>
+								<td>
+								
+									<div class="like-hate con flex flex-jc-e ">
+										<c:if test="${article.extra.actorCanLike}">
+											<div class="like flex flex-ai-c basic">
+
+												<a class="btn btn-primary"
+													href="../like/doLike?relTypeCode=member&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}"
+													onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
+													<span> <span> <i class="fas fa-thumbs-up"></i>
+															<span> ${article.extra__likeOnlyPoint}</span>
+													</span>
+												</span>
+												</a>
+											</div>
+										</c:if>
+										<c:if test="${article.extra.actorCanCancelLike}">
+											<div class="like flex flex-ai-c">
+												<div class="flex flex-ai-c">
+													<a class="btn btn-info"
+														href="../like/doCancelLike?relTypeCode=member&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}"
+														onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
+														<span> <span> <i class="far fa-thumbs-up"></i>
+																<span> ${article.extra__likeOnlyPoint}</span>
+														</span>
+													</span>
+													</a>
+												</div>
+												<div class="flex flex-ai-c">
+													<a class="btn btn-danger" href="#"> <span> <span>
+																<i class="far fa-thumbs-down"></i> <span>
+																	${article.extra__dislikeOnlyPoint}</span>
+														</span>
+													</span>
+													</a>
+												</div>
+											</div>
+										</c:if>
+
+										<c:if test="${article.extra.actorCanDislike}">
+											<div class="Dislike flex flex-ai-c basic">
+
+												<a class="btn btn-danger"
+													href="../like/doDislike?relTypeCode=member&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}"
+													onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
+
+													<span> <span> <i class="far fa-thumbs-down"></i>
+															<span> ${article.extra__dislikeOnlyPoint}</span>
+													</span>
+												</span>
+												</a>
+											</div>
+										</c:if>
+										<c:if test="${article.extra.actorCanCancelDislike}">
+											<div class="Dislike flex flex-ai-c">
+												<div class="flex flex-ai-c">
+													<a class="btn btn-danger" href="#"> <span> <span>
+																<i class="far fa-thumbs-up"></i> <span>
+																	${article.extra__likeOnlyPoint}</span>
+														</span>
+													</span>
+													</a>
+												</div>
+
+												<div class="flex flex-ai-c">
+													<a class="btn btn-info"
+														href="../like/doCancelDislike?relTypeCode=member&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}"
+														onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
+														<span> <span> <i class="far fa-thumbs-down"></i>
+																<span> ${article.extra__dislikeOnlyPoint}</span>
+														</span>
+													</span>
+													</a>
+												</div>
+
+											</div>
+										</c:if>
+
+									</div>
+								
+								</td>
+							</tr>
+
 							<c:if test="${modifyMode == reply.id}">
 								<tr>
 									<th style="width: 20px"></th>

@@ -7,12 +7,13 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
-<section class="section-1">
-	<div class="con">
-		<h1>${pageTitle}</h1>
-	</div>
-</section>
-
+<div class="title-bar padding-0-10 con-min-width">
+	<h1 class="con">
+		<span> <i class="fas fa-user"></i>
+		</span> <span>${pageTitle}</span>
+	</h1>
+</div>
+<div class="findPw-form-box form-box padding-0-10 con-min-width">
 <script>
 	let DoFindLoginPwForm__submited = false;
 	function DoFindLoginPwForm__submit(form) {
@@ -47,44 +48,55 @@
 		DoFindLoginPwForm__submited = true;
 	}
 </script>
-<section class="section-2">
-	<div class="con">
-		<main>
-			<div class="findLoginPw">
-
-				<form action="doFindLoginPw" method="POST"
+	<section class="section-2">
+		<div class="con">
+			<main>
+				<div class="findLoginPw">
+					<form action="doFindLoginPw" method="POST"
 					onsubmit="DoFindLoginPwForm__submit(this); return false;">
 					<input type="hidden" name="loginPwReal" />
-					<hr />
-					<div>
-						<div>로그인아이디</div>
-						<div>
-							<input name="loginId" type="text" maxlength="50"
-								placeholder="로그인아이디를 입력해주세요." />
-						</div>
-					</div>
+						<table>
+							<colgroup>
+								<col width="150">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th><span>로그인 아이디</span></th>
+									<td>
+										<div>
+											<input name="loginId" type="text" maxlength="50"
+												placeholder="로그인 아이디를 입력해주세요." />
+										</div>
+									</td>
+								</tr>
 
-					<hr />
-
-					<div>
-						<div>이메일</div>
-						<div>
-							<input name="email" type="email" maxlength="50"
-								placeholder="가입시 입력한 이메일을 입력해주세요." />
-						</div>
-					</div>
-
-					<hr />
-
-					<div>						
-						<div>
-							<input type="submit" value="로그인비번 찾기" />
-							<button type="button" onclick="history.back();">뒤로가기</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</main>
-	</div>
-</section>
+								<tr>
+									<th><span>이메일</span></th>
+									<td>
+										<div>
+											<input name="email" type="email" maxlength="100"
+												placeholder="이메일을 입력해주세요." />
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th><span>찾기</span></th>
+									<td>
+										<div>
+											<div class="btn-wrap">
+												<input class="btn btn-primary" type="submit" value="비밀번호 찾기" />
+												<button class="btn btn-info" type="button"
+													onclick="history.back();">뒤로가기</button>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</main>
+		</div>
+	</section>
+</div>
 <%@ include file="../../part/foot.jspf"%>
