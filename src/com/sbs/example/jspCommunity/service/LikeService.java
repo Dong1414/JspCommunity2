@@ -16,20 +16,20 @@ public class LikeService {
 		likeDao = Container.likeDao;
 	}
 
-	public boolean actorCanLike(Article article, Member actor) {
-		return likeDao.getPoint("article", article.getId(), actor.getId()) == 0;
+	public boolean actorCanLike(String relTypeCode, int id, Member actor) {
+		return likeDao.getPoint(relTypeCode, id, actor.getId()) == 0;
 	}
 
-	public boolean actorCanCancelLike(Article article, Member actor) {
-		return likeDao.getPoint("article", article.getId(), actor.getId()) > 0;
+	public boolean actorCanCancelLike(String relTypeCode, int id, Member actor) {
+		return likeDao.getPoint(relTypeCode, id, actor.getId()) > 0;
 	}
 
-	public boolean actorCanDislike(Article article, Member actor) {
-		return likeDao.getPoint("article", article.getId(), actor.getId()) == 0;
+	public boolean actorCanDislike(String relTypeCode, int id, Member actor) {
+		return likeDao.getPoint(relTypeCode, id, actor.getId()) == 0;
 	}
 
-	public boolean actorCanCancelDislike(Article article, Member actor) {
-		return likeDao.getPoint("article", article.getId(), actor.getId()) < 0;
+	public boolean actorCanCancelDislike(String relTypeCode, int id, Member actor) {
+		return likeDao.getPoint(relTypeCode, id, actor.getId()) < 0;
 	}
 	public void setLikePoint(String relTypeCode, int relId, int actorId, int point) {
 		if (point == 0) {

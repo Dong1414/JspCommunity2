@@ -3,8 +3,11 @@ package com.sbs.example.jspCommunity.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dao.ArticleDao;
+import com.sbs.example.jspCommunity.dao.ReplyDao;
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Board;
 import com.sbs.example.jspCommunity.dto.Member;
@@ -13,9 +16,12 @@ import com.sbs.example.jspCommunity.dto.Reply;
 public class ArticleService {
 	private ArticleDao articleDao;
 	private LikeService likeService;
+	private ReplyDao replyDao;
+	
 	public ArticleService() {
 		likeService = Container.likeService;
 		articleDao = Container.articleDao;
+		replyDao = Container.replyDao;
 	}
 
 	public Article getForPrintArticleById(int id) {
@@ -24,28 +30,31 @@ public class ArticleService {
 	
 	public Article getForPrintArticleById(int id, Member actor) {
 		Article article = articleDao.getForPrintArticleById(id);
-
+	
+		
 		if (article == null) {
 			return null;
 		}
 
-		if (actor != null) {
+		if(actor != null) {
 			updateInfoForPrint(article, actor);
 		}
-
-		return article;
+			return article;
 	}
-
+		
 	private void updateInfoForPrint(Article article, Member actor) {
-		boolean actorCanLike = likeService.actorCanLike(article, actor);
-		boolean actorCanCancelLike = likeService.actorCanCancelLike(article, actor);
-		boolean actorCanDislike = likeService.actorCanDislike(article, actor);
-		boolean actorCanCancelDislike = likeService.actorCanCancelDislike(article, actor);
+		System.out.println("기존 업데이트 실행");
+		boolean actorCanLike = likeService.actorCanLike("article",article.getId(), actor);
+		boolean actorCanCancelLike = likeService.actorCanCancelLike("article",article.getId(), actor);
+		boolean actorCanDislike = likeService.actorCanDislike("article",article.getId(), actor);
+		boolean actorCanCancelDislike = likeService.actorCanCancelDislike("article",article.getId(), actor);
 		article.getExtra().put("actorCanLike", actorCanLike);
 		article.getExtra().put("actorCanCancelLike", actorCanCancelLike);
 		article.getExtra().put("actorCanDislike", actorCanDislike);
-		article.getExtra().put("actorCanCancelDislike", actorCanCancelDislike);
+		article.getExtra().put("actorCanCancelDislike", actorCanCancelDislike);		
 	}
+	
+	
 
 	public Board getBoardById(int id) {
 		return articleDao.getBoardById(id);

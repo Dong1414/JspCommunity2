@@ -28,8 +28,7 @@ public class Reply {
 		this.relTypeCode = (String) map.get("relTypeCode");
 		this.relId = (int) map.get("relId");
 		this.memberId = (int) map.get("memberId");
-		this.body = (String) map.get("body");	
-		
+		this.body = (String) map.get("body");			
 		if (map.containsKey("extra__likePoint")) {
 			this.extra__likePoint = (int) map.get("extra__likePoint");
 		}

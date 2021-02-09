@@ -1,6 +1,7 @@
 package com.sbs.example.jspCommunity.servlet;
 
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,7 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 	@Override
 	protected String doAction(HttpServletRequest req, HttpServletResponse resp, String controllerName,
 			String actionMethodName) {
-
+		
 		int loginedMemberId = -1;
 		boolean isLogined = false;
 

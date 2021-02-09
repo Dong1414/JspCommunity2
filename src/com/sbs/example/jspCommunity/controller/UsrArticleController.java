@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -49,9 +50,6 @@ public class UsrArticleController extends Controller {
 		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId, limitStart, itemsInAPage,
 				searchKeywordType, searchKeyword);
 
-	
-
-	
 		int totalPage = (int) Math.ceil(totalCount / (double) itemsInAPage);
 
 		int pageBoxSize = 10;
@@ -101,27 +99,77 @@ public class UsrArticleController extends Controller {
 	public String showDetail(HttpServletRequest req, HttpServletResponse resp) {
 		int id = Util.getAsInt(req.getParameter("id"), 0);
 
+		
 		if (id == 0) {
 			return msgAndBack(req, "게시물번호를 입력해주세요.");
 		}
 
-		Member loginedMember = (Member)req.getAttribute("loginedMember");
+		Cookie viewCookie=null;
+		Cookie[] cookies=req.getCookies();
+		System.out.println("cookie : "+cookies);
+		
+		if(cookies !=null) {
+
+			for (int i = 0; i < cookies.length; i++) {
+				//System.out.println("쿠키 이름 : "+cookies[i].getName());
+               
+               //만들어진 쿠키들을 확인하며, 만약 들어온 적 있다면 생성되었을 쿠키가 있는지 확인
+				if(cookies[i].getName().equals("|"+id+"|")) {
+					System.out.println("if문 쿠키 이름 : "+cookies[i].getName());
+				
+               //찾은 쿠키를 변수에 저장
+					viewCookie=cookies[i];
+				}
+			}			
+			
+		}else {
+			System.out.println("cookies 확인 로직 : 쿠키가 없습니다.");
+		}
+		
+		//만들어진 쿠키가 없음을 확인
+		if(viewCookie==null) {
+	        
+         	System.out.println("viewCookie 확인 로직 : 쿠키 없당");
+			
+           try {
+           
+           	//이 페이지에 왔다는 증거용(?) 쿠키 생성
+				Cookie newCookie=new Cookie("|"+id+"|","readCount");
+				newCookie.setMaxAge(60*60*24);	
+				resp.addCookie(newCookie);
+               
+               //쿠키가 없으니 증가 로직 진행
+				articleService.updateHit(id);
+               
+			} catch (Exception e) {
+				System.out.println("쿠키 넣을때 오류 나나? : "+e.getMessage());
+				e.getStackTrace();
+
+			}
+		
+       //만들어진 쿠키가 있으면 증가로직 진행하지 않음
+		}else {
+			System.out.println("viewCookie 확인 로직 : 쿠키 있당");
+			String value=viewCookie.getValue();
+			System.out.println("viewCookie 확인 로직 : 쿠키 value : "+value);
+		}
+		
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
 		Article article = articleService.getForPrintArticleById(id, loginedMember);
 
 		if (article == null) {
 			return msgAndBack(req, id + "번 게시물은 존재하지 않습니다.");
 		}
-		articleService.updateHit(id);
-		req.setAttribute("article", article);		
-		
-		HttpSession session = req.getSession();
-				
+		System.out.println(article);	
+		req.setAttribute("article", article);
 
-		List<Reply> replys = replyService.getReplys(id);
+		HttpSession session = req.getSession();
 		
+		List<Reply> replys = replyService.getReplys(id, loginedMember);
+
 		session.setAttribute("replys", replys);
-		session.setAttribute("isArticleId", id);		
-		
+		session.setAttribute("isArticleId", id);
+
 		return "usr/article/detail";
 	}
 
@@ -181,6 +229,7 @@ public class UsrArticleController extends Controller {
 	}
 
 	public String doDelete(HttpServletRequest req, HttpServletResponse resp, int loginMemberId) {
+
 		int id = Util.getAsInt(req.getParameter("id"), 0);
 
 		if (id == 0) {
@@ -270,7 +319,7 @@ public class UsrArticleController extends Controller {
 		articleService.modify(modifyArgs);
 
 		return msgAndReplace(req, id + "번 게시물이 수정되었습니다.", String.format("detail?id=%d", id));
-		
+
 	}
 
 	public String doComment(HttpServletRequest req, HttpServletResponse resp) {
@@ -280,8 +329,6 @@ public class UsrArticleController extends Controller {
 		int articleId = (int) session.getAttribute("isArticleId");
 		String body = req.getParameter("body");
 		articleService.addReple(memberId, articleId, body);
-		
-		
 
 		if (relTypeCode == null) {
 			return msgAndBack(req, "관련데이터코드를 입력해주세요.");
@@ -294,18 +341,16 @@ public class UsrArticleController extends Controller {
 		}
 
 		int actorId = (int) req.getAttribute("loginedMemberId");
-		
-		
-		
+
 		return msgAndReplace(req, "댓글이 작성되었습니다.", req.getParameter("redirectUrl"));
 	}
 
 	public String showReplyModify(HttpServletRequest req, HttpServletResponse resp) {
 		HttpSession session = req.getSession();
-		
+
 		int modifyMode = Util.getAsInt(req.getParameter("id"), 0);
 		session.setAttribute("modifyMode", modifyMode);
-		
+
 		String relTypeCode = req.getParameter("relTypeCode");
 		if (relTypeCode == null) {
 			return msgAndBack(req, "관련데이터코드를 입력해주세요.");
@@ -317,20 +362,17 @@ public class UsrArticleController extends Controller {
 			return msgAndBack(req, "관련데이터번호를 입력해주세요.");
 		}
 
-		
-		return msgAndReplace(req, "댓글을 수정하세요.", req.getParameter("redirectUrl"));		
+		return msgAndReplace(req, "댓글을 수정하세요.", req.getParameter("redirectUrl"));
 	}
-	
-	
+
 	public String doReplyModify(HttpServletRequest req, HttpServletResponse resp) {
 		HttpSession session = req.getSession();
-		
-		
+
 		int replyId = Integer.parseInt(req.getParameter("replyId"));
 		String body = req.getParameter("body");
-		
-		replyService.modify(replyId,body);
-	
+
+		replyService.modify(replyId, body);
+
 		String relTypeCode = req.getParameter("relTypeCode");
 		if (relTypeCode == null) {
 			return msgAndBack(req, "관련데이터코드를 입력해주세요.");
@@ -342,14 +384,14 @@ public class UsrArticleController extends Controller {
 			return msgAndBack(req, "관련데이터번호를 입력해주세요.");
 		}
 		int modifyMode = 0;
-		session.setAttribute("modifyMode", modifyMode);				
-		
+		session.setAttribute("modifyMode", modifyMode);
+
 		return msgAndReplace(req, "댓글이 수정되었습니다.", req.getParameter("redirectUrl"));
 	}
-	
+
 	public String doCancelModifyReply(HttpServletRequest req, HttpServletResponse resp) {
 		HttpSession session = req.getSession();
-		
+
 		String relTypeCode = req.getParameter("relTypeCode");
 		if (relTypeCode == null) {
 			return msgAndBack(req, "관련데이터코드를 입력해주세요.");
@@ -361,19 +403,20 @@ public class UsrArticleController extends Controller {
 			return msgAndBack(req, "관련데이터번호를 입력해주세요.");
 		}
 		int modifyMode = 0;
-		session.setAttribute("modifyMode", modifyMode);				
-		
+		session.setAttribute("modifyMode", modifyMode);
+
 		return msgAndReplace(req, "댓글 수정이 취소되었습니다.", req.getParameter("redirectUrl"));
 	}
+
 	public String doReplyDelete(HttpServletRequest req, HttpServletResponse resp) {
-		
+
 		HttpSession session = req.getSession();
-		int memberId = (int) session.getAttribute("loginedMemberId");		
+		int memberId = (int) session.getAttribute("loginedMemberId");
 		int replyId = Util.getAsInt(req.getParameter("id"), 0);
-		
+
 		Reply reply = articleService.getReply(replyId);
-		
-		if(reply != null) {
+
+		if (reply != null) {
 			articleService.deleteReple(replyId);
 		}
 		String relTypeCode = req.getParameter("relTypeCode");
@@ -387,12 +430,9 @@ public class UsrArticleController extends Controller {
 			return msgAndBack(req, "관련데이터번호를 입력해주세요.");
 		}
 
-		int actorId = (int) req.getAttribute("loginedMemberId");				
-		
-		return msgAndReplace(req, "댓글이 삭제되었습니다.", req.getParameter("redirectUrl"));		
+		int actorId = (int) req.getAttribute("loginedMemberId");
+
+		return msgAndReplace(req, "댓글이 삭제되었습니다.", req.getParameter("redirectUrl"));
 	}
 
-	
-
-	
 }

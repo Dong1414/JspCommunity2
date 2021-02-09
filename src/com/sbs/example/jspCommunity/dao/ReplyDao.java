@@ -15,16 +15,28 @@ public class ReplyDao {
 		List<Reply> replys = new ArrayList<>();
 		String article = "article";
 		SecSql sql = new SecSql();
-		sql.append("SELECT *");	
-		sql.append("FROM reply");
-		sql.append("WHERE relTypeCode = ?",article);
-		sql.append("AND relId = ?",articleId);
+		
+		sql.append("SELECT R.*");
+		sql.append(", IFNULL(SUM(L.point), 0) AS extra__likePoint");
+		sql.append(", IFNULL(SUM(IF(L.point > 0, L.point, 0)), 0) AS extra__likeOnlyPoint");
+		sql.append(", IFNULL(SUM(IF(L.point < 0, L.point * -1, 0)), 0) extra__dislikeOnlyPoint");
+		sql.append("FROM reply AS R");
+		sql.append("LEFT JOIN `like` AS L");
+		sql.append("ON L.relTypeCode = 'reply'");		
+		sql.append("WHERE R.relTypeCode = ?",article);
+		sql.append("AND R.relId = ?",articleId);
+		sql.append("GROUP BY R.id");
+		sql.append("ORDER BY R.id DESC");
 		
 		List<Map<String, Object>> replyMapList = MysqlUtil.selectRows(sql);
 
 		for (Map<String, Object> replyMap : replyMapList) {
 			replys.add(new Reply(replyMap));
 		}
+		
+		
+		
+		
 		return replys;
 	}
 
