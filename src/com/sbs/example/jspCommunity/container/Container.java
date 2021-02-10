@@ -5,6 +5,7 @@ import com.sbs.example.jspCommunity.controller.UsrArticleController;
 import com.sbs.example.jspCommunity.controller.UsrHomeController;
 import com.sbs.example.jspCommunity.controller.UsrLikeController;
 import com.sbs.example.jspCommunity.controller.UsrMemberController;
+import com.sbs.example.jspCommunity.controller.UsrReplyController;
 import com.sbs.example.jspCommunity.dao.ArticleDao;
 import com.sbs.example.jspCommunity.dao.AttrDao;
 import com.sbs.example.jspCommunity.dao.LikeDao;
@@ -19,6 +20,11 @@ import com.sbs.example.jspCommunity.service.ReplyService;
 
 public class Container {	
 
+	public static ReplyService replyService;
+	public static ReplyDao replyDao;
+	public static UsrReplyController usrReplyController;
+	
+	
 	public static ArticleDao articleDao;
 	public static ArticleService articleService;	
 	public static UsrArticleController usrArticleController;
@@ -37,14 +43,14 @@ public class Container {
 	public static AttrDao attrDao;
 	public static AttrService attrService;
 	
-	public static ReplyDao replyDao;
-	public static ReplyService replyService;
-	
 	public static UsrHomeController homeController;			
 	
 	public static EmailService emailService;
 
 	static {
+		
+		
+		
 		attrDao = new AttrDao();
 		likeDao = new LikeDao();
 		memberDao = new MemberDao();
@@ -63,5 +69,6 @@ public class Container {
 		usrMemberController = new UsrMemberController();
 		usrArticleController = new UsrArticleController();
 		homeController = new UsrHomeController();
+		usrReplyController = new UsrReplyController();
 	}
 }

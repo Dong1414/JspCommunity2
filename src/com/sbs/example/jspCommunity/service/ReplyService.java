@@ -1,56 +1,44 @@
 package com.sbs.example.jspCommunity.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dao.ReplyDao;
-import com.sbs.example.jspCommunity.dto.Article;
-import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.dto.Reply;
 
 public class ReplyService {
 	private ReplyDao replyDao;
-	private LikeService likeService;
-
+	private MemberService memberService;
 	public ReplyService() {
 		replyDao = Container.replyDao;
-		likeService = Container.likeService;
+		memberService = Container.memberService;
 	}
 
-	public List<Reply> getReplys(int id) {
-		return getReplys(id, null);
+	
+	public int write(Map<String, Object> args) {
+		return replyDao.write(args);
+	}
+	
+	public List<Reply> getForPrintReplies(String relTypeCode, int relId) {
+		return replyDao.getForPrintReplies(relTypeCode, relId);
+	}
+	public Reply getReply(int id) {
+		return replyDao.getReply(id);
 	}
 
-	public List<Reply> getReplys(int id, Member actor) {
-
-		List<Reply> reply = replyDao.getReplys(id);
-		if (reply == null) {
-			return null;
+	public boolean actorCanDelete(Reply reply, int actorId) {
+		if (memberService.isAdmin(actorId)) {
+			return true;
 		}
 
-		if (reply != null) {
-			updateInfoForPrint(id, actor, reply);
-		}
-		return reply;
+		return reply.getMemberId() == actorId;
 	}
 
-	private void updateInfoForPrint(int id, Member actor, List<Reply> replys) {
-
-		for (Reply reply : replys) {
-			boolean actorCanLike = likeService.actorCanLike("reply", reply.getId(), actor);
-			boolean actorCanCancelLike = likeService.actorCanCancelLike("reply", reply.getId(), actor);
-			boolean actorCanDislike = likeService.actorCanDislike("reply", reply.getId(), actor);
-			boolean actorCanCancelDislike = likeService.actorCanCancelDislike("reply", reply.getId(), actor);
-			reply.getExtra().put("actorCanLike", actorCanLike);
-			reply.getExtra().put("actorCanCancelLike", actorCanCancelLike);
-			reply.getExtra().put("actorCanDislike", actorCanDislike);
-			reply.getExtra().put("actorCanCancelDislike", actorCanCancelDislike);
-		}
+	public int delete(int id) {
+		return replyDao.delete(id);
 	}
-
-	public void modify(int replyId, String body) {
-		replyDao.modify(replyId, body);
-
+	public int modify(int id, String body) {
+		return replyDao.modify(id,body);
 	}
-
 }

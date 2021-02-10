@@ -46,7 +46,9 @@
 <script src="${pageContext.request.contextPath}/template/common.js"
 	defer></script>
 
-
+<%="<script>"%>
+var param = ${paramJson};
+<%="</script>"%>
 </head>
 
 <body>

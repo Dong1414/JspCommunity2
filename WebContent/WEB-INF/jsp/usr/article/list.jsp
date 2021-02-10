@@ -80,7 +80,7 @@
 </div>
 
 
-<div class="article-list-box con-min-width">
+<div class="article-list-box response-list-box con-min-width">
 	<div class="con">
 		<table>
 			<colgroup>
@@ -106,21 +106,21 @@
 			<tbody>
 				<c:forEach items="${articles}" var="article">
 					<tr>
-						<td><span class="article-list-box__id">${article.id}</span></td>
+						<td><span class="response-list-box__id">${article.id}</span></td>
 						<td><a href="detail?id=${article.id}"
-							class="article-list-box__title hover-link"> ${article.title}
+							class="response-list-box__title hover-link"> ${article.title}
 						</a></td>
-						<td><span class="article-list-box__reg-date">
+						<td><span class="response-list-box__reg-date">
 								${article.regDate} </span></td>
-						<td><span class="article-list-box__reg-date">
+						<td><span class="response-list-box__reg-date">
 								${article.extra__nickname} </span></td>
-						<td><span class="article-list-box__reg-date">
+						<td><span class="response-list-box__reg-date">
 								${article.hitsCount} </span></td>
-						<td class="article-list-box__reg-date"><span>${article.extra__likeOnlyPoint}</span></td>
-						<td class="article-list-box__reg-date"><span>${article.extra__dislikeOnlyPoint}</span></td>
+						<td class="response-list-box__reg-date"><span>${article.extra__likeOnlyPoint}</span></td>
+						<td class="response-list-box__reg-date"><span>${article.extra__dislikeOnlyPoint}</span></td>
 						<td class="visible-sm-down">
 							<div class="flex">
-								<span class="article-list-box__id article-list-box__id--mobile">${article.id}</span>
+								<span class="response-list-box__id article-list-box__id--mobile">${article.id}</span>
 
 								<a href="detail?id=${article.id}"
 									class="article-list-box__title article-list-box__title--mobile flex-grow-1 hover-link">${article.title}</a>
@@ -128,14 +128,14 @@
 
 							<div class="flex">
 								<span
-									class="article-list-box__Detailr article-list-box__Detailr--mobile">${article.extra__nickname}</span>
-								<span>|</span> <span
-									class="article-list-box__reg-date article-list-box__reg-date--mobile">${article.regDate}
-								</span> <span>|</span> <span
+									class="response-list-box__Detailr article-list-box__Detailr--mobile">${article.extra__nickname}</span>
+								<span>&nbsp;|&nbsp;</span> <span
+									class="response-list-box__reg-date article-list-box__reg-date--mobile">${article.regDate}
+								</span> <span>&nbsp;|&nbsp;</span> <span
 									class="article-list-box__reg-date article-list-box__like--mobile"><i
 									class="far fa-thumbs-up"></i> ${article.extra__likeOnlyPoint}</span> <span>|</span>
 								<span
-									class="article-list-box__reg-date article-list-box__dislike--mobile"><i
+									class="response-list-box__reg-date article-list-box__dislike--mobile"><i
 									class="far fa-thumbs-down"></i>
 									${article.extra__dislikeOnlyPoint}</span>
 

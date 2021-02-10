@@ -1,7 +1,6 @@
 package com.sbs.example.jspCommunity.servlet;
 
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,13 +10,14 @@ import com.sbs.example.jspCommunity.controller.UsrArticleController;
 import com.sbs.example.jspCommunity.controller.UsrHomeController;
 import com.sbs.example.jspCommunity.controller.UsrLikeController;
 import com.sbs.example.jspCommunity.controller.UsrMemberController;
+import com.sbs.example.jspCommunity.controller.UsrReplyController;
 
 @WebServlet("/usr/*")
 public class UsrDispatcherServlet extends DispatcherServlet {
 	@Override
 	protected String doAction(HttpServletRequest req, HttpServletResponse resp, String controllerName,
 			String actionMethodName) {
-		
+
 		int loginedMemberId = -1;
 		boolean isLogined = false;
 
@@ -112,8 +112,19 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			} else if (actionMethodName.equals("doCancelDislike")) {
 				jspPath = likeController.doCancelDislike(req, resp);
 			}
+		} else if (controllerName.equals("reply")) {
+			UsrReplyController replyController = Container.usrReplyController;
+
+			if (actionMethodName.equals("doWrite")) {
+				jspPath = replyController.doWrite(req, resp);
+			} else if (actionMethodName.equals("doDelete")) {
+				jspPath = replyController.doDelete(req, resp);
+			} else if (actionMethodName.equals("modify")) {
+				jspPath = replyController.showModify(req, resp);
+			} else if (actionMethodName.equals("doModify")) {
+				jspPath = replyController.doModify(req, resp);
+			} 		
 		}
 		return jspPath;
 	}
-
 }

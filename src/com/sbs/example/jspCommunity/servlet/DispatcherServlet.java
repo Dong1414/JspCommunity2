@@ -118,6 +118,12 @@ public abstract class DispatcherServlet extends HttpServlet {
 
 		req.setAttribute("currentUrl", currentUrl);
 		req.setAttribute("encodedCurrentUrl", encodedCurrentUrl);
+		
+		Map<String, Object> param = Util.getParamMap(req);
+		String paramJson = Util.getJsonText(param);
+
+		req.setAttribute("paramMap", param);
+		req.setAttribute("paramJson", paramJson);
 		// 데이터 추가 인터셉터 끝
 
 		// 로그인 필요 필터링 인터셉터 시작
@@ -135,6 +141,11 @@ public abstract class DispatcherServlet extends HttpServlet {
 		needToLoginActionUrls.add("/usr/article/doLike");
 		needToLoginActionUrls.add("/usr/article/doHate");
 		needToLoginActionUrls.add("/usr/article/doComment");
+		
+		needToLoginActionUrls.add("/usr/reply/doWrite");
+		needToLoginActionUrls.add("/usr/reply/modify");
+		needToLoginActionUrls.add("/usr/reply/doModify");
+		needToLoginActionUrls.add("/usr/reply/doDelete");
 
 		if (needToLoginActionUrls.contains(actionUrl)) {
 			if ((boolean) req.getAttribute("isLogined") == false) {

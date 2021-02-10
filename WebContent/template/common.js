@@ -49,41 +49,34 @@ function Editor__init() {
 	if ( initialValue.length == 0 ) {
 		initialValue = " ";
 	}
-    var editor = new toastui.Editor({
+  let height = 600;
+
+	if ( $(node).attr('data-height') ) {
+		height = parseInt($(node).attr('data-height'));
+	}
+
+	let previewStyle = 'vertical';
+
+	if ( $(node).attr('data-previewStyle') ) {
+		previewStyle = $(node).attr('data-previewStyle');
+	}
+	else {
+		if ( $(window).width() < 600 ) {
+			previewStyle = 'tab';
+		}
+	}
+	
+	var editor = new toastui.Editor({
       el: node,	
-      previewStyle: 'vertical',
+      previewStyle: previewStyle,
       initialValue: initialValue,
-      height:600,
+      height:height,
       plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
     });
 
 	$(node).data('data-toast-editor', editor);
   });
 }
-/* 댓글용 토스트 에디터 시작*/
-function Editor__init_comment() {
-
-	  $('.toast-ui-editor-comment').each(function(index, node) {
-	    var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
-	 // 토스트 UI에
-		// <br/> 두개 들어가는 버그를 없애기 위한 궁여지책
-		if ( initialValue.length == 0 ) {
-			initialValue = " ";
-		}
-	    var editor = new toastui.Editor({
-	      el: node,
-	      previewStyle: 'vertical',
-	      initialValue: initialValue,
-	      height:150,
-	      plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
-	    });
-
-		$(node).data('data-toast-editor', editor);
-	  });
-	}
-/* 댓글용 토스트 에디터 끝 */
-
-
 
 function EditorViewer__init() {
   $('.toast-ui-viewer').each(function(index, node) {

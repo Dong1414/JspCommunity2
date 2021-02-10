@@ -132,4 +132,8 @@ public class ArticleService {
 	public Reply getReply(int replyId) {
 		return articleDao.getReply(replyId);
 	}
+	
+	public Article getArticleById(int id) {
+		return articleDao.getArticleById(id);
+	}
 }

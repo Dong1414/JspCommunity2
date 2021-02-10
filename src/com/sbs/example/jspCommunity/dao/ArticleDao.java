@@ -277,22 +277,6 @@ public class ArticleDao {
 		return MysqlUtil.insert(sql);	
 	}
 
-
-	public void addReple(int memberId, int articleId, String body) {		
-		SecSql sql = new SecSql();
-		String article = "article";
-		sql.append("INSERT INTO `reply`");
-		sql.append("SET regDate = NOW()");
-		sql.append(", updateDate = NOW()");
-		sql.append(", relTypeCode = ?",article);
-		sql.append(", relId = ?", articleId);
-		sql.append(", memberId = ?", memberId);
-		sql.append(", `body` = ?",body);
-	    
-		MysqlUtil.insert(sql);
-	}
-
-
 	public boolean likeCheck(int articleId, int memberId) {
 		SecSql sql1 = new SecSql();
 		String article = "article";
@@ -354,28 +338,18 @@ public class ArticleDao {
 		return MysqlUtil.delete(sql); 
 	}
 
-
-	public void deleteReple(int replyId) {
+	public Article getArticleById(int id) {
 		SecSql sql = new SecSql();
-		
-		sql.append("DELETE FROM `reply`");
-		sql.append("WHERE id = ?",replyId);
-		
-		MysqlUtil.delete(sql);		
-	}
+		sql.append("SELECT A.*");
+		sql.append("FROM article AS A");
+		sql.append("WHERE A.id = ?", id);
 
+		Map<String, Object> map = MysqlUtil.selectRow(sql);
 
-	public Reply getReply(int replyId) {
-		SecSql sql1 = new SecSql();
-		
-		sql1.append("SELECT *");
-		sql1.append("FROM `reply`");
-		sql1.append("WHERE id = ?", replyId);
-		
-		Map<String, Object> map = MysqlUtil.selectRow(sql1);		
-		if(map.isEmpty()) {
+		if (map.isEmpty()) {
 			return null;
 		}
-		return new Reply(map);
+
+		return new Article(map);
 	}
 }

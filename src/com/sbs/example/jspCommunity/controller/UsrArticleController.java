@@ -160,14 +160,14 @@ public class UsrArticleController extends Controller {
 		if (article == null) {
 			return msgAndBack(req, id + "번 게시물은 존재하지 않습니다.");
 		}
-		System.out.println(article);	
+		
+		List<Reply> replies = replyService.getForPrintReplies("article", article.getId());
+		req.setAttribute("replies", replies);
+		
 		req.setAttribute("article", article);
 
 		HttpSession session = req.getSession();
-		
-		List<Reply> replys = replyService.getReplys(id, loginedMember);
 
-		session.setAttribute("replys", replys);
 		session.setAttribute("isArticleId", id);
 
 		return "usr/article/detail";
@@ -370,8 +370,6 @@ public class UsrArticleController extends Controller {
 
 		int replyId = Integer.parseInt(req.getParameter("replyId"));
 		String body = req.getParameter("body");
-
-		replyService.modify(replyId, body);
 
 		String relTypeCode = req.getParameter("relTypeCode");
 		if (relTypeCode == null) {

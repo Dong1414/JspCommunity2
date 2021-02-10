@@ -11,46 +11,81 @@ import com.sbs.example.mysqlutil.SecSql;
 
 public class ReplyDao {
 
-	public List<Reply> getReplys(int articleId) {
-		List<Reply> replys = new ArrayList<>();
-		String article = "article";
+	public int write(Map<String, Object> args) {
 		SecSql sql = new SecSql();
-		
+		sql.append("INSERT INTO reply");
+		sql.append("SET regDate = NOW()");
+		sql.append(", updateDate = NOW()");
+		sql.append(", relTypeCode = ?", args.get("relTypeCode"));
+		sql.append(", relId = ?", args.get("relId"));
+		sql.append(", memberId = ?", args.get("memberId"));
+		sql.append(", `body` = ?", args.get("body"));
+
+		return MysqlUtil.insert(sql);
+	}
+	
+	public List<Reply> getForPrintReplies(String relTypeCode, int relId) {
+		List<Reply> replies = new ArrayList<>();
+
+		SecSql sql = new SecSql();
 		sql.append("SELECT R.*");
+		sql.append(", M.name AS extra__writer");
 		sql.append(", IFNULL(SUM(L.point), 0) AS extra__likePoint");
 		sql.append(", IFNULL(SUM(IF(L.point > 0, L.point, 0)), 0) AS extra__likeOnlyPoint");
 		sql.append(", IFNULL(SUM(IF(L.point < 0, L.point * -1, 0)), 0) extra__dislikeOnlyPoint");
 		sql.append("FROM reply AS R");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON R.memberId = M.id");
 		sql.append("LEFT JOIN `like` AS L");
-		sql.append("ON L.relTypeCode = 'reply'");		
-		sql.append("WHERE R.relTypeCode = ?",article);
-		sql.append("AND R.relId = ?",articleId);
+		sql.append("ON L.relTypeCode = 'article'");
+		sql.append("AND R.id = L.relId");
+		sql.append("WHERE 1");
+		sql.append("AND R.relTypeCode = ?", relTypeCode);
+		sql.append("AND R.relId = ?", relId);
 		sql.append("GROUP BY R.id");
 		sql.append("ORDER BY R.id DESC");
-		
-		List<Map<String, Object>> replyMapList = MysqlUtil.selectRows(sql);
 
-		for (Map<String, Object> replyMap : replyMapList) {
-			replys.add(new Reply(replyMap));
+		List<Map<String, Object>> mapList = MysqlUtil.selectRows(sql);
+
+		for (Map<String, Object> map : mapList) {
+			replies.add(new Reply(map));
 		}
-		
-		
-		
-		
-		return replys;
+
+		return replies;
+	}
+	public Reply getReply(int id) {
+		SecSql sql = new SecSql();
+		sql.append("SELECT R.*");
+		sql.append("FROM reply AS R");
+		sql.append("WHERE 1");
+		sql.append("AND R.id = ?", id);
+
+		Map<String, Object> map = MysqlUtil.selectRow(sql);
+
+		if (map.isEmpty()) {
+			return null;
+		}
+
+		return new Reply(map);
 	}
 
-	public void modify(int replyId, String body) {
+	public int delete(int id) {
+		SecSql sql = new SecSql();
+		sql.append("DELETE FROM reply");
+		sql.append("WHERE id = ?", id);
+
+		return MysqlUtil.delete(sql);
+	}
+
+	public int modify(int id, String body) {
 		SecSql sql = new SecSql();
 		String article = "article";
 		sql.append("UPDATE `reply`");
 		sql.append("SET updateDate = NOW(),");
 		sql.append("`body` = ?",body);
-		sql.append("WHERE id = ?",replyId);
+		sql.append("WHERE id = ?",id);
 		sql.append("AND relTypeCode = ?",article);
 		
-		
-		MysqlUtil.update(sql);
-		
+		return MysqlUtil.update(sql);
 	}
 }
