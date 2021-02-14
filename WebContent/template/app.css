@@ -1166,3 +1166,26 @@ main > .title-bar:not(:first-child) {
 	margin-top:30px;
 }
 /* 모바일 사이드바 끝 */
+
+
+.padding-15p{
+  padding:15px 45px 15px 15px;
+}
+.border-red{
+  border: 1px solid red;
+}
+.articles .new{
+  width:33.3333%;
+}
+.articles{
+  width:auto;
+}
+.hot-articles{
+  width:200px;
+}
+.hot-articles > ul li {
+  margin:10px;
+}
+.con-850{
+	width:1000px;
+}

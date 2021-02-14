@@ -111,11 +111,6 @@ public class ArticleService {
 		return articleDao.getHateCount(id);
 	}
 
-	public void addReple(int memberId, int articleId, String body) {
-		articleDao.addReple(memberId, articleId, body);
-		
-	}
-
 	public boolean likeCheck(int articleId, int memberId) {
 		return articleDao.likeCheck(articleId,memberId);
 		
@@ -124,14 +119,6 @@ public class ArticleService {
 		return articleDao.hateCheck(articleId,memberId);
 	}
 
-	public void deleteReple(int replyId) {
-		articleDao.deleteReple(replyId);
-		
-	}
-
-	public Reply getReply(int replyId) {
-		return articleDao.getReply(replyId);
-	}
 	
 	public Article getArticleById(int id) {
 		return articleDao.getArticleById(id);

@@ -322,71 +322,6 @@ public class UsrArticleController extends Controller {
 
 	}
 
-	public String doComment(HttpServletRequest req, HttpServletResponse resp) {
-		String relTypeCode = req.getParameter("relTypeCode");
-		HttpSession session = req.getSession();
-		int memberId = (int) session.getAttribute("loginedMemberId");
-		int articleId = (int) session.getAttribute("isArticleId");
-		String body = req.getParameter("body");
-		articleService.addReple(memberId, articleId, body);
-
-		if (relTypeCode == null) {
-			return msgAndBack(req, "관련데이터코드를 입력해주세요.");
-		}
-
-		int relId = Util.getAsInt(req.getParameter("relId"), 0);
-
-		if (relId == 0) {
-			return msgAndBack(req, "관련데이터번호를 입력해주세요.");
-		}
-
-		int actorId = (int) req.getAttribute("loginedMemberId");
-
-		return msgAndReplace(req, "댓글이 작성되었습니다.", req.getParameter("redirectUrl"));
-	}
-
-	public String showReplyModify(HttpServletRequest req, HttpServletResponse resp) {
-		HttpSession session = req.getSession();
-
-		int modifyMode = Util.getAsInt(req.getParameter("id"), 0);
-		session.setAttribute("modifyMode", modifyMode);
-
-		String relTypeCode = req.getParameter("relTypeCode");
-		if (relTypeCode == null) {
-			return msgAndBack(req, "관련데이터코드를 입력해주세요.");
-		}
-
-		int relId = Util.getAsInt(req.getParameter("relId"), 0);
-
-		if (relId == 0) {
-			return msgAndBack(req, "관련데이터번호를 입력해주세요.");
-		}
-
-		return msgAndReplace(req, "댓글을 수정하세요.", req.getParameter("redirectUrl"));
-	}
-
-	public String doReplyModify(HttpServletRequest req, HttpServletResponse resp) {
-		HttpSession session = req.getSession();
-
-		int replyId = Integer.parseInt(req.getParameter("replyId"));
-		String body = req.getParameter("body");
-
-		String relTypeCode = req.getParameter("relTypeCode");
-		if (relTypeCode == null) {
-			return msgAndBack(req, "관련데이터코드를 입력해주세요.");
-		}
-
-		int relId = Util.getAsInt(req.getParameter("relId"), 0);
-
-		if (relId == 0) {
-			return msgAndBack(req, "관련데이터번호를 입력해주세요.");
-		}
-		int modifyMode = 0;
-		session.setAttribute("modifyMode", modifyMode);
-
-		return msgAndReplace(req, "댓글이 수정되었습니다.", req.getParameter("redirectUrl"));
-	}
-
 	public String doCancelModifyReply(HttpServletRequest req, HttpServletResponse resp) {
 		HttpSession session = req.getSession();
 
@@ -405,32 +340,4 @@ public class UsrArticleController extends Controller {
 
 		return msgAndReplace(req, "댓글 수정이 취소되었습니다.", req.getParameter("redirectUrl"));
 	}
-
-	public String doReplyDelete(HttpServletRequest req, HttpServletResponse resp) {
-
-		HttpSession session = req.getSession();
-		int memberId = (int) session.getAttribute("loginedMemberId");
-		int replyId = Util.getAsInt(req.getParameter("id"), 0);
-
-		Reply reply = articleService.getReply(replyId);
-
-		if (reply != null) {
-			articleService.deleteReple(replyId);
-		}
-		String relTypeCode = req.getParameter("relTypeCode");
-		if (relTypeCode == null) {
-			return msgAndBack(req, "관련데이터코드를 입력해주세요.");
-		}
-
-		int relId = Util.getAsInt(req.getParameter("relId"), 0);
-
-		if (relId == 0) {
-			return msgAndBack(req, "관련데이터번호를 입력해주세요.");
-		}
-
-		int actorId = (int) req.getAttribute("loginedMemberId");
-
-		return msgAndReplace(req, "댓글이 삭제되었습니다.", req.getParameter("redirectUrl"));
-	}
-
 }
