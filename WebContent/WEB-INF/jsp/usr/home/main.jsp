@@ -82,16 +82,10 @@
 	<div class="hot-articles border-red">
 		<ul>			
 			<li><i class="fab fa-hotjar"></i> 주간 HOT! </li>
-			<li><a class="flex"><div class="num1">1</div>${hotArticle.get(0).getHitsCount}</a></li>
-			<li><a class="flex"><div class="num2">2</div></a></li>
-			<li><a class="flex"><div class="num3">3</div></a></li>
-			<li><a class="flex"><div class="num4">4</div></a></li>
-			<li><a class="flex"><div class="num5">5</div></a></li>
-			<li><a class="flex"><div class="num6">6</div></a></li>
-			<li><a class="flex"><div class="num7">7</div></a></li>
-			<li><a class="flex"><div class="num8">8</div></a></li>
-			<li><a class="flex"><div class="num9">9</div></a></li>
-			<li><a class="flex"><div class="num10">10</div></a></li>
+			<c:forEach items="${hotArticle}" varStatus="status" var="article" begin="0" end="9">
+			<li><a href="../article/detail?id=${article.id}" class="flex"><div class="num${status.count}">${status.count}</div>${article.title}</a></li>
+			
+			</c:forEach>
 		</ul>
 	</div>
 </div>

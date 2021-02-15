@@ -1306,6 +1306,9 @@ main > .title-bar:not(:first-child) {
 .con-850{
 	width:1000px;
 }
+.new{
+	height:247px;
+}
 .new > ul > li:first-child {
 	border-bottom: 1px solid #afafaf; 
 	padding-bottom : 7px;
