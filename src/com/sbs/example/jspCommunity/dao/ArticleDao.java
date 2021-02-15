@@ -352,4 +352,46 @@ public class ArticleDao {
 
 		return new Article(map);
 	}
+
+
+	public List<Article> getBoardByArticles(int boardId) {
+		List<Article> articles = new ArrayList<>();
+		SecSql sql = new SecSql();
+		sql.append("SELECT *");
+		sql.append("FROM article");
+		sql.append("WHERE boardId = ?", boardId);
+
+		List<Map<String, Object>> maps = MysqlUtil.selectRows(sql);
+
+		if (maps.isEmpty()) {
+			return null;
+		}
+		
+		for(Map<String, Object> map : maps) {
+			articles.add(new Article(map));
+		}
+
+		return articles;
+
+	}
+
+
+	public List<Article> getArticles() {		
+		List<Article> articles = new ArrayList<>();
+		SecSql sql = new SecSql();
+		sql.append("SELECT *");
+		sql.append("FROM article");
+
+		List<Map<String, Object>> maps = MysqlUtil.selectRows(sql);
+
+		if (maps.isEmpty()) {
+			return null;
+		}
+		
+		for(Map<String, Object> map : maps) {
+			articles.add(new Article(map));
+		}
+
+		return articles;
+	}
 }

@@ -123,4 +123,12 @@ public class ArticleService {
 	public Article getArticleById(int id) {
 		return articleDao.getArticleById(id);
 	}
+
+	public List<Article> getBoardByArticles(int boardId) {
+		return articleDao.getBoardByArticles(boardId);
+	}
+
+	public List<Article> getArticles() {
+		return articleDao.getArticles();
+	}
 }

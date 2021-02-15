@@ -69,8 +69,11 @@ var param = ${paramJson};
 					<nav class="login-box">
 						<ul class="flex height-100p">
 							<c:if test="${isLogined == false}">
+								<li><a href="../member/join"
+									class="flex flex-ai-c height-100p"> <span>회원가입</span>
+								</a></li>
 								<li><a href="../member/login"
-									class="flex flex-ai-c height-100p"> <span>Login</span>
+									class="flex flex-ai-c height-100p"> <span>로그인</span>
 								</a></li>
 							</c:if>
 							<c:if test="${isLogined}">
@@ -91,16 +94,15 @@ var param = ${paramJson};
 				<div class="con height-100p">
 					<nav class="menu-box-1">
 						<ul class="flex">
-							<li><a href="../article/list?boardId=1" class="block">공지사항</a>
-							<li><a href="../article/list?boardId=2" class="block">방명록</a></li>
-							<li><a href="#" class="block">커뮤니티</a>
+							<li><a href="../article/list?boardId=1" class="block">공지사항</a>														
+							<li><a href="#" class="block">게시판</a>
 								<ul>
-									<li><a href="../article/list?boardId=3" class="block">자유게시판</a></li>
-									<li><a href="#" class="block">요리 레시피</a></li>
-									<li><a href="#" class="block">벌레 퇴치</a></li>
-									<li><a href="#" class="block">자취 아이템</a></li>
-									<li><a href="#" class="block">질문 게시판</a></li>
-									<li><a href="#" class="block">꿀팁</a></li>
+									<li><a href="../article/list?boardId=2" class="block">자유게시판</a></li>
+									<li><a href="../article/list?boardId=3" class="block">요리 게시판</a></li>
+									<li><a href="../article/list?boardId=4" class="block">벌레 게시판</a></li>
+									<li><a href="../article/list?boardId=5" class="block">자취 게시판</a></li>									
+									<li><a href="../article/list?boardId=6" class="block">꿀팁 게시판</a></li>
+									<li><a href="../article/list?boardId=7" class="block">질문 게시판</a></li>
 								</ul></li>
 						</ul>
 					</nav>

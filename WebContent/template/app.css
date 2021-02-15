@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+
+@font-face {
+    font-family: 'Bazzi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html {
   /* 영문이면 roboto가 적용되고, 한글이면 Noto Sans KR가 적용되도록 아래와 같은 순서로 배치 */
   font-family: "Roboto", "Noto Sans KR", sans-serif;
@@ -1167,6 +1175,115 @@ main > .title-bar:not(:first-child) {
 }
 /* 모바일 사이드바 끝 */
 
+/*메인화면 시작*/
+.num1{
+  width:30px;
+  height:30px;
+  background-color:#ff3366;
+  color:white;
+  border-radius:50%;
+  text-align:center;
+  line-height:30px;
+  font-weight:bold;
+  font-family:Bazzi;  
+}
+.num2{
+  width:30px;
+  height:30px;
+  background-color:#3399ff;
+  color:white;
+  border-radius:50%;
+  text-align:center;
+  line-height:30px;
+  font-weight:bold;
+  font-family:Bazzi;
+}
+.num3{
+  width:30px;
+  height:30px;
+  background-color:#ffcc00;
+  color:white;
+  border-radius:50%;
+  text-align:center;
+  line-height:30px;
+  font-weight:bold;
+  font-family:Bazzi;
+}
+.num4{
+  width:30px;
+  height:30px;
+  background-color:#6600ff;
+  color:white;
+  border-radius:50%;
+  text-align:center;
+  line-height:30px;
+  font-weight:bold;
+  font-family:Bazzi;
+}.num5{
+  width:30px;
+  height:30px;
+  background-color:#66ff33;
+  color:white;
+  border-radius:50%;
+  text-align:center;
+  line-height:30px;
+  font-weight:bold;
+  font-family:Bazzi;
+}.num6{
+  width:30px;
+  height:30px;
+  background-color:#666666;
+  color:white;
+  border-radius:50%;
+  text-align:center;
+  line-height:30px;
+  font-weight:bold;
+  font-family:Bazzi;
+}
+.num7{
+  width:30px;
+  height:30px;
+  background-color:#9966ff;
+  color:white;
+  border-radius:50%;
+  text-align:center;
+  line-height:30px;
+  font-weight:bold;
+  font-family:Bazzi;
+}
+.num8{
+  width:30px;
+  height:30px;
+  background-color:#00ff99;
+  color:white;
+  border-radius:50%;
+  text-align:center;
+  line-height:30px;
+  font-weight:bold;
+  font-family:Bazzi;
+}
+.num9{
+  width:30px;
+  height:30px;
+  background-color:#cc9999;
+  color:white;
+  border-radius:50%;
+  text-align:center;
+  line-height:30px;
+  font-weight:bold;
+  font-family:Bazzi;
+}
+.num10{
+  width:30px;
+  height:30px;
+  background-color:#3333ff;
+  color:white;
+  border-radius:50%;
+  text-align:center;
+  line-height:30px;
+  font-weight:bold;
+  font-family:Bazzi;
+}
 
 .padding-15p{
   padding:15px 45px 15px 15px;
@@ -1189,3 +1306,41 @@ main > .title-bar:not(:first-child) {
 .con-850{
 	width:1000px;
 }
+.new > ul > li:first-child {
+	border-bottom: 1px solid #afafaf; 
+	padding-bottom : 7px;
+}
+.new > ul > li:not(:first-child){
+	padding-top:7px;
+	padding-left:10px; 
+	coloe:blue;
+	overflow: hidden;
+}
+.new > ul > li > a > span{
+	background-color:#494949;
+	color:white;	
+  	border-radius:15px;
+  	padding: 0 3px 3px 3px;
+}
+.new > ul > li:first-child > a:hover{
+	color:red;
+	font-weight:bold;
+}
+.new > ul > li:first-child > a:hover > span{
+	color:white;
+	font-weight:bold;
+	background-color:#6bacce;
+}
+.new > ul > li:not(:first-child) > a:hover{
+	color:#6bacce;
+	font-weight:bold;
+}
+.hot-articles > ul > li:first-child{
+	color:red;
+	font-weight:bold;
+}
+.hot-articles > ul > li > a > div{
+	margin-right:7px;
+	line-height:30px;
+}
+/*메인화면 끝*/
