@@ -1346,4 +1346,120 @@ main > .title-bar:not(:first-child) {
 	margin-right:7px;
 	line-height:30px;
 }
+
+.sbs-2021-slider {
+  position:relative;
+}
+
+.sbs-2021-slider .arrows > div {
+  font-size:4rem; /* 임시 */
+  position:absolute;
+  right:calc(100% + 30px);
+  top:50%;
+  transform:translateY(-50%);
+  z-index:10;
+  user-select:none;
+  cursor:pointer;
+}
+
+.sbs-2021-slider .arrows > div:last-child {
+  right:auto;
+  left:calc(100% + 30px);
+}
+
+.sbs-2021-slider .arrows > div:active {
+  transform:translateY(-45%);
+}
+
+.sbs-2021-slider .items-wrap {
+  height:500px; /* 임시 */
+  position:relative;
+}
+
+.sbs-2021-slider .items > div {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  font-size:5rem; /* 임시 */
+  opacity:0;
+  visibility:hidden;
+  position:absolute;
+  transition:opacity 0.3s, visibility 0.3s;
+}
+
+.sbs-2021-slider .items > div.active {
+  opacity:1;
+  visibility:visible;
+}
+
+.sbs-2021-slider .items > div > .bg {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
+}
+
+/*
+.sbs-2021-slider .items > div > img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+*/
+
+.sbs-2021-slider .pages-wrap {
+  display:flex;
+  justify-content:center;
+  margin-top:10px;
+}
+
+.sbs-2021-slider .pages {
+  display:flex;
+}
+
+.sbs-2021-slider .pages > div {
+  width:15px;
+  height:15px;
+  background-color:rgba(0,0,0,0.2);
+  border-radius:50%;
+  margin:0 5px;
+  cursor:pointer;
+}
+
+.sbs-2021-slider .pages > div.active {
+  background-color:rgba(0,0,0,1);
+}
+.sbs-2021-slider .items > div > a{
+	
+	
+}
+
+.sbs-2021-slider .items > div > .free-image{	
+	background-image: url('freeee.png'); 
+}
+.sbs-2021-slider .items > div >.cook-image{
+	background-image: url('cook.jpg'); 
+}
+.sbs-2021-slider .items > div > .bug-image{	
+	background-image: url('buggg.png'); 
+}
+.sbs-2021-slider .items > div > .single-image{	
+	background-image: url('single.jpg'); 
+}
+.sbs-2021-slider .items > div > .tip-image{
+	background-image: url('tipp.png'); 
+}
+.sbs-2021-slider .items > div > .question-image{	
+	background-image: url('question.jpg'); 
+}
+.sbs-2021-slider .items > div > .notice-image{	
+	background-image: url('notice.jpg'); 
+} 
 /*메인화면 끝*/

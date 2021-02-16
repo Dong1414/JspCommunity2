@@ -232,22 +232,13 @@
 	</div>
 </c:if>
 
-<div class="title-bar padding-0-10 con-min-width">
-	<h1 class="con">
-		<span>
-			<i class="fas fa-list"></i>
-		</span>
-		<span>댓글 리스트</span>
-	</h1>
-</div>
-
 <div class="reply-list-total-count-box padding-0-10 con-min-width">
 	<div class="con">
 		<div>
 			<span>
 				<i class="fas fa-clipboard-list"></i>
 			</span>
-			<span>총 게시물 수 : </span>
+			<span>댓글: </span>
 			<span class="color-red"> ${replies.size()} </span>
 		</div>
 	</div>
@@ -307,22 +298,68 @@ function DoModifyForm__submit(form) {
 						</td>
 						<td>
 							<span class="response-list-box__writer">${reply.extra__writer}</span>
-						</td>
+						</td>			
+						
 						<td>
+							<c:if test="${article.extra.actorCanLike}">
 							<span class="response-list-box__likeOnlyPoint">
-								<span>
+								<a href="../like/doLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}"
+							onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
 									<i class="far fa-thumbs-up"></i>
-								</span>
+								</a>
 								<span> ${reply.extra__likeOnlyPoint} </span>
 							</span>
-							<span class="response-list-box__dislikeOnlyPoint">
-								<span>
-									<i class="far fa-thumbs-down"></i>
-								</span>
-								<span> ${reply.extra__dislikeOnlyPoint} </span>
+							</c:if>
+							
+							<c:if test="${article.extra.actorCanCancelLike}">
+							<span class="response-list-box__likeOnlyPoint">
+								<a href="../like/doCancelLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}"
+								onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
+									<i class="fas fa-thumbs-up"></i>
+								</a>
+								<span> ${reply.extra__likeOnlyPoint} </span>
 							</span>
+							
+								<span class="response-list-box__dislikeOnlyPoint">
+									<span>
+										<i class="far fa-thumbs-down"></i>
+									</span>
+									<span> ${reply.extra__dislikeOnlyPoint} </span>
+								</span>
+							</c:if>
+							
+								<c:if test="${article.extra.actorCanDislike}">
+								<span class="response-list-box__dislikeOnlyPoint">
+									<a href="../like/doDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}"
+							onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
+										<i class="far fa-thumbs-down"></i>
+									</a>
+									<span> ${reply.extra__dislikeOnlyPoint} </span>
+								</span>
+								
+								</c:if>
+								
+								<c:if test="${article.extra.actorCanCancelDislike}">
+									<span class="response-list-box__likeOnlyPoint">
+								<a href="#">
+									<i class="far fa-thumbs-up"></i>
+								</a>
+								<span> ${reply.extra__likeOnlyPoint} </span>
+							</span>
+							
+							<span class="response-list-box__dislikeOnlyPoint">
+									<a href="../like/doCancelDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}"
+								onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
+										<i class="fas fa-thumbs-down"></i>
+									</a>
+									<span> ${reply.extra__dislikeOnlyPoint} </span>
+								</span>
+							
+								</c:if>
 						</td>
+																	
 						<td>
+						<c:if test="${loginedMemberId == reply.memberId}">
 							<div class="btn-wrap">
 								<a class="btn btn-info" 
 									onclick="if ( confirm('정말 수정하시겠습니까?') == false ) { return false; }"
@@ -331,7 +368,9 @@ function DoModifyForm__submit(form) {
 									onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
 									href="../reply/doDelete?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">삭제</a>
 							</div>
+							</c:if>
 						</td>
+						
 						<td>
 							<script type="text/x-template">${reply.body}</script>
 							<div class="toast-ui-viewer"></div>
