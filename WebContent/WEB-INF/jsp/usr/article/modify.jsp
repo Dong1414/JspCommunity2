@@ -4,6 +4,9 @@
 
 <c:set var="pageTitle" value="${board.name} 게시물 수정" />
 <%@ include file="../../part/head.jspf"%>
+<section class="mobile-title-bar con-min-width visible-sm-down">
+	<h1 class="con"></h1>
+</section>
 <div class="title-bar padding-0-10 con-min-width">
 	<h1 class="con">
 		<span> <i class="fas fa-pen"></i>

@@ -5,7 +5,9 @@
 
 <c:set var="pageTitle" value="${board.name} 게시물 리스트" />
 <%@ include file="../../part/head.jspf"%>
-
+<section class="mobile-title-bar con-min-width visible-sm-down">
+	<h1 class="con"></h1>
+</section>
 <div class="title-bar padding-0-10 con-min-width">
 	<h1 class="con">
 		<span> <i class="fas fa-list"></i>
@@ -106,39 +108,38 @@
 			<tbody>
 				<c:forEach items="${articles}" var="article">
 					<tr>
-						<td><span class="response-list-box__id">${article.id}</span></td>
+						<td><span class="article-list-box__id">${article.id}</span></td>
 						<td><a href="detail?id=${article.id}"
-							class="response-list-box__title hover-link"> ${article.title}
+							class="article-list-box__title hover-link"> ${article.title}
 						</a></td>
-						<td><span class="response-list-box__reg-date">
+						<td><span class="article-list-box__reg-date">
 								${article.regDate} </span></td>
-						<td><span class="response-list-box__reg-date">
+						<td><span class="article-list-box__reg-date">
 								${article.extra__nickname} </span></td>
-						<td><span class="response-list-box__reg-date">
+						<td><span class="article-list-box__reg-date">
 								${article.hitsCount} </span></td>
-						<td class="response-list-box__reg-date"><span>${article.extra__likeOnlyPoint}</span></td>
-						<td class="response-list-box__reg-date"><span>${article.extra__dislikeOnlyPoint}</span></td>
+						<td class="article-list-box__reg-date"><span>${article.extra__likeOnlyPoint}</span></td>
+						<td class="article-list-box__reg-date"><span>${article.extra__dislikeOnlyPoint}</span></td>
 						<td class="visible-sm-down">
 							<div class="flex">
-								<span class="response-list-box__id article-list-box__id--mobile">${article.id}</span>
+								<span class="response-list-box__id response-list-box__id--mobile">${article.id}</span>
 
 								<a href="detail?id=${article.id}"
-									class="article-list-box__title article-list-box__title--mobile flex-grow-1 hover-link">${article.title}</a>
+									class="response-list-box__title response-list-box__title--mobile flex-grow-1 hover-link">${article.title}</a>
 							</div>
 
 							<div class="flex">
 								<span
-									class="response-list-box__Detailr article-list-box__Detailr--mobile">${article.extra__nickname}</span>
+									class="response-list-box__Detailr response-list-box__Detailr--mobile">${article.extra__nickname}</span>
 								<span>&nbsp;|&nbsp;</span> <span
-									class="response-list-box__reg-date article-list-box__reg-date--mobile">${article.regDate}
+									class="response-list-box__reg-date response-list-box__reg-date--mobile">${article.regDate}
 								</span> <span>&nbsp;|&nbsp;</span> <span
-									class="article-list-box__reg-date article-list-box__like--mobile"><i
+									class="response-list-box__reg-date response-list-box__like--mobile"><i
 									class="far fa-thumbs-up"></i> ${article.extra__likeOnlyPoint}</span> <span>|</span>
 								<span
-									class="response-list-box__reg-date article-list-box__dislike--mobile"><i
+									class="response-list-box__reg-date response-list-box__dislike--mobile"><i
 									class="far fa-thumbs-down"></i>
 									${article.extra__dislikeOnlyPoint}</span>
-
 							</div>
 						</td>
 					</tr>

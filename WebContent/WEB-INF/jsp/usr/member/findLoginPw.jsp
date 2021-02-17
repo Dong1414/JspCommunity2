@@ -6,7 +6,9 @@
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
-
+<section class="mobile-title-bar con-min-width visible-sm-down">
+	<h1 class="con"></h1>
+</section>
 <div class="title-bar padding-0-10 con-min-width">
 	<h1 class="con">
 		<span> <i class="fas fa-user"></i>

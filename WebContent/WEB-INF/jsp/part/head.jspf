@@ -91,19 +91,24 @@ var param = ${paramJson};
 			</div>
 
 
-			<div class="con menu-bar visible-on-md-up">
+			<div class="con menu-bar">
 				<div class="con height-100p">
 					<nav class="menu-box-1">
 						<ul class="flex">
-							<li><a href="../article/list?boardId=1" class="block">공지사항</a>														
+							<li><a href="../article/list?boardId=1" class="block">공지사항</a>
 							<li><a href="#" class="block">게시판</a>
 								<ul>
 									<li><a href="../article/list?boardId=2" class="block">자유게시판</a></li>
-									<li><a href="../article/list?boardId=3" class="block">요리 게시판</a></li>
-									<li><a href="../article/list?boardId=4" class="block">벌레 게시판</a></li>
-									<li><a href="../article/list?boardId=5" class="block">자취 게시판</a></li>									
-									<li><a href="../article/list?boardId=6" class="block">꿀팁 게시판</a></li>
-									<li><a href="../article/list?boardId=7" class="block">질문 게시판</a></li>
+									<li><a href="../article/list?boardId=3" class="block">요리
+											게시판</a></li>
+									<li><a href="../article/list?boardId=4" class="block">벌레
+											게시판</a></li>
+									<li><a href="../article/list?boardId=5" class="block">자취
+											게시판</a></li>
+									<li><a href="../article/list?boardId=6" class="block">꿀팁
+											게시판</a></li>
+									<li><a href="../article/list?boardId=7" class="block">질문
+											게시판</a></li>
 								</ul></li>
 						</ul>
 					</nav>
@@ -111,11 +116,19 @@ var param = ${paramJson};
 			</div>
 		</header>
 		<header class="mobile-top-bar con-min-width visible-sm-down">
-			<div class="con flex height-100p">
-				<a href="../home/main" class="logo flex"> <span>HOUSE</span>
-				</a>
-				<div class="flex-1-0-0"></div>	
-				<div class="flex-1-0-0 flex flex-jc-e flex-ai-c">
+			<div class="con flex  height-100p">
+				<a href="../home/main" class="logo flex"><img
+					src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDI1MS40NzkgMjUxLjQ3OSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgY2xhc3M9IiI+PGc+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+Cgk8cGF0aCBkPSJNMjA5LjM1NSwxMzUuNTUxYy00LjE0MywwLTcuNSwzLjM1OC03LjUsNy41djc2LjEwOUg0OS42MzR2LTc2LjEwOWMwLTQuMTQyLTMuMzU3LTcuNS03LjUtNy41Yy00LjE0MywwLTcuNSwzLjM1OC03LjUsNy41ICAgdjgzLjYwOWMwLDQuMTQyLDMuMzU3LDcuNSw3LjUsNy41aDE2Ny4yMjFjNC4xNDMsMCw3LjUtMy4zNTgsNy41LTcuNXYtODMuNjA5QzIxNi44NTUsMTM4LjkwOSwyMTMuNDk3LDEzNS41NTEsMjA5LjM1NSwxMzUuNTUxeiIgZmlsbD0iI2ZmZmZmZiIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPgoJPHBhdGggZD0iTTI0OS4yODIsMTM3Ljc0OEwxMzEuMDM1LDE5LjUxNWMtMi45MjgtMi45MjktNy42NzctMi45MjgtMTAuNjA2LDBMMi4xOTcsMTM3Ljc0OGMtMi45MjksMi45MjktMi45MjksNy42NzgsMCwxMC42MDYgICBjMS40NjUsMS40NjQsMy4zODUsMi4xOTcsNS4zMDQsMi4xOTdjMS45MiwwLDMuODM5LTAuNzMyLDUuMzA0LTIuMTk3bDExMi45MjktMTEyLjkzbDExMi45NDMsMTEyLjkzICAgYzIuOTI4LDIuOTI5LDcuNjc3LDIuOTI4LDEwLjYwNy0wLjAwMUMyNTIuMjExLDE0NS40MjUsMjUyLjIxMSwxNDAuNjc2LDI0OS4yODIsMTM3Ljc0OHoiIGZpbGw9IiNmZmZmZmYiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8L2c+PC9zdmc+" /><span>
+						HOUSE</span> </a>
+				<div class="flex-1-0-0"></div>
+				<c:if test="${isLogined}">
+						<div class="flex-1-0-0 flex flex-jc-e flex-ai-c">
+						<a href="../member/modify"
+							class="flex flex-ai-c height-100p"> <span>${loginedMemberNickname}님</span>
+						</a>						
+						</div>
+					</c:if>
+				<div class="flex-1-0-0 flex flex-jc-e flex-ai-c">					
 					<div class="mobile-top-bar__btn-toggle-mobile-side-bar">
 						<div></div>
 						<div></div>
@@ -123,33 +136,64 @@ var param = ${paramJson};
 					</div>
 				</div>
 			</div>
-			<div class="mobile-top-bar-padding visible-sm-down"></div>
 			<aside class="mobile-side-bar visible-sm-down">
 				<nav class="mobile-side-bar__menu-box-1">
 					<ul>
-						<li><a class="block"> <span> <i
+						<li class="side-menu"><a class="block"> <span> <i
 									class="fas fa-sign-in-alt"></i>
 							</span> <span>게시판</span>
 						</a>
-
 							<ul>
 								<li><a href="../article/list?boardId=1" class="block">
 										<span> <i class="far fa-flag"></i>
 									</span> <span>공지사항</span>
 								</a></li>
-								<li><a href="#" class="block"> <span> <i
-											class="fas fa-users"></i>
-									</span> <span>커뮤니티</span>
+								<li class="side-detail-menu"><a href="#" class="block">
+										<span> <i class="fas fa-users"></i>
+									</span> <span>게시판</span>
 								</a>
 									<ul>
-										<li><a href="../article/list?boardId=3" class="block">자유게시판</a></li>
-										<li><a href="#" class="block">요리 레시피</a></li>
-										<li><a href="#" class="block">벌레 퇴치</a></li>
-										<li><a href="#" class="block">자취 아이템</a></li>
-										<li><a href="#" class="block">질문 게시판</a></li>
-										<li><a href="#" class="block">꿀팁</a></li>
+										<li><a href="../article/list?boardId=2" class="block">자유게시판</a></li>
+										<li><a href="../article/list?boardId=3" class="block">요리
+												레시피</a></li>
+										<li><a href="../article/list?boardId=4" class="block">벌레
+												퇴치</a></li>
+										<li><a href="../article/list?boardId=5" class="block">자취
+												아이템</a></li>
+										<li><a href="../article/list?boardId=6" class="block">꿀팁</a></li>
+										<li><a href="../article/list?boardId=7" class="block">질문
+												게시판</a></li>
 									</ul></li>
 							</ul></li>
+						<script>
+							// html dom 이 다 로딩된 후 실행된다.
+							$(document).ready(function() {
+								// menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+								$(".side-menu>a").click(function() {
+									var submenu = $(this).next("ul");
+
+									// submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+									if (submenu.is(":visible")) {
+										submenu.slideUp();
+									} else {
+										submenu.slideDown();
+									}
+								});
+							});
+
+							$(document).ready(function() {
+
+								$(".side-detail-menu>a").click(function() {
+									var submenu = $(this).next("ul");
+
+									if (submenu.is(":visible")) {
+										submenu.slideUp();
+									} else {
+										submenu.slideDown();
+									}
+								});
+							});
+						</script>
 						<c:if test="${isLogined}">
 							<li><a href="../member/modify" class="block"> <span>
 										<i class="fas fa-sign-in-alt"></i>

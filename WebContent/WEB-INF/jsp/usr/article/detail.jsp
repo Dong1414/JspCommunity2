@@ -23,7 +23,9 @@
 		}
 	});
 </script>
-
+<section class="mobile-title-bar con-min-width visible-sm-down">
+	<h1 class="con"></h1>
+</section>
 <section class="section-1 con">
 	<h1>${pageTitle}</h1>
 </section>
@@ -433,6 +435,7 @@ function DoModifyForm__submit(form) {
 								<div class="toast-ui-viewer"></div>
 							</div>
 						</td>
+						
 					</tr>					
 				</c:forEach>
 			</tbody>
