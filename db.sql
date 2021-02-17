@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS jspCommunity;
-CREATE DATABASE jspCommunity;
-USE jspCommunity;
+DROP DATABASE IF EXISTS jspCommunityReal;
+CREATE DATABASE jspCommunityReal;
+USE jspCommunityReal;
 # 회원 테이블 생성
 CREATE TABLE `member` (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -45,18 +45,50 @@ SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'notice',
 `name` = '공지사항';
-# 방명록 게시판 생성
-INSERT INTO board
-SET regDate = NOW(),
-updateDate = NOW(),
-`code` = 'guestBook',
-`name` = '방명록';
+
 # 자유게시판 생성
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'free',
 `name` = '자유';
+
+# 요리
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'cook',
+`name` = '요리';
+
+# 벌레
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'bug',
+`name` = '벌레';
+
+# 자취
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'single',
+`name` = '자취';
+
+# 요리
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'tip',
+`name` = '꿀팁';
+
+# 요리
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'qusetion',
+`name` = '질문';
+
+
 # 게시물 테이블 생성
 CREATE TABLE article (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -68,6 +100,8 @@ CREATE TABLE article (
     `body` LONGTEXT NOT NULL,
     hitsCount INT(10) UNSIGNED NOT NULL DEFAULT 0
 );
+
+
 # 테스트 게시물 생성
 INSERT INTO article
 SET regDate = NOW(),
@@ -104,6 +138,375 @@ memberId = 2,
 boardId = 1,
 title = '제목5',
 `body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 1,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 1,
+title = '제목5',
+`body` = '내용5';
+
+
+
+
+
+
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 2,
+title = '제목1',
+`body` = '내용1';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 2,
+title = '제목2',
+`body` = '내용2';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 2,
+title = '제목3',
+`body` = '내용3';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 2,
+title = '제목4',
+`body` = '내용4';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 2,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 2,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 2,
+title = '제목5',
+`body` = '내용5';
+
+
+
+
+
+
+
+
+
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 3,
+title = '제목1',
+`body` = '내용1';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 3,
+title = '제목2',
+`body` = '내용2';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 3,
+title = '제목3',
+`body` = '내용3';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 3,
+title = '제목4',
+`body` = '내용4';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 3,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 3,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 3,
+title = '제목5',
+`body` = '내용5';
+
+
+
+
+
+
+
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 4,
+title = '제목1',
+`body` = '내용1';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 4,
+title = '제목2',
+`body` = '내용2';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 4,
+title = '제목3',
+`body` = '내용3';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 4,
+title = '제목4',
+`body` = '내용4';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 4,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 4,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 4,
+title = '제목5',
+`body` = '내용5';
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 5,
+title = '제목1',
+`body` = '내용1';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 5,
+title = '제목2',
+`body` = '내용2';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 5,
+title = '제목3',
+`body` = '내용3';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId =5,
+title = '제목4',
+`body` = '내용4';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 5,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 5,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 5,
+title = '제목5',
+`body` = '내용5';
+
+
+
+
+
+
+
+
+
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 6,
+title = '제목1',
+`body` = '내용1';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 6,
+title = '제목2',
+`body` = '내용2';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 6,
+title = '제목3',
+`body` = '내용3';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 6,
+title = '제목4',
+`body` = '내용4';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 6,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 6,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 6,
+title = '제목5',
+`body` = '내용5';
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 7,
+title = '제목1',
+`body` = '내용1';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 7,
+title = '제목2',
+`body` = '내용2';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 7,
+title = '제목3',
+`body` = '내용3';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 7,
+title = '제목4',
+`body` = '내용4';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 7,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 7,
+title = '제목5',
+`body` = '내용5';
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 7,
+title = '제목5',
+`body` = '내용5';
+
+
+
+
 # cellphoneNo 추가 및 칼럼 순서 재정렬
 ALTER TABLE `member` CHANGE `loginId` `loginId` CHAR(50) NOT NULL AFTER `updateDate`,
                      CHANGE `loginPw` `loginPw` VARCHAR(200) NOT NULL AFTER `loginId`,
@@ -166,3 +569,4 @@ CREATE TABLE `reply`(
 );
 SELECT * FROM `reply`;
 SELECT * FROM `member`;
+SELECT * FROM `like`;

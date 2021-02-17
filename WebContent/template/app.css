@@ -420,9 +420,7 @@ width:var(--pw-search_width);
 .mobile-top-bar > div > a > img{
 	margin-right:10px;	
 }
-.articles .new {
-    width:auto !important;
-}
+
 .mobile-top-bar {
   background-color: black;
   color: white;
@@ -612,6 +610,9 @@ border-top:1px solid black;
 	  border:0 solid transparent;
 	  margin:0;
 	}
+	.articles .new {
+    width:auto !important;
+}
 }
 /* 게시물 리스트 페이지박스 끝 */
 /* 게시물 리스트 박스 - MOBILE 시작 */

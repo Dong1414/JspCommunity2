@@ -61,9 +61,7 @@ var param = ${paramJson};
 						<span> </span>
 					</a>
 					<nav class="flex flex-ai-c">
-						<input class="flex flex-ai-c height-100p"
-							@input="searchKeywordInputed" type="text" placeholder="검색어"
-							:value="searchKeyword" id="search" autocomplete="off">
+						
 					</nav>
 					<div class="flex-grow-1"></div>
 
@@ -117,6 +115,7 @@ var param = ${paramJson};
 		</header>
 		<header class="mobile-top-bar con-min-width visible-sm-down">
 			<div class="con flex  height-100p">
+				
 				<a href="../home/main" class="logo flex"><img
 					src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDI1MS40NzkgMjUxLjQ3OSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgY2xhc3M9IiI+PGc+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+Cgk8cGF0aCBkPSJNMjA5LjM1NSwxMzUuNTUxYy00LjE0MywwLTcuNSwzLjM1OC03LjUsNy41djc2LjEwOUg0OS42MzR2LTc2LjEwOWMwLTQuMTQyLTMuMzU3LTcuNS03LjUtNy41Yy00LjE0MywwLTcuNSwzLjM1OC03LjUsNy41ICAgdjgzLjYwOWMwLDQuMTQyLDMuMzU3LDcuNSw3LjUsNy41aDE2Ny4yMjFjNC4xNDMsMCw3LjUtMy4zNTgsNy41LTcuNXYtODMuNjA5QzIxNi44NTUsMTM4LjkwOSwyMTMuNDk3LDEzNS41NTEsMjA5LjM1NSwxMzUuNTUxeiIgZmlsbD0iI2ZmZmZmZiIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPgoJPHBhdGggZD0iTTI0OS4yODIsMTM3Ljc0OEwxMzEuMDM1LDE5LjUxNWMtMi45MjgtMi45MjktNy42NzctMi45MjgtMTAuNjA2LDBMMi4xOTcsMTM3Ljc0OGMtMi45MjksMi45MjktMi45MjksNy42NzgsMCwxMC42MDYgICBjMS40NjUsMS40NjQsMy4zODUsMi4xOTcsNS4zMDQsMi4xOTdjMS45MiwwLDMuODM5LTAuNzMyLDUuMzA0LTIuMTk3bDExMi45MjktMTEyLjkzbDExMi45NDMsMTEyLjkzICAgYzIuOTI4LDIuOTI5LDcuNjc3LDIuOTI4LDEwLjYwNy0wLjAwMUMyNTIuMjExLDE0NS40MjUsMjUyLjIxMSwxNDAuNjc2LDI0OS4yODIsMTM3Ljc0OHoiIGZpbGw9IiNmZmZmZmYiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8L2c+PC9zdmc+" /><span>
 						HOUSE</span> </a>

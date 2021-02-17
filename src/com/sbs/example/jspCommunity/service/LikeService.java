@@ -31,6 +31,24 @@ public class LikeService {
 	public boolean actorCanCancelDislike(String relTypeCode, int id, Member actor) {
 		return likeDao.getPoint(relTypeCode, id, actor.getId()) < 0;
 	}
+	
+
+
+	public boolean replyActorCanLike(String relTypeCode, int id, Member actor) {
+		return likeDao.getPoint(relTypeCode, id, actor.getId()) == 0;
+	}
+
+	public boolean replyActorCanCancelLike(String relTypeCode, int id, Member actor) {
+		return likeDao.getPoint(relTypeCode, id, actor.getId()) > 0;
+	}
+
+	public boolean replyActorCanDislike(String relTypeCode, int id, Member actor) {
+		return likeDao.getPoint(relTypeCode, id, actor.getId()) == 0;
+	}
+
+	public boolean replyActorCanCancelDislike(String relTypeCode, int id, Member actor) {
+		return likeDao.getPoint(relTypeCode, id, actor.getId()) < 0;
+	}
 	public void setLikePoint(String relTypeCode, int relId, int actorId, int point) {
 		if (point == 0) {
 			likeDao.removePoint(relTypeCode, relId, actorId);

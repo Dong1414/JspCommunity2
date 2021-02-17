@@ -362,11 +362,11 @@ function DoModifyForm__submit(form) {
 																	
 						<td>
 						<c:if test="${loginedMemberId == reply.memberId}">
-							<div class="btn-wrap">
-								<a class="btn btn-info" 
+							<div>
+								<a  
 									onclick="if ( confirm('정말 수정하시겠습니까?') == false ) { return false; }"
 									href="../reply/modify?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">수정</a>
-								<a class="btn btn-danger"
+								<a 
 									onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
 									href="../reply/doDelete?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">삭제</a>
 							</div>
@@ -424,13 +424,18 @@ function DoModifyForm__submit(form) {
 								<span
 									class="response-list-box__reg-date response-list-box__reg-date--mobile">${reply.regDate}</span>
 							</div>
-							<div class="btn-wrap">
-								<a class="btn btn-info" href="../reply/modify?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">수정</a>
-								<a class="btn btn-danger"
+							<c:if test="${loginedMemberId == reply.memberId}">
+							<div>
+								<a  
+									onclick="if ( confirm('정말 수정하시겠습니까?') == false ) { return false; }"
+									href="../reply/modify?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">수정</a>
+								<a 
 									onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }"
 									href="../reply/doDelete?id=${reply.id}&redirectUrl=${encodedCurrentUrl}">삭제</a>
 							</div>
+							</c:if>
 							<div>
+							
 								<script type="text/x-template">${reply.body}</script>
 								<div class="toast-ui-viewer"></div>
 							</div>
