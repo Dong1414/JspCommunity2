@@ -89,7 +89,7 @@
 
 <div class="main-layout flex con visible-md-up">
 	<div class="articles con-850">
-		<div class="flex">
+		<div class="flex main-list">
 			<div class="new new7_cook padding-15p">
 				<ul>
 					<li><a href="../article/list?boardId=2">
@@ -136,7 +136,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="flex">
+		<div class="flex main-list">
 			<div class="new new7_cook padding-15p">
 
 				<ul>

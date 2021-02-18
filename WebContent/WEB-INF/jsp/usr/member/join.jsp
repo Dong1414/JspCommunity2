@@ -151,7 +151,7 @@
 										<div>
 											<input name="loginId" type="text" maxlength="50"
 												placeholder="로그인 아이디를 입력해주세요." />
-											<button class="btn btn-primary"
+											<button class="btn text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-300"
 												onclick="DoJoinForm__checkLoginIdDup(this);"
 												name="btnLoginIdDupCheck" type="button">중복체크</button>
 										</div>
@@ -223,7 +223,7 @@
 									<td>
 										<div>
 											<div class="btn-wrap">
-												<input class="btn btn-primary" type="submit" value="가입" />
+												<input class="btn text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-300" type="submit" value="가입" />
 												<button class="btn btn-info" type="button"
 													onclick="history.back();">뒤로가기</button>
 											</div>

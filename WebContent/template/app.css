@@ -20,7 +20,10 @@ body, ul, li, h1, h2, h3 {
   padding:0;
   list-style:none;
 }
-
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
 a {
   color:inherit;
   text-decoration:none;
@@ -364,7 +367,7 @@ width:var(--pw-search_width);
 }
 
 .menu-bar .menu-box-1 > ul > li:hover > a {
-	border-bottom:8px solid black;
+	background: linear-gradient(#494949 90%, #000000 10%);
 }
 .menu-box-1 {
 	text-align: center;
@@ -385,16 +388,18 @@ width:var(--pw-search_width);
   position:absolute;
   top:100%;
   left:0px;
-  width:99%;
+  width:100%;
   border:2px solid black;
   border-top-width:0;
  z-index:100;
 }
 
 .menu-bar .menu-box-1 ul > li:hover > ul {
-  display:block;
+  display:block;  
 }
-
+.menu-box-1 > ul ul > li:hover {
+  background: linear-gradient(#ffffff 90%, #374151 10%);
+}
 .menu-bar .menu-box-1 > ul ul > li > a {
   font-weight:bold;
   text-align:center;
@@ -680,7 +685,7 @@ border-top:1px solid black;
   outline: 0;
   border: 0;
   cursor: pointer;
-  background-color: #3D94F6;
+  background-color: rgba(55, 65, 81);
   color: #FFFFFF;
   text-shadow: 1px 1px 20px #000000;
   text-decoration: none;
@@ -867,7 +872,9 @@ border-top:1px solid black;
 --article-detail__comments-count__width:70px;
 --article-detail__hit-count__width:70px;
 }
-
+.modify-delete a{
+	margin-top:10px;
+}
 
 .article-detail > * > div {
   display:flex;
@@ -1042,9 +1049,7 @@ padding-left:10px;
 .bottom-bar {	
 	background-color: black;
 	color: white;
-	padding-top: 30px;
-	padding-bottom: 30px;
-	
+	margin-top:15px;
 }
 
 .bottom-bar__site-info {
@@ -1259,6 +1264,9 @@ main > .title-bar:not(:first-child) {
 	padding-left:10px; 
 	coloe:blue;
 	overflow: hidden;
+}
+.main-list{
+	margin-bottom:15px;	
 }
 .new > ul > li > a > span{
 	background-color:#494949;

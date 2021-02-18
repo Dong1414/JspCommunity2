@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
+	
 <c:set var="pageTitle" value="${board.name} 게시물 리스트" />
 <%@ include file="../../part/head.jspf"%>
 <section class="mobile-title-bar con-min-width visible-sm-down">
@@ -72,7 +72,7 @@
 					<th><span>검색</span></th>
 					<td>
 						<div>
-							<input class="btn btn-primary" type="submit" value="검색" />
+							<input class="btn text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-300" type="submit" value="검색" />
 						</div>
 					</td>
 				</tr>
@@ -150,7 +150,7 @@
 </div>
 <div class="article-btn-box padding-0-10 con-min-width">
 	<div class="con btn-wrap">
-		<a class="btn btn-primary" href="write?boardId=${param.boardId}">글쓰기</a>
+		<a class="btn text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-300" href="write?boardId=${param.boardId}">글쓰기</a>
 	</div>
 </div>
 

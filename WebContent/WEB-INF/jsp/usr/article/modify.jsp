@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="pageTitle" value="${board.name} 게시물 수정" />
+<c:set var="pageTitle" value="게시물 수정" />
 <%@ include file="../../part/head.jspf"%>
 <section class="mobile-title-bar con-min-width visible-sm-down">
 	<h1 class="con"></h1>
@@ -84,7 +84,7 @@
 								<td>
 									<div>
 										<div class="btn-wrap">
-											<input class="btn btn-primary" type="submit" value="수정" />
+											<input class="btn text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-300" type="submit" value="수정" />
 											<button class="btn btn-info" type="button"
 												onclick="history.back();">뒤로가기</button>
 										</div>
